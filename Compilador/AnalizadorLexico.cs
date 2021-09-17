@@ -512,7 +512,7 @@ namespace Compilador
                  case "boolean":
                  case "string":
                  case "int":
-                    tabla_simbolos.Rows[token1].Cells["Token"].Value = lexema;
+                     tabla_simbolos.Rows[token1].Cells["Token"].Value = lexema;
                      tabla_simbolos.Rows[token1].Cells["Tipo"].Value = "Palabra Reservada";
                      break;
                  case "{":
