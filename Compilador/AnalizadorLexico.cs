@@ -32,7 +32,12 @@ namespace Compilador
         //Variables locales                     
         //***************************************
         #region Variables
+        int token1 = 0;   //Contador para simbolos 
+        int token2 = 0;  //Contador para errores
+        int nerror = 0; //numero de error 
         System.Windows.Forms.RichTextBox txtLenguaje; //txt para mostrar la salida del lenguaje 
+        System.Windows.Forms.DataGridView tabla_simbolos;
+        
         #endregion
 
         //***************************************
@@ -40,8 +45,9 @@ namespace Compilador
         //***************************************
         #region Constructores 
         //Constructor con parametros 
-        public AnalizadorLexico(System.Windows.Forms.RichTextBox _lenguaje)
+        public AnalizadorLexico(System.Windows.Forms.RichTextBox _lenguaje, System.Windows.Forms.DataGridView _tabla_simbolos)
         {
+            tabla_simbolos = _tabla_simbolos;
             txtLenguaje = _lenguaje;
         }
         #endregion
@@ -50,14 +56,12 @@ namespace Compilador
         //Metodos
         //***************************************
         #region Metodos
-        public void Analizar(string codigoFuente)
+        public void analizar(string codigoFuente)
         {
-
             int estado_de_inicio;            
             int estado_principal = 0;        
             char cadena;         
             string token = "";            
-            
 
             for (estado_de_inicio = 0; estado_de_inicio < codigoFuente.Length; estado_de_inicio++)
             {
@@ -181,7 +185,8 @@ namespace Compilador
                         break;
 
                     case 2:
-                        mostrarReservadas(token);                
+                        mostrarReservadas(token);
+                        mostrarTokensEnTabla(token);
                         token = "";                            
                         estado_principal = 0;                 
                         break;
@@ -221,6 +226,7 @@ namespace Compilador
 
                     case 5:
                         mostrarReservadas(token);
+                        mostrarTokensEnTabla(token);
                         token = "";
                         estado_principal = 0;
                         break;
@@ -271,12 +277,14 @@ namespace Compilador
 
                     case 8:
                         mostrarReservadas(token);
+                        mostrarTokensEnTabla(token);
                         token = "";
                         estado_principal = 0;
                         break;
 
                     case 9:
                         mostrarReservadas(token);
+                        mostrarTokensEnTabla(token);
                         token = "";
                         estado_principal = 0;
                         break;
@@ -303,6 +311,7 @@ namespace Compilador
 
                     case 11:
                         mostrarReservadas(token);
+                        mostrarTokensEnTabla(token);
                         token = "";
                         estado_principal = 0;
                         break;
@@ -353,6 +362,7 @@ namespace Compilador
 
                     case 13:
                         mostrarReservadas(token);
+                        mostrarTokensEnTabla(token);
                         token = "";
                         estado_principal = 0;
                         break;
@@ -401,6 +411,7 @@ namespace Compilador
 
                     case 16:
                         mostrarReservadas(token);
+                        mostrarTokensEnTabla(token);
                         token = "";
                         estado_principal = 0;
                         break;
@@ -442,14 +453,13 @@ namespace Compilador
 
                     case 18:
                         mostrarReservadas(token);
+                        mostrarTokensEnTabla(token);
                         token = "";
                         estado_principal = 0;
                         break;
                 }
             }
         }
-
-
         public void mostrarReservadas(string tokeniguala)
         {
             switch (tokeniguala.ToLower())
@@ -488,6 +498,36 @@ namespace Compilador
                     txtLenguaje.Text = txtLenguaje.Text + "string \n";
                     break;
             }
+        }
+        private void mostrarTokensEnTabla(string lexema)
+        {
+            
+             token1 = tabla_simbolos.Rows.Add();
+             switch (lexema.ToLower())
+             {
+                 case "public":
+                 case "protected":
+                 case "class":
+                 case "Casilla":
+                 case "boolean":
+                 case "string":
+                 case "int":
+                    tabla_simbolos.Rows[token1].Cells["Token"].Value = lexema;
+                     tabla_simbolos.Rows[token1].Cells["Tipo"].Value = "Palabra Reservada";
+                     break;
+                 case "{":
+                 case "}":
+                 case ";":
+                 case ",":
+                    tabla_simbolos.Rows[token1].Cells["Token"].Value = lexema;
+                     tabla_simbolos.Rows[token1].Cells["Tipo"].Value = "Signo Reservado";
+                     break;    
+                 default:
+                     //errores(lexema);    //error en el texto
+                     nerror += 1;      //numero de error
+                     break;
+
+             }
         }
         #endregion
     }

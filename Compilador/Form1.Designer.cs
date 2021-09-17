@@ -38,9 +38,14 @@ namespace Compilador
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.grbLenguaje = new System.Windows.Forms.GroupBox();
             this.txtLenguaje = new System.Windows.Forms.RichTextBox();
+            this.dgvSimbolos = new System.Windows.Forms.DataGridView();
+            this.Token = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grbContenedorCodigoFuente.SuspendLayout();
             this.tbcInformacion.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.grbLenguaje.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).BeginInit();
             this.SuspendLayout();
             // 
             // grbContenedorCodigoFuente
@@ -84,6 +89,7 @@ namespace Compilador
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dgvSimbolos);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -130,6 +136,27 @@ namespace Compilador
             this.txtLenguaje.TabIndex = 0;
             this.txtLenguaje.Text = "";
             // 
+            // dgvSimbolos
+            // 
+            this.dgvSimbolos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSimbolos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Token,
+            this.Tipo});
+            this.dgvSimbolos.Location = new System.Drawing.Point(6, 6);
+            this.dgvSimbolos.Name = "dgvSimbolos";
+            this.dgvSimbolos.Size = new System.Drawing.Size(667, 586);
+            this.dgvSimbolos.TabIndex = 0;
+            // 
+            // Token
+            // 
+            this.Token.HeaderText = "Token";
+            this.Token.Name = "Token";
+            // 
+            // Tipo
+            // 
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -143,7 +170,9 @@ namespace Compilador
             this.Text = "Form1";
             this.grbContenedorCodigoFuente.ResumeLayout(false);
             this.tbcInformacion.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.grbLenguaje.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -159,6 +188,9 @@ namespace Compilador
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.GroupBox grbLenguaje;
         private System.Windows.Forms.RichTextBox txtLenguaje;
+        private System.Windows.Forms.DataGridView dgvSimbolos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Token;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
     }
 }
 

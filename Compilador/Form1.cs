@@ -21,9 +21,10 @@ namespace Compilador
         private void btnAnalizar_Click(object sender, EventArgs e)
         {
             txtLenguaje.Clear();
-            analizador_lexico = new AnalizadorLexico(txtLenguaje);
+            dgvSimbolos.Rows.Clear();
+            analizador_lexico = new AnalizadorLexico(txtLenguaje, dgvSimbolos);
             string codigoFuente = txtCodigoFuente.Text;
-            analizador_lexico.Analizar(codigoFuente);
+            analizador_lexico.analizar(codigoFuente);
         }
     }
 }
