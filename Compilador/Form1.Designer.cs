@@ -34,18 +34,17 @@ namespace Compilador
             this.btnAnalizar = new System.Windows.Forms.Button();
             this.tbcInformacion = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.grbLenguaje = new System.Windows.Forms.GroupBox();
-            this.txtLenguaje = new System.Windows.Forms.RichTextBox();
             this.dgvSimbolos = new System.Windows.Forms.DataGridView();
             this.Token = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.grbLenguaje = new System.Windows.Forms.GroupBox();
+            this.txtLenguaje = new System.Windows.Forms.RichTextBox();
             this.grbContenedorCodigoFuente.SuspendLayout();
             this.tbcInformacion.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.grbLenguaje.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).BeginInit();
+            this.grbLenguaje.SuspendLayout();
             this.SuspendLayout();
             // 
             // grbContenedorCodigoFuente
@@ -80,7 +79,6 @@ namespace Compilador
             // 
             this.tbcInformacion.Controls.Add(this.tabPage1);
             this.tbcInformacion.Controls.Add(this.tabPage2);
-            this.tbcInformacion.Controls.Add(this.tabPage3);
             this.tbcInformacion.Location = new System.Drawing.Point(427, 32);
             this.tbcInformacion.Name = "tbcInformacion";
             this.tbcInformacion.SelectedIndex = 0;
@@ -97,44 +95,6 @@ namespace Compilador
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Simbolos";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(680, 598);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Arbol sintactico";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(680, 598);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Errores";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // grbLenguaje
-            // 
-            this.grbLenguaje.Controls.Add(this.txtLenguaje);
-            this.grbLenguaje.Location = new System.Drawing.Point(24, 54);
-            this.grbLenguaje.Name = "grbLenguaje";
-            this.grbLenguaje.Size = new System.Drawing.Size(384, 228);
-            this.grbLenguaje.TabIndex = 4;
-            this.grbLenguaje.TabStop = false;
-            this.grbLenguaje.Text = "Lenguaje";
-            // 
-            // txtLenguaje
-            // 
-            this.txtLenguaje.Location = new System.Drawing.Point(7, 20);
-            this.txtLenguaje.Name = "txtLenguaje";
-            this.txtLenguaje.Size = new System.Drawing.Size(371, 202);
-            this.txtLenguaje.TabIndex = 0;
-            this.txtLenguaje.Text = "";
             // 
             // dgvSimbolos
             // 
@@ -157,6 +117,34 @@ namespace Compilador
             this.Tipo.HeaderText = "Tipo";
             this.Tipo.Name = "Tipo";
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(680, 598);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Arbol sintactico";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // grbLenguaje
+            // 
+            this.grbLenguaje.Controls.Add(this.txtLenguaje);
+            this.grbLenguaje.Location = new System.Drawing.Point(24, 54);
+            this.grbLenguaje.Name = "grbLenguaje";
+            this.grbLenguaje.Size = new System.Drawing.Size(384, 228);
+            this.grbLenguaje.TabIndex = 4;
+            this.grbLenguaje.TabStop = false;
+            this.grbLenguaje.Text = "Lenguaje";
+            // 
+            // txtLenguaje
+            // 
+            this.txtLenguaje.Location = new System.Drawing.Point(7, 20);
+            this.txtLenguaje.Name = "txtLenguaje";
+            this.txtLenguaje.Size = new System.Drawing.Size(371, 202);
+            this.txtLenguaje.TabIndex = 0;
+            this.txtLenguaje.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,8 +159,8 @@ namespace Compilador
             this.grbContenedorCodigoFuente.ResumeLayout(false);
             this.tbcInformacion.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.grbLenguaje.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).EndInit();
+            this.grbLenguaje.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -185,7 +173,6 @@ namespace Compilador
         private System.Windows.Forms.TabControl tbcInformacion;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.GroupBox grbLenguaje;
         private System.Windows.Forms.RichTextBox txtLenguaje;
         private System.Windows.Forms.DataGridView dgvSimbolos;
