@@ -40,6 +40,7 @@ namespace Compilador
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.grbLenguaje = new System.Windows.Forms.GroupBox();
             this.txtLenguaje = new System.Windows.Forms.RichTextBox();
+            this.btnAnalisisSintactico = new System.Windows.Forms.Button();
             this.grbContenedorCodigoFuente.SuspendLayout();
             this.tbcInformacion.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -145,11 +146,21 @@ namespace Compilador
             this.txtLenguaje.TabIndex = 0;
             this.txtLenguaje.Text = "";
             // 
+            // btnAnalisisSintactico
+            // 
+            this.btnAnalisisSintactico.Location = new System.Drawing.Point(165, 12);
+            this.btnAnalisisSintactico.Name = "btnAnalisisSintactico";
+            this.btnAnalisisSintactico.Size = new System.Drawing.Size(115, 23);
+            this.btnAnalisisSintactico.TabIndex = 5;
+            this.btnAnalisisSintactico.Text = "Analísis sintactico";
+            this.btnAnalisisSintactico.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1127, 668);
+            this.Controls.Add(this.btnAnalisisSintactico);
             this.Controls.Add(this.grbLenguaje);
             this.Controls.Add(this.tbcInformacion);
             this.Controls.Add(this.btnAnalizar);
@@ -178,6 +189,7 @@ namespace Compilador
         private System.Windows.Forms.DataGridView dgvSimbolos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Token;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
+        private System.Windows.Forms.Button btnAnalisisSintactico;
     }
 }
 

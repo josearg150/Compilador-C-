@@ -471,10 +471,10 @@ namespace Compilador
                     txtLenguaje.Text = txtLenguaje.Text + "protected \n";
                     break;
                 case "class":
-                    txtLenguaje.Text = txtLenguaje.Text + "Class \n";
+                    txtLenguaje.Text = txtLenguaje.Text + "class \n";
                     break;
-                case "Casilla":
-                    txtLenguaje.Text = txtLenguaje.Text + "Casilla" + " " + "Nombre Clase\n";
+                case "casilla":
+                    txtLenguaje.Text = txtLenguaje.Text + "casilla \n";
                     break;
                 case "{":
                     txtLenguaje.Text = txtLenguaje.Text + "{ \n";
@@ -508,7 +508,7 @@ namespace Compilador
                  case "public":
                  case "protected":
                  case "class":
-                 case "Casilla":
+                 case "casilla":
                  case "boolean":
                  case "string":
                  case "int":
@@ -520,7 +520,7 @@ namespace Compilador
                  case ";":
                  case ",":
                     tabla_simbolos.Rows[token1].Cells["Token"].Value = lexema;
-                     tabla_simbolos.Rows[token1].Cells["Tipo"].Value = "Signo Reservado";
+                     tabla_simbolos.Rows[token1].Cells["Tipo"].Value = "Delimitador";
                      break;    
                  default:
                      //errores(lexema);    //error en el texto
