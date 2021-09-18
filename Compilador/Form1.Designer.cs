@@ -1,7 +1,7 @@
 ﻿
 namespace Compilador
 {
-    partial class Form1
+    partial class Compilador
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -29,9 +29,9 @@ namespace Compilador
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Compilador));
             this.grbContenedorCodigoFuente = new System.Windows.Forms.GroupBox();
             this.txtCodigoFuente = new System.Windows.Forms.RichTextBox();
-            this.btnAnalizar = new System.Windows.Forms.Button();
             this.tbcInformacion = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvSimbolos = new System.Windows.Forms.DataGridView();
@@ -40,72 +40,79 @@ namespace Compilador
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.grbLenguaje = new System.Windows.Forms.GroupBox();
             this.txtLenguaje = new System.Windows.Forms.RichTextBox();
-            this.btnAnalisisSintactico = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ejecutarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.léxicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sintácticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grbContenedorCodigoFuente.SuspendLayout();
             this.tbcInformacion.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).BeginInit();
             this.grbLenguaje.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grbContenedorCodigoFuente
             // 
             this.grbContenedorCodigoFuente.Controls.Add(this.txtCodigoFuente);
-            this.grbContenedorCodigoFuente.Location = new System.Drawing.Point(24, 288);
+            this.grbContenedorCodigoFuente.Font = new System.Drawing.Font("Leelawadee UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbContenedorCodigoFuente.Location = new System.Drawing.Point(18, 349);
+            this.grbContenedorCodigoFuente.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grbContenedorCodigoFuente.Name = "grbContenedorCodigoFuente";
-            this.grbContenedorCodigoFuente.Size = new System.Drawing.Size(384, 368);
+            this.grbContenedorCodigoFuente.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grbContenedorCodigoFuente.Size = new System.Drawing.Size(420, 295);
             this.grbContenedorCodigoFuente.TabIndex = 1;
             this.grbContenedorCodigoFuente.TabStop = false;
             this.grbContenedorCodigoFuente.Text = "Código fuente";
             // 
             // txtCodigoFuente
             // 
-            this.txtCodigoFuente.Location = new System.Drawing.Point(7, 20);
+            this.txtCodigoFuente.Location = new System.Drawing.Point(10, 32);
+            this.txtCodigoFuente.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCodigoFuente.Name = "txtCodigoFuente";
-            this.txtCodigoFuente.Size = new System.Drawing.Size(371, 342);
+            this.txtCodigoFuente.Size = new System.Drawing.Size(400, 250);
             this.txtCodigoFuente.TabIndex = 0;
             this.txtCodigoFuente.Text = "";
-            // 
-            // btnAnalizar
-            // 
-            this.btnAnalizar.Location = new System.Drawing.Point(24, 12);
-            this.btnAnalizar.Name = "btnAnalizar";
-            this.btnAnalizar.Size = new System.Drawing.Size(125, 23);
-            this.btnAnalizar.TabIndex = 2;
-            this.btnAnalizar.Text = "Analisis lexico";
-            this.btnAnalizar.UseVisualStyleBackColor = true;
-            this.btnAnalizar.Click += new System.EventHandler(this.btnAnalizar_Click);
             // 
             // tbcInformacion
             // 
             this.tbcInformacion.Controls.Add(this.tabPage1);
             this.tbcInformacion.Controls.Add(this.tabPage2);
-            this.tbcInformacion.Location = new System.Drawing.Point(427, 32);
+            this.tbcInformacion.Font = new System.Drawing.Font("Leelawadee UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbcInformacion.Location = new System.Drawing.Point(460, 50);
+            this.tbcInformacion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbcInformacion.Name = "tbcInformacion";
             this.tbcInformacion.SelectedIndex = 0;
-            this.tbcInformacion.Size = new System.Drawing.Size(688, 624);
+            this.tbcInformacion.Size = new System.Drawing.Size(700, 594);
             this.tbcInformacion.TabIndex = 3;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.dgvSimbolos);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 30);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(680, 598);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage1.Size = new System.Drawing.Size(692, 560);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Simbolos";
+            this.tabPage1.Text = "Tabla de Símbolos";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // dgvSimbolos
             // 
+            this.dgvSimbolos.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvSimbolos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSimbolos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Token,
             this.Tipo});
-            this.dgvSimbolos.Location = new System.Drawing.Point(6, 6);
+            this.dgvSimbolos.Location = new System.Drawing.Point(9, 10);
+            this.dgvSimbolos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvSimbolos.Name = "dgvSimbolos";
-            this.dgvSimbolos.Size = new System.Drawing.Size(667, 586);
+            this.dgvSimbolos.Size = new System.Drawing.Size(675, 541);
             this.dgvSimbolos.TabIndex = 0;
             // 
             // Token
@@ -120,59 +127,130 @@ namespace Compilador
             // 
             // tabPage2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 30);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(680, 598);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Size = new System.Drawing.Size(692, 560);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Arbol sintactico";
+            this.tabPage2.Text = "Árbol Sintáctico";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // grbLenguaje
             // 
             this.grbLenguaje.Controls.Add(this.txtLenguaje);
-            this.grbLenguaje.Location = new System.Drawing.Point(24, 54);
+            this.grbLenguaje.Font = new System.Drawing.Font("Leelawadee UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbLenguaje.Location = new System.Drawing.Point(19, 40);
+            this.grbLenguaje.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.grbLenguaje.Name = "grbLenguaje";
-            this.grbLenguaje.Size = new System.Drawing.Size(384, 228);
+            this.grbLenguaje.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.grbLenguaje.Size = new System.Drawing.Size(420, 295);
             this.grbLenguaje.TabIndex = 4;
             this.grbLenguaje.TabStop = false;
             this.grbLenguaje.Text = "Lenguaje";
             // 
             // txtLenguaje
             // 
-            this.txtLenguaje.Location = new System.Drawing.Point(7, 20);
+            this.txtLenguaje.Location = new System.Drawing.Point(10, 32);
+            this.txtLenguaje.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtLenguaje.Name = "txtLenguaje";
-            this.txtLenguaje.Size = new System.Drawing.Size(371, 202);
+            this.txtLenguaje.ReadOnly = true;
+            this.txtLenguaje.Size = new System.Drawing.Size(400, 250);
             this.txtLenguaje.TabIndex = 0;
             this.txtLenguaje.Text = "";
             // 
-            // btnAnalisisSintactico
+            // menuStrip1
             // 
-            this.btnAnalisisSintactico.Location = new System.Drawing.Point(165, 12);
-            this.btnAnalisisSintactico.Name = "btnAnalisisSintactico";
-            this.btnAnalisisSintactico.Size = new System.Drawing.Size(115, 23);
-            this.btnAnalisisSintactico.TabIndex = 5;
-            this.btnAnalisisSintactico.Text = "Analísis sintactico";
-            this.btnAnalisisSintactico.UseVisualStyleBackColor = true;
+            this.menuStrip1.Font = new System.Drawing.Font("Leelawadee UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.archivoToolStripMenuItem,
+            this.ejecutarToolStripMenuItem,
+            this.ayudaToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(1174, 31);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // Form1
+            // archivoToolStripMenuItem
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.salirToolStripMenuItem});
+            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(75, 25);
+            this.archivoToolStripMenuItem.Text = "Archivo";
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
+            // 
+            // ayudaToolStripMenuItem
+            // 
+            this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.acercaDeToolStripMenuItem});
+            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(66, 25);
+            this.ayudaToolStripMenuItem.Text = "Ayuda";
+            // 
+            // acercaDeToolStripMenuItem
+            // 
+            this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.acercaDeToolStripMenuItem.Text = "Acerca de";
+            this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
+            // 
+            // ejecutarToolStripMenuItem
+            // 
+            this.ejecutarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.léxicoToolStripMenuItem,
+            this.sintácticoToolStripMenuItem});
+            this.ejecutarToolStripMenuItem.Name = "ejecutarToolStripMenuItem";
+            this.ejecutarToolStripMenuItem.Size = new System.Drawing.Size(77, 25);
+            this.ejecutarToolStripMenuItem.Text = "Ejecutar";
+            // 
+            // léxicoToolStripMenuItem
+            // 
+            this.léxicoToolStripMenuItem.Name = "léxicoToolStripMenuItem";
+            this.léxicoToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.léxicoToolStripMenuItem.Text = "Léxico";
+            this.léxicoToolStripMenuItem.Click += new System.EventHandler(this.léxicoToolStripMenuItem_Click);
+            // 
+            // sintácticoToolStripMenuItem
+            // 
+            this.sintácticoToolStripMenuItem.Name = "sintácticoToolStripMenuItem";
+            this.sintácticoToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.sintácticoToolStripMenuItem.Text = "Sintáctico";
+            // 
+            // Compilador
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1127, 668);
-            this.Controls.Add(this.btnAnalisisSintactico);
+            this.ClientSize = new System.Drawing.Size(1174, 661);
             this.Controls.Add(this.grbLenguaje);
             this.Controls.Add(this.tbcInformacion);
-            this.Controls.Add(this.btnAnalizar);
             this.Controls.Add(this.grbContenedorCodigoFuente);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Leelawadee UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MaximizeBox = false;
+            this.Name = "Compilador";
+            this.Text = "Compilador";
             this.grbContenedorCodigoFuente.ResumeLayout(false);
             this.tbcInformacion.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).EndInit();
             this.grbLenguaje.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -180,7 +258,6 @@ namespace Compilador
 
         private System.Windows.Forms.GroupBox grbContenedorCodigoFuente;
         private System.Windows.Forms.RichTextBox txtCodigoFuente;
-        private System.Windows.Forms.Button btnAnalizar;
         private System.Windows.Forms.TabControl tbcInformacion;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -189,7 +266,14 @@ namespace Compilador
         private System.Windows.Forms.DataGridView dgvSimbolos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Token;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
-        private System.Windows.Forms.Button btnAnalisisSintactico;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ayudaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ejecutarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem léxicoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sintácticoToolStripMenuItem;
     }
 }
 
