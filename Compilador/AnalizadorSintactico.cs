@@ -42,6 +42,10 @@ namespace Compilador
         //Metodos
         //***************************************
         #region Metodos
+        public void analizar()
+        {
+
+        }
         #endregion
     }
 }
