@@ -25,7 +25,10 @@ namespace Compilador
 
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.MessageBox.Show("");
+            System.Windows.Forms.MessageBox.Show("Proyecto de compilador.\n" +
+                                                 "Fase léxica y sintáctica.\n" +
+                                                 "José Luis Carreón Reyes\n" +
+                                                 "José Ángel Rocha García");
         }
 
         private void léxicoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -64,7 +67,14 @@ namespace Compilador
                 // Se crea el objeto gráfica, al cual se irán añadiendo elementos visuales.
                 Microsoft.Msagl.Drawing.Graph Grafica = new Microsoft.Msagl.Drawing.Graph("Grafica");
                 // ...
-                // ...
+                String linea = txtCodigoFuente.SelectedText;
+                if (linea.Contains("\n"))
+                {
+                    System.Windows.Forms.MessageBox.Show("Por favor seleccione sólo una línea.");
+                } else
+                {
+                    System.Windows.Forms.MessageBox.Show(linea);
+                }
                 Visor.Graph = Grafica;
                 // Se asocia el visor al formulario creado al principio del método
                 Formulario.SuspendLayout();
