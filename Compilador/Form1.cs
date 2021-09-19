@@ -30,11 +30,19 @@ namespace Compilador
 
         private void léxicoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            tbcInformacion.SelectTab(tabPage1);
             txtLenguaje.Clear();
             dgvSimbolos.Rows.Clear();
             analizador_lexico = new AnalizadorLexico(txtLenguaje, dgvSimbolos);
             string codigoFuente = txtCodigoFuente.Text;
             analizador_lexico.analizar(codigoFuente);
+        }
+
+        private void sintácticoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            txtLenguaje.Clear();
+            dgvSimbolos.Rows.Clear();
+            tbcInformacion.SelectTab(tabPage2);
         }
     }
 }

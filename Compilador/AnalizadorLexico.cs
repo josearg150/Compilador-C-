@@ -96,10 +96,10 @@ namespace Compilador
                                 estado_principal = 3;       
                                 break;
 
-                            case 'C':
+                           /* case 'C':
                                 token += cadena;  
                                 estado_principal = 6;       
-                                break;
+                                break;*/
                             case '{':
                                 token += cadena;
                                 estado_principal = 9;
@@ -232,7 +232,7 @@ namespace Compilador
                         break;
 
 
-                    case 6:
+                    /*case 6:
                         if (cadena == 'C')
                         {
                             token += cadena;
@@ -273,7 +273,7 @@ namespace Compilador
                             estado_principal = 8;
                             estado_de_inicio = estado_de_inicio - 1;
                         }
-                        break;
+                        break;*/
 
                     case 8:
                         mostrarReservadas(token);
@@ -473,9 +473,9 @@ namespace Compilador
                 case "class":
                     txtLenguaje.Text = txtLenguaje.Text + "class \n";
                     break;
-                case "casilla":
+                /*case "casilla":
                     txtLenguaje.Text = txtLenguaje.Text + "casilla \n";
-                    break;
+                    break;*/
                 case "{":
                     txtLenguaje.Text = txtLenguaje.Text + "{ \n";
                     break;
@@ -508,7 +508,7 @@ namespace Compilador
                  case "public":
                  case "protected":
                  case "class":
-                 case "casilla":
+                 //case "casilla":
                  case "boolean":
                  case "string":
                  case "int":
