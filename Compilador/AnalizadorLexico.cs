@@ -185,6 +185,12 @@ namespace Compilador
                             lexema = "";
                         }
                         //Comparadores
+                        else if (caracter == '=')
+                        {
+                            lexema += caracter;
+                            agregarToken(lexema, "Asignacion", fila, columna, i - lexema.Length);
+                            lexema = "";
+                        }
                         else if (caracter == '<')
                         {
                             lexema += caracter;
