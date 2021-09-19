@@ -32,11 +32,13 @@ namespace Compilador
         //Variables locales                     
         //***************************************
         #region Variables
+
         #endregion
         //***************************************
         //Constructores   
         //***************************************
-        #region Constructores 
+        #region Constructores
+
         #endregion
         //***************************************
         //Metodos
@@ -44,7 +46,7 @@ namespace Compilador
         #region Metodos
         public void analizar()
         {
-
+            
         }
         #endregion
     }

@@ -33,11 +33,11 @@ namespace Compilador
             this.grbContenedorCodigoFuente = new System.Windows.Forms.GroupBox();
             this.txtCodigoFuente = new System.Windows.Forms.RichTextBox();
             this.tbcInformacion = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tbpLexico = new System.Windows.Forms.TabPage();
             this.dgvSimbolos = new System.Windows.Forms.DataGridView();
             this.Token = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tbpSintactico = new System.Windows.Forms.TabPage();
             this.grbLenguaje = new System.Windows.Forms.GroupBox();
             this.txtLenguaje = new System.Windows.Forms.RichTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -50,7 +50,7 @@ namespace Compilador
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grbContenedorCodigoFuente.SuspendLayout();
             this.tbcInformacion.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tbpLexico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).BeginInit();
             this.grbLenguaje.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -80,8 +80,8 @@ namespace Compilador
             // 
             // tbcInformacion
             // 
-            this.tbcInformacion.Controls.Add(this.tabPage1);
-            this.tbcInformacion.Controls.Add(this.tabPage2);
+            this.tbcInformacion.Controls.Add(this.tbpLexico);
+            this.tbcInformacion.Controls.Add(this.tbpSintactico);
             this.tbcInformacion.Font = new System.Drawing.Font("Leelawadee UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbcInformacion.Location = new System.Drawing.Point(460, 50);
             this.tbcInformacion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -90,17 +90,17 @@ namespace Compilador
             this.tbcInformacion.Size = new System.Drawing.Size(700, 594);
             this.tbcInformacion.TabIndex = 3;
             // 
-            // tabPage1
+            // tbpLexico
             // 
-            this.tabPage1.Controls.Add(this.dgvSimbolos);
-            this.tabPage1.Location = new System.Drawing.Point(4, 30);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage1.Size = new System.Drawing.Size(692, 560);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Tabla de Símbolos";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tbpLexico.Controls.Add(this.dgvSimbolos);
+            this.tbpLexico.Location = new System.Drawing.Point(4, 30);
+            this.tbpLexico.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpLexico.Name = "tbpLexico";
+            this.tbpLexico.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpLexico.Size = new System.Drawing.Size(692, 560);
+            this.tbpLexico.TabIndex = 0;
+            this.tbpLexico.Text = "Tabla de Símbolos";
+            this.tbpLexico.UseVisualStyleBackColor = true;
             // 
             // dgvSimbolos
             // 
@@ -125,16 +125,16 @@ namespace Compilador
             this.Tipo.HeaderText = "Tipo";
             this.Tipo.Name = "Tipo";
             // 
-            // tabPage2
+            // tbpSintactico
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 30);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage2.Size = new System.Drawing.Size(692, 560);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Árbol Sintáctico";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tbpSintactico.Location = new System.Drawing.Point(4, 30);
+            this.tbpSintactico.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpSintactico.Name = "tbpSintactico";
+            this.tbpSintactico.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbpSintactico.Size = new System.Drawing.Size(692, 560);
+            this.tbpSintactico.TabIndex = 1;
+            this.tbpSintactico.Text = "Árbol Sintáctico";
+            this.tbpSintactico.UseVisualStyleBackColor = true;
             // 
             // grbLenguaje
             // 
@@ -200,14 +200,14 @@ namespace Compilador
             // léxicoToolStripMenuItem
             // 
             this.léxicoToolStripMenuItem.Name = "léxicoToolStripMenuItem";
-            this.léxicoToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.léxicoToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.léxicoToolStripMenuItem.Text = "Léxico";
             this.léxicoToolStripMenuItem.Click += new System.EventHandler(this.léxicoToolStripMenuItem_Click);
             // 
             // sintácticoToolStripMenuItem
             // 
             this.sintácticoToolStripMenuItem.Name = "sintácticoToolStripMenuItem";
-            this.sintácticoToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.sintácticoToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.sintácticoToolStripMenuItem.Text = "Sintáctico";
             this.sintácticoToolStripMenuItem.Click += new System.EventHandler(this.sintácticoToolStripMenuItem_Click);
             // 
@@ -245,7 +245,7 @@ namespace Compilador
             this.Text = "Compilador";
             this.grbContenedorCodigoFuente.ResumeLayout(false);
             this.tbcInformacion.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tbpLexico.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).EndInit();
             this.grbLenguaje.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -260,8 +260,8 @@ namespace Compilador
         private System.Windows.Forms.GroupBox grbContenedorCodigoFuente;
         private System.Windows.Forms.RichTextBox txtCodigoFuente;
         private System.Windows.Forms.TabControl tbcInformacion;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tbpLexico;
+        private System.Windows.Forms.TabPage tbpSintactico;
         private System.Windows.Forms.GroupBox grbLenguaje;
         private System.Windows.Forms.RichTextBox txtLenguaje;
         private System.Windows.Forms.DataGridView dgvSimbolos;
