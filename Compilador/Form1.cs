@@ -93,5 +93,25 @@ namespace Compilador
                 
             }
         }
+
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog DialogoArchivo = new OpenFileDialog();
+            DialogoArchivo.Title = "Buscar archivos de texto";
+            DialogoArchivo.DefaultExt = "txt";
+            DialogoArchivo.Filter = "Archivos de texto (*.txt)|*.txt";
+            DialogoArchivo.CheckFileExists = true;
+            DialogoArchivo.CheckPathExists = true;
+            DialogoArchivo.RestoreDirectory = true;
+            if (DialogoArchivo.ShowDialog() == DialogResult.OK)
+            {
+                String RutaArchivo = DialogoArchivo.FileName;
+                String ContenidoArchivo = System.IO.File.ReadAllText(RutaArchivo);
+                txtLenguaje.Text = ContenidoArchivo;
+            } else
+            {
+                System.Windows.Forms.MessageBox.Show("Error al abrir el archivo.");
+            }
+        }
     }
 }
