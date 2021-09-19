@@ -39,12 +39,13 @@ namespace Compilador
             }
             else
             {
+                string codigoFuente = txtCodigoFuente.Text;
                 tbcInformacion.SelectTab(tbpLexico);
                 txtLenguaje.Clear();
                 dgvSimbolos.Rows.Clear();
                 analizador_lexico = new AnalizadorLexico(txtLenguaje, dgvSimbolos);
-                string codigoFuente = txtCodigoFuente.Text;
                 analizador_lexico.analizar(codigoFuente);
+                analizador_lexico.mostrar();
             }
         }
 
