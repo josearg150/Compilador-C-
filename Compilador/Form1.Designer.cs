@@ -35,21 +35,21 @@ namespace Compilador
             this.tbcInformacion = new System.Windows.Forms.TabControl();
             this.tbpLexico = new System.Windows.Forms.TabPage();
             this.dgvSimbolos = new System.Windows.Forms.DataGridView();
+            this.Lexema = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoToken = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpSintactico = new System.Windows.Forms.TabPage();
             this.grbLenguaje = new System.Windows.Forms.GroupBox();
             this.txtLenguaje = new System.Windows.Forms.RichTextBox();
             this.mspMenu = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ejecutarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.léxicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sintácticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Lexema = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoToken = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grbContenedorCodigoFuente.SuspendLayout();
             this.tbcInformacion.SuspendLayout();
             this.tbpLexico.SuspendLayout();
@@ -123,6 +123,26 @@ namespace Compilador
             this.dgvSimbolos.Size = new System.Drawing.Size(675, 541);
             this.dgvSimbolos.TabIndex = 0;
             // 
+            // Lexema
+            // 
+            this.Lexema.HeaderText = "Lexema";
+            this.Lexema.Name = "Lexema";
+            this.Lexema.ReadOnly = true;
+            // 
+            // TipoToken
+            // 
+            this.TipoToken.HeaderText = "Token";
+            this.TipoToken.Name = "TipoToken";
+            this.TipoToken.ReadOnly = true;
+            this.TipoToken.Width = 170;
+            // 
+            // Linea
+            // 
+            this.Linea.HeaderText = "Línea";
+            this.Linea.Name = "Linea";
+            this.Linea.ReadOnly = true;
+            this.Linea.Width = 55;
+            // 
             // tbpSintactico
             // 
             this.tbpSintactico.Location = new System.Drawing.Point(4, 30);
@@ -180,10 +200,18 @@ namespace Compilador
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(75, 25);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
+            // abrirToolStripMenuItem
+            // 
+            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
+            this.abrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.abrirToolStripMenuItem.Text = "Abrir";
+            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
+            // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.salirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
@@ -194,8 +222,8 @@ namespace Compilador
             this.léxicoToolStripMenuItem,
             this.sintácticoToolStripMenuItem});
             this.ejecutarToolStripMenuItem.Name = "ejecutarToolStripMenuItem";
-            this.ejecutarToolStripMenuItem.Size = new System.Drawing.Size(77, 25);
-            this.ejecutarToolStripMenuItem.Text = "Ejecutar";
+            this.ejecutarToolStripMenuItem.Size = new System.Drawing.Size(116, 25);
+            this.ejecutarToolStripMenuItem.Text = "Herramientas";
             // 
             // léxicoToolStripMenuItem
             // 
@@ -224,38 +252,9 @@ namespace Compilador
             // acercaDeToolStripMenuItem
             // 
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.acercaDeToolStripMenuItem.Text = "Acerca de";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
-            // 
-            // abrirToolStripMenuItem
-            // 
-            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
-            this.abrirToolStripMenuItem.Text = "Abrir";
-            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
-            // 
-            // Lexema
-            // 
-            this.Lexema.HeaderText = "Lexema";
-            this.Lexema.Name = "Lexema";
-            this.Lexema.ReadOnly = true;
-            // 
-            // TipoToken
-            // 
-            this.TipoToken.HeaderText = "Token";
-            this.TipoToken.Name = "TipoToken";
-            this.TipoToken.ReadOnly = true;
-            this.TipoToken.Width = 170;
-            // 
-            // Linea
-            // 
-            this.Linea.HeaderText = "Línea";
-            this.Linea.Name = "Linea";
-            this.Linea.ReadOnly = true;
-            this.Linea.Width = 55;
             // 
             // Compilador
             // 
