@@ -396,6 +396,11 @@ namespace Compilador
                 tabla_simbolos.Rows[i].Cells["TipoToken"].Value = token_actual.getIdToken();
                 tabla_simbolos.Rows[i].Cells["Linea"].Value = token_actual.getLinea();
             }
+
+            for (int i = 0; i < tokens.Count; i++)
+            {
+                txtLenguaje.Text = txtLenguaje.Text + "\n" + tokens[i];
+            }
         }
 
 
