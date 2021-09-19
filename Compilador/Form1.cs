@@ -54,39 +54,43 @@ namespace Compilador
             if (txtCodigoFuente.Text.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show("El input no puede estar vacío.");
+            } else if (txtCodigoFuente.SelectedText.Equals(""))
+            {
+                System.Windows.Forms.MessageBox.Show("Por favor seleccione una línea.");
             } else
             {
-                txtLenguaje.Clear();
-                dgvSimbolos.Rows.Clear();
-                tbcInformacion.SelectTab(tbpSintactico);
-                // Se crea un formulario (requerido por la librería Microsoft.Msagl)
-                System.Windows.Forms.Form Formulario = new System.Windows.Forms.Form();
-                // Se ajusta el tamaño del formulario
-                Formulario.Size = new Size(800, 600);
-                // Objeto para visualizar los elementos (nodos, líneas) que se vayan creando.
-                Microsoft.Msagl.GraphViewerGdi.GViewer Visor = new Microsoft.Msagl.GraphViewerGdi.GViewer();
-                // Se crea el objeto gráfica, al cual se irán añadiendo elementos visuales.
-                Microsoft.Msagl.Drawing.Graph Grafica = new Microsoft.Msagl.Drawing.Graph("Grafica");
-                // ...
                 String linea = txtCodigoFuente.SelectedText;
                 if (linea.Contains("\n"))
                 {
                     System.Windows.Forms.MessageBox.Show("Por favor seleccione sólo una línea.");
-                } else
-                {
-                    System.Windows.Forms.MessageBox.Show(linea);
                 }
-                Visor.Graph = Grafica;
-                // Se asocia el visor al formulario creado al principio del método
-                Formulario.SuspendLayout();
-                Formulario.TopLevel = false;
-                Formulario.Visible = true;
-                Formulario.FormBorderStyle = FormBorderStyle.None;
-                Visor.Dock = System.Windows.Forms.DockStyle.Fill;
-                Formulario.Controls.Add(Visor);
-                Formulario.ResumeLayout();
-                // Muestra el formulario (la gráfica)
-                tbcInformacion.TabPages[1].Controls.Add(Formulario);
+                else
+                {
+                    txtLenguaje.Clear();
+                    dgvSimbolos.Rows.Clear();
+                    tbcInformacion.SelectTab(tbpSintactico);
+                    // Se crea un formulario (requerido por la librería Microsoft.Msagl)
+                    System.Windows.Forms.Form Formulario = new System.Windows.Forms.Form();
+                    // Se ajusta el tamaño del formulario
+                    Formulario.Size = new Size(800, 600);
+                    // Objeto para visualizar los elementos (nodos, líneas) que se vayan creando.
+                    Microsoft.Msagl.GraphViewerGdi.GViewer Visor = new Microsoft.Msagl.GraphViewerGdi.GViewer();
+                    // Se crea el objeto gráfica, al cual se irán añadiendo elementos visuales.
+                    Microsoft.Msagl.Drawing.Graph Grafica = new Microsoft.Msagl.Drawing.Graph("Grafica");
+                    // ...
+                    Visor.Graph = Grafica;
+                    // Se asocia el visor al formulario creado al principio del método
+                    Formulario.SuspendLayout();
+                    Formulario.TopLevel = false;
+                    Formulario.Visible = true;
+                    Formulario.FormBorderStyle = FormBorderStyle.None;
+                    Visor.Dock = System.Windows.Forms.DockStyle.Fill;
+                    Formulario.Controls.Add(Visor);
+                    Formulario.ResumeLayout();
+                    // Muestra el formulario (la gráfica)
+                    tbcInformacion.TabPages[1].Controls.Add(Formulario);
+                }
+                
             }
         }
     }
