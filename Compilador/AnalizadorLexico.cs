@@ -397,13 +397,23 @@ namespace Compilador
                 tabla_simbolos.Rows[i].Cells["Linea"].Value = token_actual.getLinea();
             }
 
+            
+        }
+        public void mostrarReservadas()
+        {
             for (int i = 0; i < tokens.Count; i++)
             {
                 txtLenguaje.Text = txtLenguaje.Text + "\n" + tokens[i];
             }
         }
-
-
+        public void guardarReservadas(string contenido)
+        {
+            for (int i = 1; i <= contenido.Length; i++)
+            {
+                
+               
+            }
+        }
 
         #endregion
     }
