@@ -16,6 +16,7 @@ namespace Compilador
         public Compilador()
         {
             InitializeComponent();
+            analizador_lexico = new AnalizadorLexico(txtLenguaje, dgvSimbolos);
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -40,10 +41,8 @@ namespace Compilador
             else
             {
                 string codigoFuente = txtCodigoFuente.Text;
-                tbcInformacion.SelectTab(tbpLexico);
-                txtLenguaje.Clear();
+                tbcInformacion.SelectTab(tbpLexico);     
                 dgvSimbolos.Rows.Clear();
-                analizador_lexico = new AnalizadorLexico(txtLenguaje, dgvSimbolos);
                 analizador_lexico.analizar(codigoFuente);
                 analizador_lexico.mostrar();
             }
@@ -96,6 +95,7 @@ namespace Compilador
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            txtLenguaje.Clear();
             OpenFileDialog DialogoArchivo = new OpenFileDialog();
             DialogoArchivo.Title = "Buscar archivos de texto";
             DialogoArchivo.DefaultExt = "txt";
@@ -108,6 +108,7 @@ namespace Compilador
                 String RutaArchivo = DialogoArchivo.FileName;
                 String ContenidoArchivo = System.IO.File.ReadAllText(RutaArchivo);
                 txtLenguaje.Text = ContenidoArchivo;
+                analizador_lexico.guardarReservadas(ContenidoArchivo);
             } else
             {
                 System.Windows.Forms.MessageBox.Show("Error al abrir el archivo.");

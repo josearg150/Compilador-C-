@@ -57,11 +57,6 @@ namespace Compilador
             tabla_simbolos = _tabla_simbolos;
             txtLenguaje = _lenguaje;
             listaDeTokens = new List<Token>();
-            tokens = new ArrayList();
-            //Lista de palabras reservadas
-            tokens.Add("inicio");  
-            tokens.Add("prueba"); 
-            tokens.Add("reservada"); 
         }
         #endregion
 
@@ -399,20 +394,10 @@ namespace Compilador
 
             
         }
-        public void mostrarReservadas()
-        {
-            for (int i = 0; i < tokens.Count; i++)
-            {
-                txtLenguaje.Text = txtLenguaje.Text + "\n" + tokens[i];
-            }
-        }
         public void guardarReservadas(string contenido)
         {
-            for (int i = 1; i <= contenido.Length; i++)
-            {
-                
-               
-            }
+            string[] lineas = contenido.Split(new[] { "\r\n", "\r", "\n" },StringSplitOptions.None);
+            tokens = new ArrayList(lineas);
         }
 
         #endregion
