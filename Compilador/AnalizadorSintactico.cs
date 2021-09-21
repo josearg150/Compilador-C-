@@ -35,6 +35,8 @@ namespace Compilador
         //***************************************
         #region Variables
         private bool OperadoresShuntingInicializados = false;
+        List<string> ExpresionRPNArreglo;
+
         #endregion
         //***************************************
         //Constructores   
@@ -57,16 +59,12 @@ namespace Compilador
             string ExpresionRPN = ShuntingYard.ConvertirInfijaAPosfija(Expresion); // Expresion en notación polaca revertida
             System.Windows.Forms.MessageBox.Show(ExpresionRPN);
             // Se convierte la cadena de la expresión en notación polaca revertida en un arreglo
-            List<string> ExpresionRPNArreglo = new List<string>(ExpresionRPN.Split(' ').ToList());
+            ExpresionRPNArreglo = new List<string>(ExpresionRPN.Split(' ').ToList());
             // Se elimina el objeto vacío sobrante al final del arreglo
             ExpresionRPNArreglo.RemoveAt(ExpresionRPNArreglo.Count - 1);
-            //Graficar(ExpresionRPNArreglo);
+        
         }
-        private void Graficar(List<string> ExpresionPosfija)
-        {
-           
-
-        }
+   
         public System.Windows.Forms.Form crearFormulario()
         {
             // Se crea un formulario (requerido por la librería Microsoft.Msagl)
@@ -80,8 +78,11 @@ namespace Compilador
             // Se crea el objeto gráfica, al cual se irán añadiendo elementos visuales.
             Microsoft.Msagl.Drawing.Graph Grafica = new Microsoft.Msagl.Drawing.Graph("Grafica");
             // ...
-            Visor.Graph = Grafica;
+            var Nodo = Grafica.AddNode("hola");
+            Nodo.LabelText = "1";
+
             // Se asocia el visor al formulario creado al principio del método
+            Visor.Graph = Grafica;
             Formulario.SuspendLayout();
             Formulario.TopLevel = false;
             Formulario.Visible = true;

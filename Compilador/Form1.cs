@@ -66,7 +66,7 @@ namespace Compilador
                 else
                 {
                     //txtLenguaje.Clear();
-                    //dgvSimbolos.Rows.Clear();
+                    dgvSimbolos.Rows.Clear();
                     tbcInformacion.SelectTab(tbpSintactico);
                     /* Se crea un formulario (requerido por la librería Microsoft.Msagl)
                     System.Windows.Forms.Form Formulario = new System.Windows.Forms.Form();
@@ -92,6 +92,7 @@ namespace Compilador
                     //tbcInformacion.TabPages[1].Controls.Add(Formulario);
                     //Creando objeto analizador_sintactico 
                     AnalizadorSintactico analizador_sintactico = new AnalizadorSintactico();
+                    analizador_sintactico.analizar(linea);
                     tbcInformacion.TabPages[1].Controls.Add(analizador_sintactico.crearFormulario());
                 }
                 
