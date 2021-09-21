@@ -106,17 +106,39 @@ namespace Compilador
             Microsoft.Msagl.GraphViewerGdi.GViewer Visor = new Microsoft.Msagl.GraphViewerGdi.GViewer();
             // Se crea el objeto gráfica, al cual se irán añadiendo elementos visuales.
             Microsoft.Msagl.Drawing.Graph Grafica = new Microsoft.Msagl.Drawing.Graph("Grafica");
+            // Pila de nodos de la librería Microsoft.Msagl
+            Stack<Microsoft.Msagl.Drawing.Node> PilaGrafica = new Stack<Microsoft.Msagl.Drawing.Node>();
             // ...
+            ExpresionRPNArreglo.Reverse();
             int Id = 0;
+            int i = 0;
+            bool primerNodo = true;
             foreach (string c in ExpresionRPNArreglo)
             {
+                bool result = int.TryParse(c, out i);//swaber si es numero 
                 // Se incrementa el entero para identificar al siguiente nodo que se cree
+                System.Windows.Forms.MessageBox.Show(c);
                 Id++;
-                // Se crea un nuevo nodo con el número
-                var Nodo = Grafica.AddNode(Id.ToString());
-                Nodo.LabelText = c;
-                // Se introduce el nodo creado a la pila
-                //     PilaGrafica.Push(Nodo);
+                if (primerNodo)
+                {
+                    var Nodo = Grafica.AddNode(Id.ToString());
+                    Nodo.LabelText = c;
+                    // Se introduce el nodo creado a la pila
+                    PilaGrafica.Push(Nodo);
+                    primerNodo = false;
+                }
+                else if (result)
+                {
+                    var T1 = PilaGrafica.Pop();
+                    // Se crea un nuevo nodo con el operador
+                    var Nodo = Grafica.AddNode(Id.ToString());
+                    Nodo.LabelText = c;
+                    // y se enlazan al nodo creado (operador)
+                    Grafica.AddEdge(Nodo.Id, "", T1.Id);
+                    // Se introduce el nodo creado a la pila
+                    PilaGrafica.Push(Nodo);
+                }
+                
             }
 
             // Se asocia el visor al formulario creado al principio del método
