@@ -77,7 +77,7 @@ namespace Compilador
             Operadores.Add("*", new Operador { CodigoOperador = "*", Asociatividad = IzquierdaAsociatividad, Precedencia = 1 });
             Operadores.Add("-", new Operador { CodigoOperador = "-", Asociatividad = IzquierdaAsociatividad, Precedencia = 0 });
             Operadores.Add("+", new Operador { CodigoOperador = "+", Asociatividad = IzquierdaAsociatividad, Precedencia = 0 });
-            Operadores.Add("=", new Operador { CodigoOperador = "+", Asociatividad = IzquierdaAsociatividad, Precedencia = 0 });
+            Operadores.Add("=", new Operador { CodigoOperador = "=", Asociatividad = IzquierdaAsociatividad, Precedencia = 0 });
         }
 
         /// <summary>
