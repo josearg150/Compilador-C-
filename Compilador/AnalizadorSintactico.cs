@@ -52,12 +52,13 @@ namespace Compilador
         //Metodos
         //***************************************
         #region Metodos
-        public void analizar(String Expresion )
+        public void analizar(String Expresion)
         {
-            if (!OperadoresShuntingInicializados)       // Se inicializan los operadores permitidos con su precedencia
-                ShuntingYard.InicializarOperadores();     // y asociatividad, tal como lo indica el algoritmo usado
+            ShuntingYard shunting = new ShuntingYard();
+            if (!OperadoresShuntingInicializados)         // Se inicializan los operadores permitidos con su precedencia
+                shunting.InicializarOperadores();     // y asociatividad, tal como lo indica el algoritmo usado
             OperadoresShuntingInicializados = true; // (Shunting Yard)
-            string ExpresionRPN = ShuntingYard.ConvertirInfijaAPosfija(Expresion); // Expresion en notación polaca revertida     
+            string ExpresionRPN = shunting.ConvertirInfijaAPosfija(Expresion); // Expresion en notación polaca revertida     
             System.Windows.Forms.MessageBox.Show(ExpresionRPN);
             // Se convierte la cadena de la expresión en notación polaca revertida en un arreglo
             ExpresionRPNArreglo = new List<string>(ExpresionRPN.Split(' ').ToList());

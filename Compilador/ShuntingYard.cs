@@ -58,7 +58,7 @@ namespace Compilador
         #region Variables
         const int IzquierdaAsociatividad = 0;
         const int DerechaAsociatividad = 1;
-        static Dictionary<string, Operador> Operadores = new Dictionary<string, Operador>();
+        Dictionary<string, Operador> Operadores = new Dictionary<string, Operador>();
         #endregion Variables
 
         //****************************************************************************************
@@ -69,7 +69,7 @@ namespace Compilador
         ///     Inicializa los operadores permitidos con su precedencia y
         ///     asociatividad correspondiente.
         /// </summary>
-        public static void InicializarOperadores()
+        public void InicializarOperadores()
         {
             Operadores.Add("^", new Operador { CodigoOperador = "^", Asociatividad = DerechaAsociatividad, Precedencia = 2 });
             Operadores.Add("√", new Operador { CodigoOperador = "√", Asociatividad = IzquierdaAsociatividad, Precedencia = 2 });
@@ -85,7 +85,7 @@ namespace Compilador
         /// </summary>
         /// <param name="Token"></param>
         /// <returns>Booleano.</returns>
-        private static bool EsOperador(String Token)
+        private bool EsOperador(String Token)
         {
             return Operadores.ContainsKey(Token);
         }
@@ -95,7 +95,7 @@ namespace Compilador
         /// </summary>
         /// <param name="ExpresionInfija"></param>
         /// <returns>Una cadena con la expresión, con un espacio entre cada término.</returns>
-        public static string ConvertirInfijaAPosfija(string ExpresionInfija)
+        public string ConvertirInfijaAPosfija(string ExpresionInfija)
         {
             try
             {
