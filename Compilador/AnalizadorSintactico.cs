@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -36,15 +37,15 @@ namespace Compilador
         #region Variables
         private bool OperadoresShuntingInicializados = false;
         List<string> ExpresionRPNArreglo;
-
+        ArrayList tokens;
         #endregion
         //***************************************
         //Constructores   
         //***************************************
         #region Constructores
-        public AnalizadorSintactico()
+        public AnalizadorSintactico(ArrayList _tokens)
         {
-
+            tokens = new ArrayList(_tokens);
         }
         #endregion
         //***************************************
@@ -56,7 +57,7 @@ namespace Compilador
             if (!OperadoresShuntingInicializados)       // Se inicializan los operadores permitidos con su precedencia
                 ShuntingYard.InicializarOperadores();     // y asociatividad, tal como lo indica el algoritmo usado
             OperadoresShuntingInicializados = true; // (Shunting Yard)
-            string ExpresionRPN = ShuntingYard.ConvertirInfijaAPosfija(Expresion); // Expresion en notación polaca revertida
+            string ExpresionRPN = ShuntingYard.ConvertirInfijaAPosfija(Expresion); // Expresion en notación polaca revertida     
             System.Windows.Forms.MessageBox.Show(ExpresionRPN);
             // Se convierte la cadena de la expresión en notación polaca revertida en un arreglo
             ExpresionRPNArreglo = new List<string>(ExpresionRPN.Split(' ').ToList());
@@ -64,9 +65,36 @@ namespace Compilador
             ExpresionRPNArreglo.RemoveAt(ExpresionRPNArreglo.Count - 1);
         
         }
-   
+        public Boolean IdentificarReservada(String palabra)
+        {
+            for (int i = 0; i < tokens.Count; ++i)
+            {
+                if (palabra == tokens[i].ToString())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public void quitarReservadas()
+        {
+            for (int i = 0; i < ExpresionRPNArreglo.Count; i++)
+            {
+                bool encontrado = IdentificarReservada(ExpresionRPNArreglo.ElementAt(i));
+              /*  for (int j = 0; j < tokens.Count; j++)
+                {
+                    
+                }*/
+               
+                if (encontrado)
+                {
+                    ExpresionRPNArreglo.RemoveAt(i);
+                }
+            }
+        }
         public System.Windows.Forms.Form crearFormulario()
         {
+            quitarReservadas();
             // Se crea un formulario (requerido por la librería Microsoft.Msagl)
             System.Windows.Forms.Form Formulario = new System.Windows.Forms.Form();
             // Se ajusta el tamaño del formulario

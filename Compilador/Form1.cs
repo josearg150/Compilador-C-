@@ -93,7 +93,7 @@ namespace Compilador
                     // analizador_sintactico.crearFormulario();
                     //tbcInformacion.TabPages[1].Controls.Add(Formulario);
                     //Creando objeto analizador_sintactico 
-                    AnalizadorSintactico analizador_sintactico = new AnalizadorSintactico();
+                    AnalizadorSintactico analizador_sintactico = new AnalizadorSintactico(analizador_lexico.getListaTokens());
                     analizador_sintactico.analizar(linea);
                     tbcInformacion.TabPages[1].Controls.Add(analizador_sintactico.crearFormulario());
                 }

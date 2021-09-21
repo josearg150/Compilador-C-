@@ -394,12 +394,15 @@ namespace Compilador
 
             
         }
+        public ArrayList getListaTokens()
+        {
+            return tokens;
+        }
         public void guardarReservadas(string contenido)
         {
             string[] lineas = contenido.Split(new[] { "\r\n", "\r", "\n" },StringSplitOptions.None);
             tokens = new ArrayList(lineas);
         }
-
         #endregion
     }
 }
