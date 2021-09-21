@@ -115,12 +115,12 @@ namespace Compilador
                 // Se crea un nuevo nodo con el número
                 var Nodo = Grafica.AddNode(Id.ToString());
                 Nodo.LabelText = c;
-                    // Se introduce el nodo creado a la pila
-               //     PilaGrafica.Push(Nodo);
-                }
+                // Se introduce el nodo creado a la pila
+                //     PilaGrafica.Push(Nodo);
+            }
 
-                // Se asocia el visor al formulario creado al principio del método
-                Visor.Graph = Grafica;
+            // Se asocia el visor al formulario creado al principio del método
+            Visor.Graph = Grafica;
             Formulario.SuspendLayout();
             Formulario.TopLevel = false;
             Formulario.Visible = true;
