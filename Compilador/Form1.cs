@@ -37,8 +37,10 @@ namespace Compilador
             if (txtCodigoFuente.Text.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show("El input no puede estar vacío.");
-            }
-            else
+            } else if (txtLenguaje.Text.Equals(""))
+            {
+                System.Windows.Forms.MessageBox.Show("No se cargó ningún archivo.");
+            } else
             {
                 string codigoFuente = txtCodigoFuente.Text;
                 tbcInformacion.SelectTab(tbpLexico);     
