@@ -78,11 +78,20 @@ namespace Compilador
             // Se crea el objeto gráfica, al cual se irán añadiendo elementos visuales.
             Microsoft.Msagl.Drawing.Graph Grafica = new Microsoft.Msagl.Drawing.Graph("Grafica");
             // ...
-            var Nodo = Grafica.AddNode("hola");
-            Nodo.LabelText = "1";
+            int Id = 0;
+            foreach (string c in ExpresionRPNArreglo)
+            {
+                // Se incrementa el entero para identificar al siguiente nodo que se cree
+                Id++;
+                // Se crea un nuevo nodo con el número
+                var Nodo = Grafica.AddNode(Id.ToString());
+                Nodo.LabelText = c;
+                    // Se introduce el nodo creado a la pila
+               //     PilaGrafica.Push(Nodo);
+                }
 
-            // Se asocia el visor al formulario creado al principio del método
-            Visor.Graph = Grafica;
+                // Se asocia el visor al formulario creado al principio del método
+                Visor.Graph = Grafica;
             Formulario.SuspendLayout();
             Formulario.TopLevel = false;
             Formulario.Visible = true;
