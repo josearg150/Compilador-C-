@@ -59,13 +59,13 @@ namespace Compilador
                 shunting.InicializarOperadores();     // y asociatividad, tal como lo indica el algoritmo usado
             OperadoresShuntingInicializados = true; // (Shunting Yard)
             string ExpresionRPN = shunting.ConvertirInfijaAPosfija(Expresion); // Expresion en notación polaca revertida     
-            System.Windows.Forms.MessageBox.Show(ExpresionRPN);
+            //System.Windows.Forms.MessageBox.Show(ExpresionRPN);
             // Se convierte la cadena de la expresión en notación polaca revertida en un arreglo
             ExpresionRPNArreglo = new List<string>(ExpresionRPN.Split(' ').ToList());
             // Se elimina el objeto vacío sobrante al final del arreglo
             ExpresionRPNArreglo.RemoveAt(ExpresionRPNArreglo.Count - 1);
-        
         }
+
         public Boolean IdentificarReservada(String palabra)
         {
             for (int i = 0; i < tokens.Count; ++i)
@@ -117,7 +117,7 @@ namespace Compilador
             {
                 bool result = int.TryParse(c, out i);//swaber si es numero 
                 // Se incrementa el entero para identificar al siguiente nodo que se cree
-                System.Windows.Forms.MessageBox.Show(c);
+                //System.Windows.Forms.MessageBox.Show(c);
                 Id++;
                 if (primerNodo)
                 {
