@@ -35,9 +35,9 @@ namespace Compilador
         //Variables locales                     
         //***************************************
         #region Variables
-        private bool OperadoresShuntingInicializados = false;
-        List<string> ExpresionRPNArreglo;
-        ArrayList tokens;
+        private bool OperadoresShuntingInicializados = false;//operadores del algoritmo shunting 
+        List<string> ExpresionRPNArreglo;//expresion que se usara para crear el arbol 
+        ArrayList tokens;//tokens de la clase analisis lexico 
         #endregion
         //***************************************
         //Constructores   
@@ -45,7 +45,7 @@ namespace Compilador
         #region Constructores
         public AnalizadorSintactico(ArrayList _tokens)
         {
-            tokens = new ArrayList(_tokens);
+            tokens = new ArrayList(_tokens);//se copian los tokens obtenidos 
         }
         #endregion
         //***************************************
@@ -66,6 +66,7 @@ namespace Compilador
             ExpresionRPNArreglo.RemoveAt(ExpresionRPNArreglo.Count - 1);
         }
 
+        //metodo para identificar palabras reservadas 
         public Boolean IdentificarReservada(String palabra)
         {
             for (int i = 0; i < tokens.Count; ++i)
@@ -77,24 +78,21 @@ namespace Compilador
             }
             return false;
         }
+        //metodo para quitar palabras reservadas 
         public void quitarReservadas()
         {
             for (int i = 0; i < ExpresionRPNArreglo.Count; i++)
             {
                 bool encontrado = IdentificarReservada(ExpresionRPNArreglo.ElementAt(i));
-              /*  for (int j = 0; j < tokens.Count; j++)
-                {
-                    
-                }*/
-               
                 if (encontrado)
                 {
-                    ExpresionRPNArreglo.RemoveAt(i);
+                    ExpresionRPNArreglo.RemoveAt(i);//se quita el elemento detectado 
                 }
             }
         }
         public System.Windows.Forms.Form crearFormulario()
         {
+            //Se llama al metodo para eliminar las palabras reservadas
             quitarReservadas();
             // Se crea un formulario (requerido por la librería Microsoft.Msagl)
             System.Windows.Forms.Form Formulario = new System.Windows.Forms.Form();
