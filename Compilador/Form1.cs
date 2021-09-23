@@ -12,11 +12,12 @@ namespace Compilador
 {
     public partial class Compilador : Form
     {
-        AnalizadorLexico analizador_lexico;
+        AnalizadorLexico AnalizadorLexico;
+
         public Compilador()
         {
             InitializeComponent();
-            analizador_lexico = new AnalizadorLexico(txtLenguaje, dgvSimbolos);
+            AnalizadorLexico = new AnalizadorLexico(txtLenguaje, dgvSimbolos);
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -42,11 +43,12 @@ namespace Compilador
                 System.Windows.Forms.MessageBox.Show("No se cargó ningún archivo.");
             } else
             {
-                string codigoFuente = txtCodigoFuente.Text;
+                string CodigoFuente = txtCodigoFuente.Text;
                 tbcInformacion.SelectTab(tbpLexico);     
                 dgvSimbolos.Rows.Clear();
-                analizador_lexico.analizar(codigoFuente);
-                analizador_lexico.mostrar();
+                dgvSimbolos.Refresh();
+                AnalizadorLexico.analizar(CodigoFuente);
+                AnalizadorLexico.mostrar();
             }
         }
 
@@ -67,8 +69,6 @@ namespace Compilador
                 }
                 else
                 {
-                    //txtLenguaje.Clear();
-                    //dgvSimbolos.Rows.Clear();
                     tbcInformacion.SelectTab(tbpSintactico);
                     /* Se crea un formulario (requerido por la librería Microsoft.Msagl)
                     System.Windows.Forms.Form Formulario = new System.Windows.Forms.Form();
@@ -93,7 +93,7 @@ namespace Compilador
                     // analizador_sintactico.crearFormulario();
                     //tbcInformacion.TabPages[1].Controls.Add(Formulario);
                     //Creando objeto analizador_sintactico 
-                    AnalizadorSintactico analizador_sintactico = new AnalizadorSintactico(analizador_lexico.getListaTokens());
+                    AnalizadorSintactico analizador_sintactico = new AnalizadorSintactico(AnalizadorLexico.getTokens());
                     analizador_sintactico.analizar(linea);
                     tbcInformacion.TabPages[1].Controls.Add(analizador_sintactico.crearFormulario());
                 }
@@ -115,12 +115,11 @@ namespace Compilador
                 String RutaArchivo = DialogoArchivo.FileName;
                 String ContenidoArchivo = System.IO.File.ReadAllText(RutaArchivo);
                 txtLenguaje.Text = ContenidoArchivo;
-                analizador_lexico.guardarReservadas(ContenidoArchivo);
+                AnalizadorLexico.guardarReservadas(ContenidoArchivo);
             } else
             {
                 System.Windows.Forms.MessageBox.Show("Error al abrir el archivo.");
             }
         }
-
     }
 }

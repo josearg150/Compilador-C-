@@ -33,27 +33,29 @@ namespace Compilador
         //***************************************
         #region Variables locales 
         //Atributos de un token 
-        private String lexema;
-        private String tipoToken;
-        private int linea;
-        private int columna;
-        private int indice;
+        private String Lexema;
+        private String TipoToken;
+        private int Linea;
+        private int Columna;
+        private int Indice;
         #endregion
+
         //***************************************
         //Constructores   
         //***************************************
         #region Constructores
         //Constructor con parametros 
-        public Token(String lexema, String tipoToken, int linea, int columna, int indice)
+        public Token(String Lexema, String TipoToken, int Linea, int Columna, int Indice)
         {
 
-            this.lexema = lexema;
-            this.tipoToken = tipoToken;
-            this.linea = linea;
-            this.columna = columna;
-            this.indice = indice;
+            this.Lexema = Lexema;
+            this.TipoToken = TipoToken;
+            this.Linea = Linea;
+            this.Columna = Columna;
+            this.Indice = Indice;
         }
         #endregion
+
         //***************************************
         //Metodos
         //***************************************
@@ -61,23 +63,23 @@ namespace Compilador
         //metodos get de los atributos
         public int getIndice()
         {
-            return indice;
+            return Indice;
         }
         public String getLexema()
         {
-            return lexema;
+            return Lexema;
         }
         public String getIdToken()
         {
-            return tipoToken;
+            return TipoToken;
         }
         public int getLinea()
         {
-            return linea;
+            return Linea;
         }
         public int getColumna()
         {
-            return columna;
+            return Columna;
         }
         #endregion
     }

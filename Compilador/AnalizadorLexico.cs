@@ -34,14 +34,14 @@ namespace Compilador
         //***************************************
         #region Variables
         //Variables que se usaran en el analiador lexico, como atributos de tokens, caracter 
-        ArrayList tokens;//Lista de palabras reservadas 
-        int estado;
-        int columna;
-        int fila;
-        string lexema;
-        Char caracter;
-        public int estado_token;
-        static private List<Token> listaDeTokens;
+        ArrayList Tokens; //Lista de palabras reservadas 
+        int Estado;
+        int Columna;
+        int Fila;
+        string Lexema;
+        Char Caracter;
+        public int EstadoToken;
+        static private List<Token> ListaTokens;
         //Elementos graficos del form
         System.Windows.Forms.RichTextBox txtLenguaje; 
         System.Windows.Forms.DataGridView tabla_simbolos; 
@@ -56,7 +56,7 @@ namespace Compilador
         {
             tabla_simbolos = _tabla_simbolos;
             txtLenguaje = _lenguaje;
-            listaDeTokens = new List<Token>();
+            ListaTokens = new List<Token>();
         }
         #endregion
 
@@ -68,24 +68,21 @@ namespace Compilador
         public void agregarToken(String lexema, String idToken, int linea, int columna, int indice)
         {
             Token nuevo = new Token(lexema, idToken, linea, columna, indice);
-            listaDeTokens.Add(nuevo);
+            ListaTokens.Add(nuevo);
         }
+
         //Metodo para saber si es reservada o no
         public Boolean IdentificarReservada(String palabra)
         {
             Boolean encontrado = false;
-            for (int i = 0; i < tokens.Count; ++i)
+            for (int i = 0; i < Tokens.Count; ++i)
             {
-                if (palabra == tokens[i].ToString())
+                if (palabra == Tokens[i].ToString())
                 {
                     encontrado = true;
-                    estado_token = i;
+                    EstadoToken = i;
                     return encontrado;
                 }
-                else { 
-                    encontrado = false; 
-                }
-
             }
             return encontrado;
         }
@@ -93,286 +90,287 @@ namespace Compilador
         //metodo para analizar el codigo fuente
         public void analizar(string _codigoFuente)
         {
+            ListaTokens.Clear();
             //incializamos variables de estado e identificadores en tabla 
             //el estado en 0 es un error o espacio en blanco por lo cual volvera a analizar 
-            estado = 0;
-            columna = 0;
-            fila = 1;
-            lexema = "";
-            _codigoFuente = _codigoFuente + " ";
+            Estado = 0;
+            Columna = 0;
+            Fila = 1;
+            Lexema = "";
+            _codigoFuente += " ";
 
             for (int i = 0; i < _codigoFuente.Length; i++)
             {
-                caracter = _codigoFuente[i];//tomamos el caracter 
-                columna++;//aumentamos columna 
+                Caracter = _codigoFuente[i]; //tomamos el caracter 
+                Columna++; //aumentamos columna 
 
-                switch (estado)
+                switch (Estado)
                 {
                     case 0:
-                        if (Char.IsLetter(caracter))//Comparamos si es una letra
+                        if (Char.IsLetter(Caracter))//Comparamos si es una letra
                         {
-                            estado = 1;
-                            lexema += caracter; //Agregamos el caracter al lexema
+                            Estado = 1;
+                            Lexema += Caracter; //Agregamos el caracter al lexema
                         }
-                        else if (Char.IsDigit(caracter))//Comparamos si es numero
+                        else if (Char.IsDigit(Caracter))//Comparamos si es numero
                         {
-                            estado = 2;
-                            lexema += caracter;
+                            Estado = 2;
+                            Lexema += Caracter;
                         }
                         //Comparaciones de comillas, comas, espacios en blancos etc.
-                        else if (caracter == '"') 
+                        else if (Caracter == '"') 
                         {
-                            estado = 4;
+                            Estado = 4;
                             i--;
-                            columna--;
+                            Columna--;
                         }
-                        else if (caracter == ',')
+                        else if (Caracter == ',')
                         {
-                            estado = 6;
+                            Estado = 6;
                             i--;
-                            columna--;
+                            Columna--;
                         }
-                        else if (caracter == ' ')
+                        else if (Caracter == ' ')
                         {
-                            estado = 0;
+                            Estado = 0;
                         }
-                        else if (caracter == '\n')
+                        else if (Caracter == '\n')
                         {
-                            columna = 0;
-                            fila++;
-                            estado = 0;
+                            Columna = 0;
+                            Fila++;
+                            Estado = 0;
                         }
                         //Delimitadores
-                        else if (caracter == '{')
+                        else if (Caracter == '{')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "llaveIzquierda", fila, columna, i - lexema.Length);
-                            lexema = "";//se deja en blanco el lexema para seguir analizando 
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "llaveIzquierda", Fila, Columna, i - Lexema.Length);
+                            Lexema = "";//se deja en blanco el lexema para seguir analizando 
                         }
-                        else if (caracter == '}')
+                        else if (Caracter == '}')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "llaveDerecha", fila, columna, i - lexema.Length);
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "llaveDerecha", Fila, Columna, i - Lexema.Length);
+                            Lexema = "";
                         }
-                        else if (caracter == '(')
+                        else if (Caracter == '(')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "parentIzquierdo", fila, columna, i - lexema.Length);
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "parentIzquierdo", Fila, Columna, i - Lexema.Length);
+                            Lexema = "";
                         }
-                        else if (caracter == ')')
+                        else if (Caracter == ')')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "parentDerecho", fila, columna, i - lexema.Length);
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "parentDerecho", Fila, Columna, i - Lexema.Length);
+                            Lexema = "";
                         }
-                        else if (caracter == ',')
+                        else if (Caracter == ',')
                         {
-                            lexema += caracter;
-                            lexema = "";
+                            Lexema += Caracter;
+                            Lexema = "";
                         }
 
-                        else if (caracter == ';')
+                        else if (Caracter == ';')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "Punto y Coma", fila, columna, i - lexema.Length);
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "Punto y Coma", Fila, Columna, i - Lexema.Length);
+                            Lexema = "";
                         }
                         //Comparadores
-                        else if (caracter == '=')
+                        else if (Caracter == '=')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "Asignacion", fila, columna, i - lexema.Length);
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "Asignacion", Fila, Columna, i - Lexema.Length);
+                            Lexema = "";
                         }
-                        else if (caracter == '<')
+                        else if (Caracter == '<')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "Menor que", fila, columna, i - lexema.Length);
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "Menor que", Fila, Columna, i - Lexema.Length);
+                            Lexema = "";
                         }
-                        else if (caracter == '>')
+                        else if (Caracter == '>')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "Mayor que", fila, columna, i - lexema.Length);
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "Mayor que", Fila, Columna, i - Lexema.Length);
+                            Lexema = "";
                         }
 
-                        else if (caracter == '.')
+                        else if (Caracter == '.')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "Punto", fila, columna, i - lexema.Length);
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "Punto", Fila, Columna, i - Lexema.Length);
+                            Lexema = "";
                         }
                         //Operadores
-                        else if (caracter == '+')
+                        else if (Caracter == '+')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "Suma", fila, columna, i);
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "Suma", Fila, Columna, i);
+                            Lexema = "";
                         }
-                        else if (caracter == '-')
+                        else if (Caracter == '-')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "Resta", fila, columna, i);
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "Resta", Fila, Columna, i);
+                            Lexema = "";
                         }
-                        else if (caracter == '*')
+                        else if (Caracter == '*')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "Multiplicacion", fila, columna, i);
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "Multiplicacion", Fila, Columna, i);
+                            Lexema = "";
                         }
-                        else if (caracter == '/')
+                        else if (Caracter == '/')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "Division", fila, columna, i);
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "Division", Fila, Columna, i);
+                            Lexema = "";
                         }
                         else
                         {
                             //no es ninguno de los anteriores
-                            estado = -99;
+                            Estado = -99;
                             i--;
-                            columna--;
+                            Columna--;
                         }
                         break;
 
                     case 1:
                         //comparamos para saber si es un numero o una variable tipo _hola
-                        if (Char.IsLetterOrDigit(caracter) || caracter == '_')
+                        if (Char.IsLetterOrDigit(Caracter) || Caracter == '_')
                         {
-                            lexema += caracter;
-                            estado = 1;
+                            Lexema += Caracter;
+                            Estado = 1;
                         }
                         else
                         {
                             //buscamos si es una palabra reservada o un identificador con el metodo de abajo
                             Boolean encontrado = false;
-                            encontrado = IdentificarReservada(lexema);
+                            encontrado = IdentificarReservada(Lexema);
                             if (encontrado)
                             {
-                                agregarToken(lexema, "Reservada", fila, columna, i - lexema.Length);
+                                agregarToken(Lexema, "Reservada", Fila, Columna, i - Lexema.Length);
                             }
                             else
                             {
-                                agregarToken(lexema, "Identificador", fila, columna, i - lexema.Length);
+                                agregarToken(Lexema, "Identificador", Fila, Columna, i - Lexema.Length);
                             }
-                            lexema = "";
+                            Lexema = "";
                             i--;
-                            columna--;
-                            estado = 0;
+                            Columna--;
+                            Estado = 0;
                         }
                         break;
                     case 2:
                         //analisis si es un numero 
-                        if (Char.IsDigit(caracter))
+                        if (Char.IsDigit(Caracter))
                         {
-                            lexema += caracter;
-                            estado = 2;
+                            Lexema += Caracter;
+                            Estado = 2;
                         }
-                        else if (caracter == '.')
+                        else if (Caracter == '.')
                         {
-                            estado = 8;
-                            lexema += caracter;
+                            Estado = 8;
+                            Lexema += Caracter;
                         }
                         else
                         {
-                            agregarToken(lexema, "Digito", fila, columna, i - lexema.Length);
-                            lexema = "";
+                            agregarToken(Lexema, "Digito", Fila, Columna, i - Lexema.Length);
+                            Lexema = "";
                             i--;
-                            columna--;
-                            estado = 0;
+                            Columna--;
+                            Estado = 0;
                         }
                         break;
                     case 3:
-                        if (Char.IsDigit(caracter))
+                        if (Char.IsDigit(Caracter))
                         {
-                            lexema += caracter;
-                            estado = 2;
+                            Lexema += Caracter;
+                            Estado = 2;
                         }
                         else
                         {
-                            estado = -99;
+                            Estado = -99;
                             i = i - 2;
-                            columna = columna - 2;
-                            lexema = "";
+                            Columna = Columna - 2;
+                            Lexema = "";
                         }
                         break;
                     case 4:
                         //analisis para char y string 
-                        if (caracter == '"')
+                        if (Caracter == '"')
                         {
-                            lexema += caracter;
-                            estado = 5;
+                            Lexema += Caracter;
+                            Estado = 5;
                         }
                         break;
                     case 5:
-                        if (caracter != '"')
+                        if (Caracter != '"')
                         {
-                            lexema += caracter;
-                            estado = 5;
+                            Lexema += Caracter;
+                            Estado = 5;
                         }
                         else
                         {
-                            estado = 6;
+                            Estado = 6;
                             i--;
-                            columna--;
+                            Columna--;
                         }
                         break;
                     case 6:
-                        if (caracter == '"')
+                        if (Caracter == '"')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "Cadena", fila, columna, i - lexema.Length);
-                            estado = 0;
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "Cadena", Fila, Columna, i - Lexema.Length);
+                            Estado = 0;
+                            Lexema = "";
                         }
-                        else if (caracter == ',')
+                        else if (Caracter == ',')
                         {
-                            lexema += caracter;
-                            agregarToken(lexema, "Coma", fila, columna, i - lexema.Length);
-                            estado = 0;
-                            lexema = "";
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "Coma", Fila, Columna, i - Lexema.Length);
+                            Estado = 0;
+                            Lexema = "";
                         }
 
                         break;
 
                     case 8:
-                        if (Char.IsDigit(caracter))
+                        if (Char.IsDigit(Caracter))
                         {
-                            estado = 9;
-                            lexema += caracter;
+                            Estado = 9;
+                            Lexema += Caracter;
                         }
                         else
                         {
-                            estado = 0;
-                            lexema = "";
+                            Estado = 0;
+                            Lexema = "";
                         }
                         break;
                     case 9:
-                        if (Char.IsDigit(caracter))
+                        if (Char.IsDigit(Caracter))
                         {
-                            estado = 9;
-                            lexema += caracter;
+                            Estado = 9;
+                            Lexema += Caracter;
                         }
                         else
                         {
-                            agregarToken(lexema, "Digito", fila, columna, i - lexema.Length);
-                            lexema = "";
+                            agregarToken(Lexema, "Digito", Fila, Columna, i - Lexema.Length);
+                            Lexema = "";
                             i--;
-                            columna--;
-                            estado = 0;
+                            Columna--;
+                            Estado = 0;
                         }
 
                         break;
 
                     case -99:
                         //es un posible error o espacio blanco por lo tanto el estado es 0 
-                        lexema += caracter;
-                        estado = 0;
-                        lexema = "";
+                        Lexema += Caracter;
+                        Estado = 0;
+                        Lexema = "";
                         break;
                 }
             }
@@ -381,27 +379,32 @@ namespace Compilador
         //Metodo para mostrar en la tabla
         public void mostrar()
         {
-            for (int i = 0; i < listaDeTokens.Count; i++)
+            for (int i = 0; i < ListaTokens.Count; i++)
             {
                 //Asignamos el token de la lista a un token auxiliar 
-                Token token_actual = listaDeTokens.ElementAt(i);
+                Token token_actual = ListaTokens.ElementAt(i);
                 i = tabla_simbolos.Rows.Add();//creamos una fila 
                 //Asignamos datos a columnas
                 tabla_simbolos.Rows[i].Cells["Lexema"].Value = token_actual.getLexema();
                 tabla_simbolos.Rows[i].Cells["TipoToken"].Value = token_actual.getIdToken();
                 tabla_simbolos.Rows[i].Cells["Linea"].Value = token_actual.getLinea();
             }
+        }
 
-            
-        }
-        public ArrayList getListaTokens()
+        public ArrayList getTokens()
         {
-            return tokens;
+            return Tokens;
         }
+
+        public List<Token> getListaTokens()
+        {
+            return ListaTokens;
+        }
+
         public void guardarReservadas(string contenido)
         {
-            string[] lineas = contenido.Split(new[] { "\r\n", "\r", "\n" },StringSplitOptions.None);
-            tokens = new ArrayList(lineas);
+            string[] Lineas = contenido.Split(new[] { "\r\n", "\r", "\n" },StringSplitOptions.None);
+            Tokens = new ArrayList(Lineas);
         }
         #endregion
     }
