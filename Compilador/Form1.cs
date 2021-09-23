@@ -13,6 +13,7 @@ namespace Compilador
     public partial class Compilador : Form
     {
         AnalizadorLexico AnalizadorLexico;
+        AnalizadorSintactico AnalizadorSintactico;
 
         public Compilador()
         {
@@ -43,11 +44,10 @@ namespace Compilador
                 System.Windows.Forms.MessageBox.Show("No se cargó ningún archivo.");
             } else
             {
-                string CodigoFuente = txtCodigoFuente.Text;
                 tbcInformacion.SelectTab(tbpLexico);     
                 dgvSimbolos.Rows.Clear();
                 dgvSimbolos.Refresh();
-                AnalizadorLexico.analizar(CodigoFuente);
+                AnalizadorLexico.analizar(txtCodigoFuente.Text);
                 AnalizadorLexico.mostrar();
             }
         }
@@ -57,45 +57,36 @@ namespace Compilador
             if (txtCodigoFuente.Text.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show("El input no puede estar vacío.");
+            } else if (txtLenguaje.Text.Equals(""))
+            {
+                System.Windows.Forms.MessageBox.Show("No se cargó ningún archivo.");
             } else if (txtCodigoFuente.SelectedText.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show("Por favor seleccione una línea.");
             } else
             {
-                String linea = txtCodigoFuente.SelectedText;
-                if (linea.Contains("\n"))
+                String Linea = txtCodigoFuente.SelectedText;
+                if (Linea.Contains("\n"))
                 {
                     System.Windows.Forms.MessageBox.Show("Por favor seleccione sólo una línea.");
                 }
                 else
                 {
-                    tbcInformacion.SelectTab(tbpSintactico);
-                    /* Se crea un formulario (requerido por la librería Microsoft.Msagl)
-                    System.Windows.Forms.Form Formulario = new System.Windows.Forms.Form();
-                    // Se ajusta el tamaño del formulario
-                    Formulario.Size = new Size(800, 600);
-                    
-                    // Objeto para visualizar los elementos (nodos, líneas) que se vayan creando.
-                    Microsoft.Msagl.GraphViewerGdi.GViewer Visor = new Microsoft.Msagl.GraphViewerGdi.GViewer();
-                    // Se crea el objeto gráfica, al cual se irán añadiendo elementos visuales.
-                    Microsoft.Msagl.Drawing.Graph Grafica = new Microsoft.Msagl.Drawing.Graph("Grafica");
-                    // ...
-                    Visor.Graph = Grafica;
-                    // Se asocia el visor al formulario creado al principio del método
-                    Formulario.SuspendLayout();
-                    Formulario.TopLevel = false;
-                    Formulario.Visible = true;
-                    Formulario.FormBorderStyle = FormBorderStyle.None;
-                    Visor.Dock = System.Windows.Forms.DockStyle.Fill;
-                    Formulario.Controls.Add(Visor);
-                    Formulario.ResumeLayout();
-                    // Muestra el formulario (la gráfica)*/
-                    // analizador_sintactico.crearFormulario();
-                    //tbcInformacion.TabPages[1].Controls.Add(Formulario);
-                    //Creando objeto analizador_sintactico 
-                    AnalizadorSintactico analizador_sintactico = new AnalizadorSintactico(AnalizadorLexico.getTokens());
-                    analizador_sintactico.analizar(linea);
-                    tbcInformacion.TabPages[1].Controls.Add(analizador_sintactico.crearFormulario());
+                    if (AnalizadorLexico.getListaTokens().Count == 0)
+                    {
+                        AnalizadorLexico.analizar(txtCodigoFuente.Text);
+                        tbcInformacion.SelectTab(tbpSintactico);
+                        AnalizadorSintactico = new AnalizadorSintactico(AnalizadorLexico.getTokens());
+                        AnalizadorSintactico.analizar(Linea);
+                        tbcInformacion.TabPages[1].Controls.Add(AnalizadorSintactico.crearFormulario());
+                    } else
+                    {
+                        tbcInformacion.SelectTab(tbpSintactico);
+                        AnalizadorSintactico = new AnalizadorSintactico(AnalizadorLexico.getTokens());
+                        AnalizadorSintactico.analizar(Linea);
+                        tbcInformacion.TabPages[1].Controls.Clear();
+                        tbcInformacion.TabPages[1].Controls.Add(AnalizadorSintactico.crearFormulario());
+                    }
                 }
             }
         }

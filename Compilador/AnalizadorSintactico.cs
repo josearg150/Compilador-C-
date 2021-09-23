@@ -78,6 +78,7 @@ namespace Compilador
             }
             return false;
         }
+
         //metodo para quitar palabras reservadas 
         public void quitarReservadas()
         {
@@ -90,6 +91,7 @@ namespace Compilador
                 }
             }
         }
+
         public System.Windows.Forms.Form crearFormulario()
         {
             //Se llama al metodo para eliminar las palabras reservadas
@@ -136,7 +138,6 @@ namespace Compilador
                     // Se introduce el nodo creado a la pila
                     PilaGrafica.Push(Nodo);
                 }
-                
             }
 
             // Se asocia el visor al formulario creado al principio del método
