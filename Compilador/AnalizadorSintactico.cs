@@ -38,7 +38,14 @@ namespace Compilador
         private bool OperadoresShuntingInicializados = false;//operadores del algoritmo shunting 
         List<string> ExpresionRPNArreglo;//expresion que se usara para crear el arbol 
         ArrayList tokens;//tokens de la clase analisis lexico 
+        ShuntingYard shunting;
+        private readonly List<char> Numeros = new List<char>()
+                    {
+                        '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
+                    };
+            //{ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
         #endregion
+
         //***************************************
         //Constructores   
         //***************************************
@@ -46,15 +53,16 @@ namespace Compilador
         public AnalizadorSintactico(ArrayList _tokens)
         {
             tokens = new ArrayList(_tokens);//se copian los tokens obtenidos 
+            shunting = new ShuntingYard();
         }
         #endregion
+
         //***************************************
         //Metodos
         //***************************************
         #region Metodos
         public void analizar(String Expresion)
         {
-            ShuntingYard shunting = new ShuntingYard();
             if (!OperadoresShuntingInicializados)         // Se inicializan los operadores permitidos con su precedencia
                 shunting.InicializarOperadores();     // y asociatividad, tal como lo indica el algoritmo usado
             OperadoresShuntingInicializados = true; // (Shunting Yard)
@@ -92,10 +100,23 @@ namespace Compilador
             }
         }
 
+        // metodo para quitar delimitadores
+        public void quitarDelims()
+        {
+            for (int i = 0; i < ExpresionRPNArreglo.Count; i++)
+            {
+                if (ExpresionRPNArreglo[i].EndsWith(";"))
+                {
+                    ExpresionRPNArreglo[i] = ExpresionRPNArreglo[i].TrimEnd(';');
+                }
+            }
+        }
+
         public System.Windows.Forms.Form crearFormulario()
         {
             //Se llama al metodo para eliminar las palabras reservadas
             quitarReservadas();
+            quitarDelims();
             // Se crea un formulario (requerido por la librería Microsoft.Msagl)
             System.Windows.Forms.Form Formulario = new System.Windows.Forms.Form();
             // Se ajusta el tamaño del formulario
@@ -109,32 +130,53 @@ namespace Compilador
             // Pila de nodos de la librería Microsoft.Msagl
             Stack<Microsoft.Msagl.Drawing.Node> PilaGrafica = new Stack<Microsoft.Msagl.Drawing.Node>();
             // ...
-            ExpresionRPNArreglo.Reverse();
+            //ExpresionRPNArreglo.Reverse();
             int Id = 0;
             int i = 0;
-            bool primerNodo = true;
+            //bool primerNodo = true;
             foreach (string c in ExpresionRPNArreglo)
             {
-                bool result = int.TryParse(c, out i);//swaber si es numero 
                 // Se incrementa el entero para identificar al siguiente nodo que se cree
                 //System.Windows.Forms.MessageBox.Show(c);
                 Id++;
-                if (primerNodo)
+                // Si es numero...
+                try
+                {
+                    if (Numeros.Contains(char.Parse(c)))
+                    {
+                        var Nodo = Grafica.AddNode(Id.ToString());
+                        Nodo.LabelText = "const";
+                        var Nodo2 = Grafica.AddNode(Id + 1.ToString());
+                        Nodo2.LabelText = c;
+                        Grafica.AddEdge(Nodo.Id, "", Nodo2.Id);
+                        // Se introduce el nodo creado a la pila
+                        PilaGrafica.Push(Nodo);
+                    }
+                } catch
+                {
+                    
+                }
+                if (!shunting.OperadoresArr.Contains(c))
                 {
                     var Nodo = Grafica.AddNode(Id.ToString());
-                    Nodo.LabelText = c;
-                    // Se introduce el nodo creado a la pila
+                    Nodo.LabelText = "id";
+                    var Nodo2 = Grafica.AddNode(Id + 1.ToString());
+                    Nodo2.LabelText = c;
+                    Grafica.AddEdge(Nodo.Id, "", Nodo2.Id);
                     PilaGrafica.Push(Nodo);
-                    primerNodo = false;
-                }
-                else if (result)
+                } else if (shunting.OperadoresArr.Contains(c))
                 {
                     var T1 = PilaGrafica.Pop();
+                    var T2 = PilaGrafica.Pop();
                     // Se crea un nuevo nodo con el operador
                     var Nodo = Grafica.AddNode(Id.ToString());
                     Nodo.LabelText = c;
+                    var Nodo2 = Grafica.AddNode(Id+1.ToString());
+                    Nodo2.LabelText = "exp";
+                    Grafica.AddEdge(Nodo2.Id, "", T1.Id);
                     // y se enlazan al nodo creado (operador)
-                    Grafica.AddEdge(Nodo.Id, "", T1.Id);
+                    Grafica.AddEdge(Nodo.Id, "", Nodo2.Id);
+                    Grafica.AddEdge(Nodo.Id, "", T2.Id);
                     // Se introduce el nodo creado a la pila
                     PilaGrafica.Push(Nodo);
                 }

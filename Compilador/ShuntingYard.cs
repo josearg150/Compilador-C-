@@ -58,6 +58,7 @@ namespace Compilador
         #region Variables
         const int IzquierdaAsociatividad = 0;
         const int DerechaAsociatividad = 1;
+        public String[] OperadoresArr = { "^", "-", "+", "=", "*", "/" };
         Dictionary<string, Operador> Operadores = new Dictionary<string, Operador>();
         #endregion Variables
 

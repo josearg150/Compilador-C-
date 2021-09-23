@@ -10,17 +10,47 @@ using System.Windows.Forms;
 
 namespace Compilador
 {
+    /// <summary>
+    ///     Formulario principal para la interfaz de la aplicación.
+    /// </summary>
+    /// <Para>
+    ///     Invocar al formulario y sus componentes (botones, menús, etc.)
+    /// </Para>
+    /// <Supuestos>
+    ///     Para que aparezca la interfaz, es necesario no remover las llamadas pertinentes en main().
+    /// </Supuestos>
+    /// <Autor>
+    ///     José Luis Carreón Reyes
+    ///     José Ángel Rocha García
+    /// </Autor>
+    /// <FechaCreacion>
+    ///     14/09/2021
+    /// </FechaCreacion>
     public partial class Compilador : Form
     {
+        //***************************************
+        //Variables locales                     
+        //***************************************
+        #region Variables
         AnalizadorLexico AnalizadorLexico;
         AnalizadorSintactico AnalizadorSintactico;
+        #endregion
 
+        //***************************************
+        //Constructores   
+        //***************************************
+        #region Constructores 
         public Compilador()
         {
             InitializeComponent();
             AnalizadorLexico = new AnalizadorLexico(txtLenguaje, dgvSimbolos);
         }
+        #endregion
 
+        //***************************************
+        //Eventos
+        //***************************************
+        #region Eventos
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
@@ -34,8 +64,10 @@ namespace Compilador
                                                  "José Ángel Rocha García");
         }
 
+        // Dispara la ejecución del analizador léxico
         private void léxicoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Validacion de input
             if (txtCodigoFuente.Text.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show("El input no puede estar vacío.");
@@ -47,13 +79,18 @@ namespace Compilador
                 tbcInformacion.SelectTab(tbpLexico);     
                 dgvSimbolos.Rows.Clear();
                 dgvSimbolos.Refresh();
+                // Se toma el código fuente escrito y se le pasa al constructor del
+                // objeto del analizador léxico
                 AnalizadorLexico.analizar(txtCodigoFuente.Text);
+                // Añade los tokens generados a la tabla
                 AnalizadorLexico.mostrar();
             }
         }
 
+        // Dispara la ejecución del analizador sintáctico
         private void sintácticoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Validación de input
             if (txtCodigoFuente.Text.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show("El input no puede estar vacío.");
@@ -65,6 +102,7 @@ namespace Compilador
                 System.Windows.Forms.MessageBox.Show("Por favor seleccione una línea.");
             } else
             {
+                // Solo se debe seleccionar una sola linea
                 String Linea = txtCodigoFuente.SelectedText;
                 if (Linea.Contains("\n"))
                 {
@@ -72,12 +110,16 @@ namespace Compilador
                 }
                 else
                 {
+                    // Si se ejecuta directamente el analizador sintáctico antes del
+                    // léxico
                     if (AnalizadorLexico.getListaTokens().Count == 0)
                     {
                         AnalizadorLexico.analizar(txtCodigoFuente.Text);
                         tbcInformacion.SelectTab(tbpSintactico);
+                        // El analizador sintáctico recibe los tokens generados
                         AnalizadorSintactico = new AnalizadorSintactico(AnalizadorLexico.getTokens());
                         AnalizadorSintactico.analizar(Linea);
+                        // Muestra la gráfica
                         tbcInformacion.TabPages[1].Controls.Add(AnalizadorSintactico.crearFormulario());
                     } else
                     {
@@ -91,6 +133,7 @@ namespace Compilador
             }
         }
 
+        // Método para cargar el archivo con el lenguaje
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             txtLenguaje.Clear();
@@ -106,11 +149,13 @@ namespace Compilador
                 String RutaArchivo = DialogoArchivo.FileName;
                 String ContenidoArchivo = System.IO.File.ReadAllText(RutaArchivo);
                 txtLenguaje.Text = ContenidoArchivo;
+                // Se cargan las palabras reservadas del lenguaje al analizador léxico
                 AnalizadorLexico.guardarReservadas(ContenidoArchivo);
             } else
             {
                 System.Windows.Forms.MessageBox.Show("Error al abrir el archivo.");
             }
         }
+        #endregion
     }
 }

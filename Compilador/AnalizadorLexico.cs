@@ -390,16 +390,19 @@ namespace Compilador
                 tabla_simbolos.Rows[i].Cells["Linea"].Value = token_actual.getLinea();
             }
         }
+
         //metodo para obtener los tokens identificados 
         public ArrayList getTokens()
         {
             return Tokens;
         }
+
         //metodo para obtener la lista de tokens 
         public List<Token> getListaTokens()
         {
             return ListaTokens;
         }
+
         //Metodo para guardar las palabras reservadas del txt 
         public void guardarReservadas(string contenido)
         {
