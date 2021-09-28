@@ -165,6 +165,18 @@ namespace Compilador
                             agregarToken(Lexema, "parentDerecho", Fila, Columna, i - Lexema.Length);
                             Lexema = "";
                         }
+                        else if (Caracter == '[')
+                        {
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "corcheteIzquierdo", Fila, Columna, i - Lexema.Length);
+                            Lexema = "";
+                        }
+                        else if (Caracter == ']')
+                        {
+                            Lexema += Caracter;
+                            agregarToken(Lexema, "corcheteDerecho", Fila, Columna, i - Lexema.Length);
+                            Lexema = "";
+                        }
                         else if (Caracter == ',')
                         {
                             Lexema += Caracter;

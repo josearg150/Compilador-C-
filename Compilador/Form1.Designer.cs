@@ -39,6 +39,8 @@ namespace Compilador
             this.TipoToken = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpSintactico = new System.Windows.Forms.TabPage();
+            this.tbpSemantico = new System.Windows.Forms.TabPage();
+            this.dvgErrores = new System.Windows.Forms.DataGridView();
             this.grbLenguaje = new System.Windows.Forms.GroupBox();
             this.txtLenguaje = new System.Windows.Forms.RichTextBox();
             this.mspMenu = new System.Windows.Forms.MenuStrip();
@@ -48,12 +50,17 @@ namespace Compilador
             this.ejecutarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.léxicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sintácticoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colError = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLinea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grbContenedorCodigoFuente.SuspendLayout();
             this.tbcInformacion.SuspendLayout();
             this.tbpLexico.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).BeginInit();
+            this.tbpSemantico.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgErrores)).BeginInit();
             this.grbLenguaje.SuspendLayout();
             this.mspMenu.SuspendLayout();
             this.SuspendLayout();
@@ -84,6 +91,7 @@ namespace Compilador
             // 
             this.tbcInformacion.Controls.Add(this.tbpLexico);
             this.tbcInformacion.Controls.Add(this.tbpSintactico);
+            this.tbcInformacion.Controls.Add(this.tbpSemantico);
             this.tbcInformacion.Font = new System.Drawing.Font("Leelawadee UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbcInformacion.Location = new System.Drawing.Point(460, 50);
             this.tbcInformacion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -154,6 +162,28 @@ namespace Compilador
             this.tbpSintactico.Text = "Árbol Sintáctico";
             this.tbpSintactico.UseVisualStyleBackColor = true;
             // 
+            // tbpSemantico
+            // 
+            this.tbpSemantico.Controls.Add(this.dvgErrores);
+            this.tbpSemantico.Location = new System.Drawing.Point(4, 30);
+            this.tbpSemantico.Name = "tbpSemantico";
+            this.tbpSemantico.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpSemantico.Size = new System.Drawing.Size(692, 560);
+            this.tbpSemantico.TabIndex = 2;
+            this.tbpSemantico.Text = "Errores";
+            this.tbpSemantico.UseVisualStyleBackColor = true;
+            // 
+            // dvgErrores
+            // 
+            this.dvgErrores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvgErrores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colError,
+            this.colLinea});
+            this.dvgErrores.Location = new System.Drawing.Point(0, 0);
+            this.dvgErrores.Name = "dvgErrores";
+            this.dvgErrores.Size = new System.Drawing.Size(692, 290);
+            this.dvgErrores.TabIndex = 0;
+            // 
             // grbLenguaje
             // 
             this.grbLenguaje.Controls.Add(this.txtLenguaje);
@@ -204,7 +234,7 @@ namespace Compilador
             // 
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
             this.abrirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.abrirToolStripMenuItem.Text = "Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
@@ -212,7 +242,7 @@ namespace Compilador
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
             this.salirToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -220,10 +250,12 @@ namespace Compilador
             // 
             this.ejecutarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.léxicoToolStripMenuItem,
-            this.sintácticoToolStripMenuItem});
+            this.sintácticoToolStripMenuItem,
+            this.toolStripMenuItem1});
             this.ejecutarToolStripMenuItem.Name = "ejecutarToolStripMenuItem";
             this.ejecutarToolStripMenuItem.Size = new System.Drawing.Size(116, 25);
             this.ejecutarToolStripMenuItem.Text = "Herramientas";
+            this.ejecutarToolStripMenuItem.Click += new System.EventHandler(this.ejecutarToolStripMenuItem_Click);
             // 
             // léxicoToolStripMenuItem
             // 
@@ -241,6 +273,13 @@ namespace Compilador
             this.sintácticoToolStripMenuItem.Text = "Sintáctico";
             this.sintácticoToolStripMenuItem.Click += new System.EventHandler(this.sintácticoToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(202, 26);
+            this.toolStripMenuItem1.Text = "Semantico";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
             // ayudaToolStripMenuItem
             // 
             this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -252,9 +291,19 @@ namespace Compilador
             // acercaDeToolStripMenuItem
             // 
             this.acercaDeToolStripMenuItem.Name = "acercaDeToolStripMenuItem";
-            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.acercaDeToolStripMenuItem.Text = "Acerca de";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
+            // 
+            // colError
+            // 
+            this.colError.HeaderText = "Error";
+            this.colError.Name = "colError";
+            // 
+            // colLinea
+            // 
+            this.colLinea.HeaderText = "Linea";
+            this.colLinea.Name = "colLinea";
             // 
             // Compilador
             // 
@@ -278,6 +327,8 @@ namespace Compilador
             this.tbcInformacion.ResumeLayout(false);
             this.tbpLexico.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSimbolos)).EndInit();
+            this.tbpSemantico.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dvgErrores)).EndInit();
             this.grbLenguaje.ResumeLayout(false);
             this.mspMenu.ResumeLayout(false);
             this.mspMenu.PerformLayout();
@@ -308,6 +359,11 @@ namespace Compilador
         private System.Windows.Forms.DataGridViewTextBoxColumn Lexema;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoToken;
         private System.Windows.Forms.DataGridViewTextBoxColumn Linea;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.TabPage tbpSemantico;
+        private System.Windows.Forms.DataGridView dvgErrores;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colError;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLinea;
     }
 }
 

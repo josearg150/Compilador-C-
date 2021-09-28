@@ -34,6 +34,7 @@ namespace Compilador
         #region Variables
         AnalizadorLexico AnalizadorLexico;
         AnalizadorSintactico AnalizadorSintactico;
+        AnalizadorSemantico AnalizadorSemantico;
         #endregion
 
         //***************************************
@@ -157,5 +158,17 @@ namespace Compilador
             }
         }
         #endregion
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            tbcInformacion.SelectTab(tbpSemantico);
+            AnalizadorSemantico = new AnalizadorSemantico(AnalizadorLexico.getListaTokens(), dvgErrores);
+            AnalizadorSemantico.analizar();
+        }
+
+        private void ejecutarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
