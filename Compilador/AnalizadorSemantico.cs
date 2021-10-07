@@ -66,7 +66,10 @@ namespace Compilador
             }
           
             for (int i = 0; i < ListaTokens.Count; i++)
-            {
+            {   if(tokens.Count == 0)
+                {
+                    break;
+                }
                 Token token = tokens.Peek();
                 if (token.getIdToken().Equals("llaveIzquierda") && ListaTokens.ElementAt(i).getIdToken().Equals("llaveDerecha"))
                 {
@@ -90,7 +93,7 @@ namespace Compilador
             else
             {
                 System.Windows.Forms.MessageBox.Show("Se detectaron errores");
-                for(int i = 0; i < tokens.Count; i++)
+                for(int i = 0; i <= tokens.Count; i++)
                 {
                     Token token = tokens.Pop();
                     string error = " ";

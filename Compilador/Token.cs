@@ -35,6 +35,7 @@ namespace Compilador
         //Atributos de un token 
         private String Lexema;
         private String TipoToken;
+        private String tipoDato="";
         private int Linea;
         private int Columna;
         private int Indice;
@@ -72,6 +73,14 @@ namespace Compilador
         public String getIdToken()
         {
             return TipoToken;
+        }
+        public String getTipoDato()
+        {
+            return tipoDato;
+        }
+        public void setTipoDato(String _tipoDato)
+        {
+            tipoDato = _tipoDato;
         }
         public int getLinea()
         {

@@ -35,12 +35,11 @@ namespace Compilador
             this.tbcInformacion = new System.Windows.Forms.TabControl();
             this.tbpLexico = new System.Windows.Forms.TabPage();
             this.dgvSimbolos = new System.Windows.Forms.DataGridView();
-            this.Lexema = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TipoToken = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpSintactico = new System.Windows.Forms.TabPage();
             this.tbpSemantico = new System.Windows.Forms.TabPage();
             this.dvgErrores = new System.Windows.Forms.DataGridView();
+            this.colError = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLinea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grbLenguaje = new System.Windows.Forms.GroupBox();
             this.txtLenguaje = new System.Windows.Forms.RichTextBox();
             this.mspMenu = new System.Windows.Forms.MenuStrip();
@@ -53,8 +52,10 @@ namespace Compilador
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.colError = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLinea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lexema = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoToken = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoDato = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grbContenedorCodigoFuente.SuspendLayout();
             this.tbcInformacion.SuspendLayout();
             this.tbpLexico.SuspendLayout();
@@ -121,7 +122,8 @@ namespace Compilador
             this.dgvSimbolos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Lexema,
             this.TipoToken,
-            this.Linea});
+            this.Linea,
+            this.TipoDato});
             this.dgvSimbolos.Location = new System.Drawing.Point(9, 10);
             this.dgvSimbolos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvSimbolos.Name = "dgvSimbolos";
@@ -130,26 +132,6 @@ namespace Compilador
             this.dgvSimbolos.RowTemplate.Height = 25;
             this.dgvSimbolos.Size = new System.Drawing.Size(675, 541);
             this.dgvSimbolos.TabIndex = 0;
-            // 
-            // Lexema
-            // 
-            this.Lexema.HeaderText = "Lexema";
-            this.Lexema.Name = "Lexema";
-            this.Lexema.ReadOnly = true;
-            // 
-            // TipoToken
-            // 
-            this.TipoToken.HeaderText = "Token";
-            this.TipoToken.Name = "TipoToken";
-            this.TipoToken.ReadOnly = true;
-            this.TipoToken.Width = 170;
-            // 
-            // Linea
-            // 
-            this.Linea.HeaderText = "Línea";
-            this.Linea.Name = "Linea";
-            this.Linea.ReadOnly = true;
-            this.Linea.Width = 55;
             // 
             // tbpSintactico
             // 
@@ -183,6 +165,16 @@ namespace Compilador
             this.dvgErrores.Name = "dvgErrores";
             this.dvgErrores.Size = new System.Drawing.Size(692, 290);
             this.dvgErrores.TabIndex = 0;
+            // 
+            // colError
+            // 
+            this.colError.HeaderText = "Error";
+            this.colError.Name = "colError";
+            // 
+            // colLinea
+            // 
+            this.colLinea.HeaderText = "Linea";
+            this.colLinea.Name = "colLinea";
             // 
             // grbLenguaje
             // 
@@ -295,15 +287,31 @@ namespace Compilador
             this.acercaDeToolStripMenuItem.Text = "Acerca de";
             this.acercaDeToolStripMenuItem.Click += new System.EventHandler(this.acercaDeToolStripMenuItem_Click);
             // 
-            // colError
+            // Lexema
             // 
-            this.colError.HeaderText = "Error";
-            this.colError.Name = "colError";
+            this.Lexema.HeaderText = "Lexema";
+            this.Lexema.Name = "Lexema";
+            this.Lexema.ReadOnly = true;
             // 
-            // colLinea
+            // TipoToken
             // 
-            this.colLinea.HeaderText = "Linea";
-            this.colLinea.Name = "colLinea";
+            this.TipoToken.HeaderText = "Token";
+            this.TipoToken.Name = "TipoToken";
+            this.TipoToken.ReadOnly = true;
+            this.TipoToken.Width = 170;
+            // 
+            // Linea
+            // 
+            this.Linea.HeaderText = "Línea";
+            this.Linea.Name = "Linea";
+            this.Linea.ReadOnly = true;
+            this.Linea.Width = 55;
+            // 
+            // TipoDato
+            // 
+            this.TipoDato.HeaderText = "TipoDato";
+            this.TipoDato.Name = "TipoDato";
+            this.TipoDato.ReadOnly = true;
             // 
             // Compilador
             // 
@@ -356,14 +364,15 @@ namespace Compilador
         private System.Windows.Forms.ToolStripMenuItem léxicoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sintácticoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Lexema;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TipoToken;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Linea;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.TabPage tbpSemantico;
         private System.Windows.Forms.DataGridView dvgErrores;
         private System.Windows.Forms.DataGridViewTextBoxColumn colError;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLinea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Lexema;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoToken;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Linea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoDato;
     }
 }
 

@@ -391,6 +391,8 @@ namespace Compilador
         //Metodo para mostrar en la tabla
         public void mostrar()
         {
+            //Agregar tipos de datos si es identificador
+            agregarTiposDeDato();
             for (int i = 0; i < ListaTokens.Count; i++)
             {
                 //Asignamos el token de la lista a un token auxiliar 
@@ -400,6 +402,10 @@ namespace Compilador
                 tabla_simbolos.Rows[i].Cells["Lexema"].Value = token_actual.getLexema();
                 tabla_simbolos.Rows[i].Cells["TipoToken"].Value = token_actual.getIdToken();
                 tabla_simbolos.Rows[i].Cells["Linea"].Value = token_actual.getLinea();
+                if (!(token_actual.getTipoDato().Equals("")))
+                {
+                    tabla_simbolos.Rows[i].Cells["TipoDato"].Value = ListaTokens.ElementAt(i-1).getLexema();
+                }
             }
         }
 
@@ -415,12 +421,29 @@ namespace Compilador
             return ListaTokens;
         }
 
+        public void agregarTiposDeDato()
+        {
+            int elemento_anterior;
+            for(int i = 0; i < ListaTokens.Count; i++)
+            {
+                elemento_anterior = i - 1;
+                //Comprobar si es menor a 0 para evitar errores y si el token anterior es reservado y si el actual es identificador
+                if ((!(elemento_anterior < 0)) && ListaTokens.ElementAt(elemento_anterior).getIdToken().Equals("Reservada")
+                    && ListaTokens.ElementAt(i).getIdToken().Equals("Identificador"))
+                {
+                    //Le asginamos al token actual el tipo de dato del anterior
+                    ListaTokens.ElementAt(i).setTipoDato(ListaTokens.ElementAt(elemento_anterior).getIdToken());
+                }
+            }
+        }
+
         //Metodo para guardar las palabras reservadas del txt 
         public void guardarReservadas(string contenido)
         {
             string[] Lineas = contenido.Split(new[] { "\r\n", "\r", "\n" },StringSplitOptions.None);
             Tokens = new ArrayList(Lineas);
         }
+
         #endregion
     }
 }
