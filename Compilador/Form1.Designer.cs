@@ -56,6 +56,7 @@ namespace Compilador
             this.TipoToken = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TipoDato = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Scope = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grbContenedorCodigoFuente.SuspendLayout();
             this.tbcInformacion.SuspendLayout();
             this.tbpLexico.SuspendLayout();
@@ -123,7 +124,8 @@ namespace Compilador
             this.Lexema,
             this.TipoToken,
             this.Linea,
-            this.TipoDato});
+            this.TipoDato,
+            this.Scope});
             this.dgvSimbolos.Location = new System.Drawing.Point(9, 10);
             this.dgvSimbolos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvSimbolos.Name = "dgvSimbolos";
@@ -157,13 +159,16 @@ namespace Compilador
             // 
             // dvgErrores
             // 
+            this.dvgErrores.AllowUserToAddRows = false;
+            this.dvgErrores.AllowUserToDeleteRows = false;
+            this.dvgErrores.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dvgErrores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dvgErrores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colError,
             this.colLinea});
             this.dvgErrores.Location = new System.Drawing.Point(0, 0);
             this.dvgErrores.Name = "dvgErrores";
-            this.dvgErrores.Size = new System.Drawing.Size(692, 290);
+            this.dvgErrores.Size = new System.Drawing.Size(692, 557);
             this.dvgErrores.TabIndex = 0;
             // 
             // colError
@@ -253,7 +258,7 @@ namespace Compilador
             // 
             this.léxicoToolStripMenuItem.Name = "léxicoToolStripMenuItem";
             this.léxicoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.léxicoToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.léxicoToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
             this.léxicoToolStripMenuItem.Text = "Léxico";
             this.léxicoToolStripMenuItem.Click += new System.EventHandler(this.léxicoToolStripMenuItem_Click);
             // 
@@ -261,14 +266,16 @@ namespace Compilador
             // 
             this.sintácticoToolStripMenuItem.Name = "sintácticoToolStripMenuItem";
             this.sintácticoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.sintácticoToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.sintácticoToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
             this.sintácticoToolStripMenuItem.Text = "Sintáctico";
             this.sintácticoToolStripMenuItem.Click += new System.EventHandler(this.sintácticoToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(202, 26);
+            this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.S)));
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(238, 26);
             this.toolStripMenuItem1.Text = "Semantico";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -312,6 +319,13 @@ namespace Compilador
             this.TipoDato.HeaderText = "TipoDato";
             this.TipoDato.Name = "TipoDato";
             this.TipoDato.ReadOnly = true;
+            // 
+            // Scope
+            // 
+            this.Scope.HeaderText = "Ámbito (Scope)";
+            this.Scope.Name = "Scope";
+            this.Scope.ReadOnly = true;
+            this.Scope.Width = 900;
             // 
             // Compilador
             // 
@@ -373,6 +387,7 @@ namespace Compilador
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoToken;
         private System.Windows.Forms.DataGridViewTextBoxColumn Linea;
         private System.Windows.Forms.DataGridViewTextBoxColumn TipoDato;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Scope;
     }
 }
 

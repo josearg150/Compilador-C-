@@ -36,6 +36,7 @@ namespace Compilador
         private String Lexema;
         private String TipoToken;
         private String tipoDato="";
+        private String Ambito = "";
         private int Linea;
         private int Columna;
         private int Indice;
@@ -81,6 +82,14 @@ namespace Compilador
         public void setTipoDato(String _tipoDato)
         {
             tipoDato = _tipoDato;
+        }
+        public String getAmbito()
+        {
+            return Ambito;
+        }
+        public void setAmbito(String _ambito)
+        {
+            Ambito = _ambito;
         }
         public int getLinea()
         {

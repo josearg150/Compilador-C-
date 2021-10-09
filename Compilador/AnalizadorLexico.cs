@@ -393,6 +393,7 @@ namespace Compilador
         {
             //Agregar tipos de datos si es identificador
             agregarTiposDeDato();
+            extraerAmbitos();
             for (int i = 0; i < ListaTokens.Count; i++)
             {
                 //Asignamos el token de la lista a un token auxiliar 
@@ -405,6 +406,10 @@ namespace Compilador
                 if (!(token_actual.getTipoDato().Equals("")))
                 {
                     tabla_simbolos.Rows[i].Cells["TipoDato"].Value = ListaTokens.ElementAt(i-1).getLexema();
+                }
+                if (!(token_actual.getAmbito().Equals("")))
+                {
+                    tabla_simbolos.Rows[i].Cells["Scope"].Value = token_actual.getAmbito();
                 }
             }
         }
@@ -433,6 +438,112 @@ namespace Compilador
                 {
                     //Le asginamos al token actual el tipo de dato del anterior
                     ListaTokens.ElementAt(i).setTipoDato(ListaTokens.ElementAt(elemento_anterior).getIdToken());
+                }
+            }
+        }
+
+        public void extraerAmbitos()
+        {
+            List<Ambito> Ambitos = new List<Ambito>();
+            for (int i = 0; i < ListaTokens.Count; i++)
+            {
+                Ambito ObjetoAmbito = new Ambito();
+                Token token_actual = ListaTokens.ElementAt(i);
+                if (token_actual.getLexema().Equals("package"))
+                {
+                    ObjetoAmbito.setIdAmbito(ListaTokens.ElementAt(i + 1).getLexema());
+                    ObjetoAmbito.setTipoAmbito("paquete");
+                    Ambitos.Add(ObjetoAmbito);
+                    string CadenaAmbitos = "";
+                    foreach (Ambito ambito in Ambitos)
+                    {
+                        CadenaAmbitos += ambito.getIdAmbito();
+                        CadenaAmbitos += ": ";
+                        CadenaAmbitos += ambito.getTipoAmbito();
+                        CadenaAmbitos += ", ";
+                    }
+                    ListaTokens.ElementAt(i + 1).setAmbito(CadenaAmbitos);
+                    continue;
+                }
+                if (token_actual.getLexema().Equals("class"))
+                {
+                    ObjetoAmbito.setIdAmbito(ListaTokens.ElementAt(i + 1).getLexema());
+                    ObjetoAmbito.setTipoAmbito("clase");
+                    Ambitos.Add(ObjetoAmbito);
+                    string CadenaAmbitos = "";
+                    foreach (Ambito ambito in Ambitos)
+                    {
+                        CadenaAmbitos += ambito.getIdAmbito();
+                        CadenaAmbitos += ": ";
+                        CadenaAmbitos += ambito.getTipoAmbito();
+                        CadenaAmbitos += ", ";
+                    }
+                    ListaTokens.ElementAt(i + 1).setAmbito(CadenaAmbitos);
+                    continue;
+                }
+                if ((token_actual.getLexema().Equals("int") ||
+                     token_actual.getLexema().Equals("float") ||
+                     token_actual.getLexema().Equals("char") ||
+                     token_actual.getLexema().Equals("double") ||
+                     token_actual.getLexema().Equals("string")))
+                {
+                    if (ListaTokens.ElementAt(i + 2).getIdToken().Equals("parentIzquierdo"))
+                    {
+                        ObjetoAmbito.setIdAmbito(ListaTokens.ElementAt(i + 1).getLexema());
+                        ObjetoAmbito.setTipoAmbito("función");
+                        Ambitos.Add(ObjetoAmbito);
+                        string CadenaAmbitos = "";
+                        foreach (Ambito ambito in Ambitos)
+                        {
+                            CadenaAmbitos += ambito.getIdAmbito();
+                            CadenaAmbitos += ": ";
+                            CadenaAmbitos += ambito.getTipoAmbito();
+                            CadenaAmbitos += ", ";
+                        }
+                        ListaTokens.ElementAt(i + 1).setAmbito(CadenaAmbitos);
+                        continue;
+                    }
+                    else
+                    {
+                        string CadenaAmbitos = "";
+                        foreach (Ambito ambito in Ambitos)
+                        {
+                            CadenaAmbitos += ambito.getIdAmbito();
+                            CadenaAmbitos += ": ";
+                            CadenaAmbitos += ambito.getTipoAmbito();
+                            CadenaAmbitos += ", ";
+                        }
+                        ListaTokens.ElementAt(i + 1).setAmbito(CadenaAmbitos);
+                        continue;
+                    }
+                }
+                if (token_actual.getLexema().Equals("if") ||
+                    token_actual.getLexema().Equals("for") ||
+                    token_actual.getLexema().Equals("while") ||
+                    token_actual.getLexema().Equals("switch"))
+                {
+                    ObjetoAmbito.setIdAmbito(token_actual.getLexema());
+                    ObjetoAmbito.setTipoAmbito("control de flujo");
+                    Ambitos.Add(ObjetoAmbito);
+                    string CadenaAmbitos = "";
+                    foreach (Ambito ambito in Ambitos)
+                    {
+                        CadenaAmbitos += ambito.getIdAmbito();
+                        CadenaAmbitos += ": ";
+                        CadenaAmbitos += ambito.getTipoAmbito();
+                        CadenaAmbitos += ", ";
+                    }
+                    token_actual.setAmbito(CadenaAmbitos);
+                    continue;
+                }
+                if (token_actual.getLexema().Equals("("))
+                {
+                    while (!ListaTokens.ElementAt(i).getLexema().Equals(")"))
+                    {
+                        i++;
+                    }
+                    i++;
+                    continue;
                 }
             }
         }

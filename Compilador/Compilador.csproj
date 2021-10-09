@@ -62,6 +62,7 @@
     <Compile Include="AnalizadorSemantico.cs" />
     <Compile Include="AnalizadorSintactico.cs" />
     <Compile Include="Arbol.cs" />
+    <Compile Include="Ambito.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
