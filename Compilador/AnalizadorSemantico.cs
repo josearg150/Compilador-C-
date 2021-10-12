@@ -34,6 +34,7 @@ namespace Compilador
         #region Variables
         static private List<Token> ListaTokens;
         System.Windows.Forms.DataGridView tabla;
+        Stack<String> PilaIDR = new Stack<String>();
         #endregion
         //***************************************
         //Constructores   
@@ -50,8 +51,7 @@ namespace Compilador
         //***************************************
         #region Metodos
         public void analizar()
-        {
-            
+        { 
             //metemos los parentesis, corchetes o llaves en una pila 
             Stack<Token> tokens = new Stack<Token>();
             for (int i = 0; i < ListaTokens.Count; i++)
@@ -114,6 +114,21 @@ namespace Compilador
                     tabla.Rows[i].Cells["colError"].Value = error;
                     tabla.Rows[i].Cells["colLinea"].Value = token.getLinea();
                 }
+            }
+        }
+
+        private void guardarOperadores_OperandosEnPila() {
+            for (int i = 0; i <= ListaTokens.Count; i++)
+            {
+                //Extraer lexema ingresado por el usuario
+                String lexema = ListaTokens.ElementAt(i).getLexema();
+                //Identificar si es operador u operando
+                if (lexema.Equals("+") || lexema.Equals("-") || lexema.Equals("*") || lexema.Equals("/") || lexema.Equals("^") 
+                    || lexema.All(char.IsDigit))
+                {
+                    PilaIDR.Push(lexema);
+                }
+                
             }
         }
         #endregion
