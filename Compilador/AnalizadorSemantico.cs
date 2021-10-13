@@ -85,8 +85,8 @@ namespace Compilador
                     tokens.Pop();
                 }
             }
-
-            if(tokens.Count == 0)
+            guardarOperadores_OperandosEnPila();
+            if (tokens.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("No se detectaron errores");
             }
@@ -113,12 +113,14 @@ namespace Compilador
                     i = tabla.Rows.Add();
                     tabla.Rows[i].Cells["colError"].Value = error;
                     tabla.Rows[i].Cells["colLinea"].Value = token.getLinea();
+                    //Guardamos los operadores y operandos en la pila 
+                    
                 }
             }
         }
 
         private void guardarOperadores_OperandosEnPila() {
-            for (int i = 0; i <= ListaTokens.Count; i++)
+            for (int i = 0; i < ListaTokens.Count; i++)
             {
                 //Extraer lexema ingresado por el usuario
                 String lexema = ListaTokens.ElementAt(i).getLexema();
@@ -129,6 +131,12 @@ namespace Compilador
                     PilaIDR.Push(lexema);
                 }
                 
+            }
+
+            //Prueba para ver si se guarda
+            while(PilaIDR.Count > 0)
+            {
+                System.Windows.Forms.MessageBox.Show(PilaIDR.Pop());
             }
         }
         #endregion
