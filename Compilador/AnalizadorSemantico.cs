@@ -182,17 +182,36 @@ namespace Compilador
                 {
                     pilaAux.Push(elem);
                 }
-                else
+                else if(pilaAux.Count == 2)
                 {
                     switch (elem)
                     {
-                        case "+": break;
-                        case "-": break;
-                        case "*": break;
-                        case "/": break;
-                        case "^": break;
+                        case "+": 
+                            int suma = int.Parse(pilaAux.Pop()) + int.Parse(pilaAux.Pop());
+                            pilaAux.Push(suma.ToString());
+                             break;
+                        case "-":
+                            int resta = int.Parse(pilaAux.Pop()) - int.Parse(pilaAux.Pop());
+                            pilaAux.Push(resta.ToString()); 
+                            break;
+                        case "*":
+                            int mult = int.Parse(pilaAux.Pop()) * int.Parse(pilaAux.Pop());
+                            pilaAux.Push(mult.ToString()); 
+                            break;
+                        case "/":
+                            int division = int.Parse(pilaAux.Pop()) / int.Parse(pilaAux.Pop());
+                            pilaAux.Push(division.ToString());
+                            break;
+                        case "^":
+                            Double pot = Math.Pow(int.Parse(pilaAux.Pop()), int.Parse(pilaAux.Pop()));  
+                            pilaAux.Push(pot.ToString());
+                            break;
                     }
                 }
+            while(pilaAux.Count > 0)
+            {
+               System.Windows.Forms.MessageBox.Show(pilaAux.Pop());
+            }
             }
         }
 
