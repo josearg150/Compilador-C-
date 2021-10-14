@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Compilador
-{   
+{
     /// <summary>
     ///     Clase Analizador semantico
     ///     Contiene los metodos para analizar errores en el codigo fuente 
@@ -34,7 +34,8 @@ namespace Compilador
         #region Variables
         static private List<Token> ListaTokens;
         System.Windows.Forms.DataGridView tabla;
-        Stack<String> PilaIDR = new Stack<String>();
+        Stack<String> PilaOperandos = new Stack<String>(); 
+        Stack<String> PilaOperadores = new Stack<String>();
         #endregion
         //***************************************
         //Constructores   
@@ -125,19 +126,84 @@ namespace Compilador
                 //Extraer lexema ingresado por el usuario
                 String lexema = ListaTokens.ElementAt(i).getLexema();
                 //Identificar si es operador u operando
-                if (lexema.Equals("+") || lexema.Equals("-") || lexema.Equals("*") || lexema.Equals("/") || lexema.Equals("^") 
-                    || lexema.All(char.IsDigit))
+                if (lexema.Equals("+") || lexema.Equals("-") || lexema.Equals("*") || lexema.Equals("/") || lexema.Equals("^"))
                 {
-                    PilaIDR.Push(lexema);
+                    PilaOperadores.Push(lexema);
+                }
+                else if (lexema.All(char.IsDigit))
+                {
+                    PilaOperandos.Push(lexema);
                 }
                 
             }
-
-            //Prueba para ver si se guarda
-            while(PilaIDR.Count > 0)
+            Stack<String> pilaOperadoresInvertida = invertirPila(PilaOperadores);
+            Stack<String> pilaOperandosInvertida = invertirPila(PilaOperandos);
+            realizarOperaciones(pilaOperadoresInvertida, pilaOperandosInvertida);
+        }
+        private void realizarOperaciones(Stack<String> pilaOperadores, Stack<String> pilaOperandos)
+        {
+            Stack<String> pilaOperaciones = new Stack<String>();
+            //Ingresamos dos operandos para realizar operaciones
+            if(pilaOperadores.Count >= 2)
             {
-                System.Windows.Forms.MessageBox.Show(PilaIDR.Pop());
+                pilaOperaciones.Push(pilaOperandos.Pop());
+                pilaOperaciones.Push(pilaOperandos.Pop());
             }
+            //Contador para while
+            int i = pilaOperadores.Count + pilaOperandos.Count;
+            //meter los operadores y operandos restantes
+            while (i > 0)
+            {
+                if(pilaOperadores.Count > 0)
+                {
+                    pilaOperaciones.Push(pilaOperadores.Pop());
+                }
+                if(pilaOperandos.Count > 0)
+                {
+                    pilaOperaciones.Push(pilaOperandos.Pop());
+                }
+                i--;
+            }
+            //valores pa probar nomas 
+            //while (pilaOperaciones.Count > 0)
+            //{
+            //    System.Windows.Forms.MessageBox.Show(pilaOperaciones.Pop());
+            //}
+            //Invertir pila operaciones
+            Stack<String> pilaOperacionesInvertida = invertirPila(pilaOperaciones);
+            //Realizar operaciones 
+            Stack<String> pilaAux = new Stack<String>();
+
+            while (pilaOperacionesInvertida.Count > 0)
+            {
+                String elem = pilaOperacionesInvertida.Pop();
+
+                if (elem.All(char.IsDigit))
+                {
+                    pilaAux.Push(elem);
+                }
+                else
+                {
+                    switch (elem)
+                    {
+                        case "+": break;
+                        case "-": break;
+                        case "*": break;
+                        case "/": break;
+                        case "^": break;
+                    }
+                }
+            }
+        }
+
+        private Stack<String> invertirPila(Stack<String> pilaR)
+        {
+            Stack<String> PilaFinal = new Stack<string>();
+            while(pilaR.Count > 0)
+            {
+               PilaFinal.Push(pilaR.Pop());
+            }
+            return PilaFinal;
         }
         #endregion
     }
