@@ -42,6 +42,7 @@ namespace Compilador
         Char Caracter;
         public int EstadoToken;
         static private List<Token> ListaTokens;
+        List<Error> ListaErrores;
         //Elementos graficos del form
         System.Windows.Forms.RichTextBox txtLenguaje; 
         System.Windows.Forms.DataGridView tabla_simbolos; 
@@ -57,6 +58,7 @@ namespace Compilador
             tabla_simbolos = _tabla_simbolos;
             txtLenguaje = _lenguaje;
             ListaTokens = new List<Token>();
+            ListaErrores = new List<Error>();
         }
         #endregion
 

@@ -39,6 +39,7 @@ namespace Compilador
         List<string> ExpresionRPNArreglo;//expresion que se usara para crear el arbol 
         ArrayList tokens;//tokens de la clase analisis lexico 
         ShuntingYard shunting;
+        List<Error> ListaErrores;
         private readonly List<char> Numeros = new List<char>()
                     {
                         '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
@@ -54,6 +55,7 @@ namespace Compilador
         {
             tokens = new ArrayList(_tokens);//se copian los tokens obtenidos 
             shunting = new ShuntingYard();
+            ListaErrores = new List<Error>();
         }
         #endregion
 
