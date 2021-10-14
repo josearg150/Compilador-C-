@@ -173,16 +173,17 @@ namespace Compilador
             Stack<String> pilaOperacionesInvertida = invertirPila(pilaOperaciones);
             //Realizar operaciones 
             Stack<String> pilaAux = new Stack<String>();
-
+            String operadores = "+-*^^";
             while (pilaOperacionesInvertida.Count > 0)
             {
                 String elem = pilaOperacionesInvertida.Pop();
 
                 if (elem.All(char.IsDigit))
-                {
+                {   
                     pilaAux.Push(elem);
+
                 }
-                else if(pilaAux.Count == 2)
+                else if(operadores.Contains(elem) && pilaAux.Count >= 2)
                 {
                     switch (elem)
                     {
@@ -208,10 +209,11 @@ namespace Compilador
                             break;
                     }
                 }
-            while(pilaAux.Count > 0)
+            } 
+            
+            while (pilaAux.Count > 0)
             {
-               System.Windows.Forms.MessageBox.Show(pilaAux.Pop());
-            }
+                System.Windows.Forms.MessageBox.Show("El resultado de la pila semantica es: "+pilaAux.Pop());
             }
         }
 
