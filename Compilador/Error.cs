@@ -6,60 +6,72 @@ using System.Threading.Tasks;
 
 namespace Compilador
 {
-    public enum tipoError
-    {
-        Lexico,
-        Sintactico,
-        Semantico,
-        CodigoIntermedio,
-        Ejecucion
-    }
-
+    /// <summary>
+    ///     Clase Error
+    ///     Contiene los metodos para ver los errores del codigo
+    /// </summary>
+    /// 
+    /// <Para>
+    ///     Con esta clase se puede analizar el codigo fuente y podemos ver los errores
+    /// </Para>
+    /// 
+    /// <Supuestos>
+    /// </Supuestos>
+    /// 
+    /// <Autor>
+    ///     Jose angel rocha garcia 
+    ///     Jose luis carreon reyes
+    /// </Autor>
+    /// 
+    /// <FechaCreacion >
+    ///     14/10/2021
+    /// </FechaCreacion>
     class Error
     {
-        private int Codigo;
-        private string MensajeError;
-        private tipoError Tipo;
-        private int Linea;
-
-        public int getCodigo()
+        //***************************************
+        //Variables locales                     
+        //***************************************
+        #region Variables
+        private String lexema;
+        private String idToken;
+        private int linea;
+        private int columna;
+        #endregion
+        //***************************************
+        //Constructores   
+        //***************************************
+        #region Constructores 
+        public Error(String lexema, String idToken, int linea, int columna)
         {
-            return Codigo;
-        }
 
-        public string getMensajeError()
+            this.lexema = lexema;
+            this.idToken = idToken;
+            this.linea = linea;
+            this.columna = columna;
+        }
+        #endregion 
+        //***************************************
+        //Metodos
+        //***************************************
+        #region Metodos
+        public String getLexema()
         {
-            return MensajeError;
+            return this.lexema;
         }
-
-        public tipoError getTipo()
+        public String getIdToken()
         {
-            return Tipo;
+            return this.idToken;
         }
-
         public int getLinea()
         {
-            return Linea;
+            return this.linea;
         }
-
-        public void setCodigo(int Codigo)
+        public int getColumna()
         {
-            this.Codigo = Codigo;
+            return this.columna;
         }
-
-        public void setMensajeError(string Mensaje)
-        {
-            this.MensajeError = Mensaje;
-        }
-
-        public void setTipo(tipoError Tipo)
-        {
-            this.Tipo = Tipo;
-        }
-
-        public void setLinea(int Linea)
-        {
-            this.Linea = Linea;
-        }
+        #endregion
     }
 }
+    
+
