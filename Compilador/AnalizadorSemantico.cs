@@ -36,15 +36,17 @@ namespace Compilador
         System.Windows.Forms.DataGridView tabla;
         Stack<String> PilaOperandos = new Stack<String>(); 
         Stack<String> PilaOperadores = new Stack<String>();
+        IdentificadorDeErrores ListaErrores;
         #endregion
         //***************************************
         //Constructores   
         //***************************************
         #region Constructores 
-        public AnalizadorSemantico(List<Token> lista, System.Windows.Forms.DataGridView _tabla_simbolos)
+        public AnalizadorSemantico(List<Token> lista, System.Windows.Forms.DataGridView _tabla_simbolos, IdentificadorDeErrores Lista)
         {
             ListaTokens = lista;
             tabla = _tabla_simbolos;
+            ListaErrores = Lista;
         }
         #endregion
         //***************************************
@@ -97,6 +99,7 @@ namespace Compilador
                 for(int i = 0; i <= tokens.Count; i++)
                 {
                     Token token = tokens.Pop();
+                    ListaErrores.agregarErrores("Semantico", token.getLexema(), token.getIdToken(), token.getLinea(),token.getColumna());
                     string error = " ";
                     string lexema = token.getLexema();
                     if (lexema.Equals("("))
@@ -164,12 +167,6 @@ namespace Compilador
                 }
                 i--;
             }
-            //valores pa probar nomas 
-            //while (pilaOperaciones.Count > 0)
-            //{
-            //    System.Windows.Forms.MessageBox.Show(pilaOperaciones.Pop());
-            //}
-            //Invertir pila operaciones
             Stack<String> pilaOperacionesInvertida = invertirPila(pilaOperaciones);
             //Realizar operaciones 
             Stack<String> pilaAux = new Stack<String>();

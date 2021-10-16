@@ -38,12 +38,11 @@ namespace Compilador
         int Estado;
         int Columna;
         int Fila;
-        int errores;
         string Lexema;
         Char Caracter;
         public int EstadoToken;
         static private List<Token> ListaTokens;
-        static private List<Error> ListaErrores;
+        IdentificadorDeErrores ListaErrores;
         //Elementos graficos del form
         System.Windows.Forms.RichTextBox txtLenguaje; 
         System.Windows.Forms.DataGridView tabla_simbolos; 
@@ -54,12 +53,13 @@ namespace Compilador
         //***************************************
         #region Constructores 
         //Constructor con parametros 
-        public AnalizadorLexico(System.Windows.Forms.RichTextBox _lenguaje, System.Windows.Forms.DataGridView _tabla_simbolos)
+        public AnalizadorLexico(System.Windows.Forms.RichTextBox _lenguaje, System.Windows.Forms.DataGridView _tabla_simbolos,
+                                IdentificadorDeErrores lista)
         {
             tabla_simbolos = _tabla_simbolos;
             txtLenguaje = _lenguaje;
             ListaTokens = new List<Token>();
-            ListaErrores = new List<Error>();
+            ListaErrores = lista;
         }
         #endregion
 
@@ -73,11 +73,7 @@ namespace Compilador
             Token nuevo = new Token(lexema, idToken, linea, columna, indice);
             ListaTokens.Add(nuevo);
         }
-        public void agregarErrores(String lexema, String idToken, int linea, int columna)
-        {
-            Error errtok = new Error(lexema, idToken, linea, columna);
-            ListaErrores.Add(errtok);
-        }
+        
         //Metodo para saber si es reservada o no
         public Boolean IdentificarReservada(String palabra)
         {
@@ -364,7 +360,7 @@ namespace Compilador
                         }
                         else
                         {
-                            agregarErrores(Lexema, "Se esperaba un digito [" + Lexema + "]", Fila, Columna);
+                            ListaErrores.agregarErrores("Lexico",Lexema, "Se esperaba un digito [" + Lexema + "]", Fila, Columna);
                             Estado = 0;
                             Lexema = "";
                         }
@@ -389,7 +385,7 @@ namespace Compilador
                     case -99:
                         //es un posible error o espacio blanco por lo tanto el estado es 0 
                         Lexema += Caracter;
-                        agregarErrores(Lexema, "Caracter Desconocido", Fila, Columna);
+                        ListaErrores.agregarErrores("Lexico",Lexema, "Caracter Desconocido", Fila, Columna);
                         Estado = 0;
                         Lexema = "";
                         break;
@@ -421,11 +417,12 @@ namespace Compilador
                     tabla_simbolos.Rows[i].Cells["Scope"].Value = token_actual.getAmbito();
                 }
             }
+            /*
             for (int i = 0; i < ListaErrores.Count; i++) {
                 Error token = ListaErrores.ElementAt(i);
                 System.Windows.Forms.MessageBox.Show("Error: "+token.getLexema()+" en linea "+token.getLinea());
                 ListaErrores.RemoveAt(i);
-                }
+                }*/
                 
         }
 

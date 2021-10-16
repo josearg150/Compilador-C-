@@ -35,6 +35,7 @@ namespace Compilador
         AnalizadorLexico AnalizadorLexico;
         AnalizadorSintactico AnalizadorSintactico;
         AnalizadorSemantico AnalizadorSemantico;
+        IdentificadorDeErrores ListaErrores;
         #endregion
 
         //***************************************
@@ -44,7 +45,9 @@ namespace Compilador
         public Compilador()
         {
             InitializeComponent();
-            AnalizadorLexico = new AnalizadorLexico(txtLenguaje, dgvSimbolos);
+            ListaErrores = new IdentificadorDeErrores(dgvErrores);
+            AnalizadorLexico = new AnalizadorLexico(txtLenguaje, dgvSimbolos,ListaErrores);
+            
         }
         #endregion
 
@@ -162,13 +165,19 @@ namespace Compilador
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             tbcInformacion.SelectTab(tbpSemantico);
-            AnalizadorSemantico = new AnalizadorSemantico(AnalizadorLexico.getListaTokens(), dvgErrores);
+            AnalizadorSemantico = new AnalizadorSemantico(AnalizadorLexico.getListaTokens(), dvgErrores, ListaErrores);
             AnalizadorSemantico.analizar();
         }
 
         private void ejecutarToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void listaDeErroresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tbcInformacion.SelectTab(tbpErrores);
+            ListaErrores.mostrar();
         }
     }
 }

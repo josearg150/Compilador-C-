@@ -32,6 +32,7 @@ namespace Compilador
         //Variables locales                     
         //***************************************
         #region Variables
+        private String tipo;
         private String lexema;
         private String idToken;
         private int linea;
@@ -41,19 +42,23 @@ namespace Compilador
         //Constructores   
         //***************************************
         #region Constructores 
-        public Error(String lexema, String idToken, int linea, int columna)
+        public Error(String tipo,String lexema, String idToken, int linea, int columna)
         {
-
+            this.tipo = tipo;
             this.lexema = lexema;
             this.idToken = idToken;
             this.linea = linea;
             this.columna = columna;
         }
-        #endregion 
+        #endregion
         //***************************************
         //Metodos
         //***************************************
         #region Metodos
+        public String getTipo()
+        {
+            return this.tipo;
+        }
         public String getLexema()
         {
             return this.lexema;
@@ -70,6 +75,7 @@ namespace Compilador
         {
             return this.columna;
         }
+        
         #endregion
     }
 }
