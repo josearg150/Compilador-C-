@@ -120,7 +120,7 @@ namespace Compilador
                             Estado = 2;
                             Lexema += Caracter;
                         }
-                        //Comparaciones de comillas, comas, espacios en blancos etc.
+                        //Comparaciones de cadenas,comillas, comas, espacios en blancos etc.
                         else if (Caracter == '"') 
                         {
                             Estado = 4;
@@ -360,7 +360,7 @@ namespace Compilador
                         }
                         else
                         {
-                            ListaErrores.agregarErrores("Lexico",Lexema, "Se esperaba un digito [" + Lexema + "]", Fila, Columna);
+                            ListaErrores.agregarErrores("01","Lexico",Lexema, "Se esperaba un digito ["+Lexema+Caracter+"]", Fila, Columna);
                             Estado = 0;
                             Lexema = "";
                         }
@@ -385,7 +385,7 @@ namespace Compilador
                     case -99:
                         //es un posible error o espacio blanco por lo tanto el estado es 0 
                         Lexema += Caracter;
-                        ListaErrores.agregarErrores("Lexico",Lexema, "Caracter Desconocido", Fila, Columna);
+                        ListaErrores.agregarErrores("02","Lexico",Lexema, "Caracter invalido", Fila, Columna);
                         Estado = 0;
                         Lexema = "";
                         break;

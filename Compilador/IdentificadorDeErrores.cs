@@ -53,9 +53,9 @@ namespace Compilador
         {
             return ListaErrores;
         }
-        public void agregarErrores(String tipo,String lexema, String idToken, int linea, int columna)
+        public void agregarErrores(String codigo,String tipo,String lexema, String idToken, int linea, int columna)
         {
-            Error errtok = new Error(tipo,lexema, idToken, linea, columna);
+            Error errtok = new Error(codigo,tipo,lexema, idToken, linea, columna);
             ListaErrores.Add(errtok);
         }
         public void mostrar()
@@ -66,9 +66,9 @@ namespace Compilador
                 Error Error_actual = ListaErrores.ElementAt(i);
                 i = tabla_errores.Rows.Add();//creamos una fila 
                 //Asignamos datos a columnas
-                tabla_errores.Rows[i].Cells["ColCodigo"].Value = "NOID";
+                tabla_errores.Rows[i].Cells["ColCodigo"].Value =Error_actual.getCodigo();
                 tabla_errores.Rows[i].Cells["colTipo"].Value = Error_actual.getTipo();
-                tabla_errores.Rows[i].Cells["colLexema"].Value = Error_actual.getLexema();
+                tabla_errores.Rows[i].Cells["colLexema"].Value = Error_actual.getLexema()+"->"+Error_actual.getIdToken();
                 tabla_errores.Rows[i].Cells["colLineaError"].Value = Error_actual.getLinea(); 
 
             }

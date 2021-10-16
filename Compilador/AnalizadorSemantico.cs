@@ -99,20 +99,23 @@ namespace Compilador
                 for(int i = 0; i <= tokens.Count; i++)
                 {
                     Token token = tokens.Pop();
-                    ListaErrores.agregarErrores("Semantico", token.getLexema(), token.getIdToken(), token.getLinea(),token.getColumna());
+                    
                     string error = " ";
                     string lexema = token.getLexema();
                     if (lexema.Equals("("))
                     {
                         error = "Falta cierre de parentesis izquierdo";
+                        ListaErrores.agregarErrores("03", "Semantico", token.getLexema(), error, token.getLinea(), token.getColumna());
                     }
                     else if (lexema.Equals("{"))
                     {
                         error = "Falta cierre de llave izquierda";
+                        ListaErrores.agregarErrores("03", "Semantico", token.getLexema(), error, token.getLinea(), token.getColumna());
                     }
                     else if (lexema.Equals("["))
                     {
                         error = "Falta cierre de corchete izquierdo";
+                        ListaErrores.agregarErrores("03", "Semantico", token.getLexema(), error, token.getLinea(), token.getColumna());
                     }
                     i = tabla.Rows.Add();
                     tabla.Rows[i].Cells["colError"].Value = error;
