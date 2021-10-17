@@ -91,7 +91,7 @@ namespace Compilador
             guardarOperadores_OperandosEnPila();
             if (tokens.Count == 0)
             {
-                System.Windows.Forms.MessageBox.Show("No se detectaron errores");
+                System.Windows.Forms.MessageBox.Show("No se detectaron errores de apertura y cierre");
             }
             else
             {
@@ -105,17 +105,17 @@ namespace Compilador
                     if (lexema.Equals("("))
                     {
                         error = "Falta cierre de parentesis izquierdo";
-                        ListaErrores.agregarErrores("03", "Semantico", token.getLexema(), error, token.getLinea(), token.getColumna());
+                        ListaErrores.agregarErrores("03", "Sintactico", token.getLexema(), error, token.getLinea(), token.getColumna());
                     }
                     else if (lexema.Equals("{"))
                     {
                         error = "Falta cierre de llave izquierda";
-                        ListaErrores.agregarErrores("03", "Semantico", token.getLexema(), error, token.getLinea(), token.getColumna());
+                        ListaErrores.agregarErrores("03", "Sintactico", token.getLexema(), error, token.getLinea(), token.getColumna());
                     }
                     else if (lexema.Equals("["))
                     {
                         error = "Falta cierre de corchete izquierdo";
-                        ListaErrores.agregarErrores("03", "Semantico", token.getLexema(), error, token.getLinea(), token.getColumna());
+                        ListaErrores.agregarErrores("03", "Siintactico", token.getLexema(), error, token.getLinea(), token.getColumna());
                     }
                     i = tabla.Rows.Add();
                     tabla.Rows[i].Cells["colError"].Value = error;
@@ -174,6 +174,9 @@ namespace Compilador
             //Realizar operaciones 
             Stack<String> pilaAux = new Stack<String>();
             String operadores = "+-*^^";
+            String operadorAnterior = "";
+            bool continuar = true;
+            bool finalizoCorrecto = true;
             while (pilaOperacionesInvertida.Count > 0)
             {
                 String elem = pilaOperacionesInvertida.Pop();
@@ -181,39 +184,54 @@ namespace Compilador
                 if (elem.All(char.IsDigit))
                 {   
                     pilaAux.Push(elem);
-
+                    continuar = true;
                 }
-                else if(operadores.Contains(elem) && pilaAux.Count >= 2)
+                else if (operadorAnterior.Contains(elem))
                 {
+                    System.Windows.Forms.MessageBox.Show("Error en correspondencia");
+                    ListaErrores.agregarErrores("05", "Sintactico", elem+operadorAnterior, "Error en correspondencia de operadores", 0, 0);
+                    continuar = false;
+                    finalizoCorrecto = false;
+                    break;
+                }
+                else if(operadores.Contains(elem) && pilaAux.Count >= 2 && continuar)
+                {
+                    finalizoCorrecto = true;
                     switch (elem)
                     {
                         case "+": 
                             int suma = int.Parse(pilaAux.Pop()) + int.Parse(pilaAux.Pop());
                             pilaAux.Push(suma.ToString());
+                            operadorAnterior = "+";
                              break;
                         case "-":
                             int resta = int.Parse(pilaAux.Pop()) - int.Parse(pilaAux.Pop());
-                            pilaAux.Push(resta.ToString()); 
-                            break;
+                            pilaAux.Push(resta.ToString());
+                            operadorAnterior = "-";
+                            break;       
                         case "*":
                             int mult = int.Parse(pilaAux.Pop()) * int.Parse(pilaAux.Pop());
-                            pilaAux.Push(mult.ToString()); 
+                            pilaAux.Push(mult.ToString());
+                            operadorAnterior = "*";
                             break;
                         case "/":
                             int division = int.Parse(pilaAux.Pop()) / int.Parse(pilaAux.Pop());
                             pilaAux.Push(division.ToString());
-                            break;
+                            operadorAnterior = "/";
+                            break;                          
                         case "^":
                             Double pot = Math.Pow(int.Parse(pilaAux.Pop()), int.Parse(pilaAux.Pop()));  
                             pilaAux.Push(pot.ToString());
+                            operadorAnterior = "^";
                             break;
                     }
                 }
             } 
             
-            while (pilaAux.Count > 0)
+            while (pilaAux.Count == 1 && finalizoCorrecto)
             {
-                System.Windows.Forms.MessageBox.Show("El resultado de la pila semantica es: "+pilaAux.Pop());
+                pilaAux.Pop();
+                System.Windows.Forms.MessageBox.Show("Existe correspondencia de operandos y operadores");
             }
         }
 

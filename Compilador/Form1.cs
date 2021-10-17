@@ -177,6 +177,7 @@ namespace Compilador
         private void listaDeErroresToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tbcInformacion.SelectTab(tbpErrores);
+            ListaErrores.setCodigo(txtCodigoFuente);
             ListaErrores.mostrar();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,6 +33,7 @@ namespace Compilador
         #region Variables
         static private List<Error> ListaErrores;
         System.Windows.Forms.DataGridView tabla_errores;
+        System.Windows.Forms.RichTextBox codigo;
 
         #endregion
         //***************************************
@@ -42,6 +44,8 @@ namespace Compilador
         {
             ListaErrores = new List<Error>();
             tabla_errores = tabla;
+            codigo = new System.Windows.Forms.RichTextBox();
+            
         }
 
         #endregion
@@ -73,6 +77,49 @@ namespace Compilador
 
             }
         }
+        public void setCodigo(System.Windows.Forms.RichTextBox _codigo)
+        {
+            codigo.Text = _codigo.Text;
+            AnalizarLineas();
+        }
+        //Revisar si las lineas terminan con ;
+        private void AnalizarLineas()
+        {
+
+            for(int i = 0; i < codigo.Lines.Length; i++)
+            {
+                analizarTiposDeDato(codigo.Lines[i], i);
+                //Aperturas de llaves, parentesis, corchetes ,no son errores
+                if (codigo.Lines[i].EndsWith("{") || codigo.Lines[i].EndsWith("(") || codigo.Lines[i].EndsWith("["))
+                {
+                    continue;
+                }
+                //La linea no termina en ;
+                else if (!(codigo.Lines[i].EndsWith(";")))
+                {
+                    agregarErrores("04", "Semantico", codigo.Lines[i].Last().ToString(), "Se esperaba ;", i+1, 0);
+                }
+                
+            }
+        }
+        private void analizarTiposDeDato(String linea, int numLinea)
+        {
+            ///  0  1 2 3
+            /// int a = 1;
+            /// 
+            String[] word1 = linea.Split(' ');
+            String palabraInicio = word1[0].ToLower();
+            
+            if(palabraInicio.Equals("int") || palabraInicio.Equals("float") || palabraInicio.Equals("char") || palabraInicio.Equals("string"))
+            {
+                if (word1[1].All(char.IsDigit))
+                {
+                    agregarErrores("06", "Semantico", word1[1], "Nombre de variable invalido", numLinea + 1, 0);
+                }
+
+            }
+        }
+
         #endregion
     }
 }
