@@ -32,10 +32,15 @@ namespace Compilador
         //Variables locales                     
         //***************************************
         #region Variables
+        // Arreglos de referencia para establecer los caracteres que están permitidos en la expresión.
+        private readonly char[] Operadores = { '+', '-', '*', '/', '^', '√' };
+        private readonly char[] Numeros = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
         AnalizadorLexico AnalizadorLexico;
         AnalizadorSintactico AnalizadorSintactico;
         AnalizadorSemantico AnalizadorSemantico;
         IdentificadorDeErrores ListaErrores;
+        IDictionary<string, StringBuilder> Terminos = new Dictionary<string, StringBuilder>();
+        int Tx = 1;
         #endregion
 
         //***************************************
@@ -47,7 +52,6 @@ namespace Compilador
             InitializeComponent();
             ListaErrores = new IdentificadorDeErrores(dgvErrores);
             AnalizadorLexico = new AnalizadorLexico(txtLenguaje, dgvSimbolos,ListaErrores);
-            
         }
         #endregion
 
@@ -179,6 +183,219 @@ namespace Compilador
             tbcInformacion.SelectTab(tbpErrores);
             ListaErrores.setCodigo(txtCodigoFuente);
             ListaErrores.mostrar();
+        }
+
+        /// <summary>
+        ///     Valida el input dado por el usuario.
+        /// </summary>
+        /// <param name="expresion">Cadena con la expresión a validar.</param>
+        /// <returns>La expresión validada en forma de cadena, o una cadena vacía en caso de error.</returns>
+        private string ValidarInput(string expresion)
+        {
+            if (expresion.Equals(""))
+            {
+                // Se retorna una cadena vacía cuando haya error de validación.
+                return "";
+            }
+            else
+            {
+                // Cadena que lleva cuenta del tipo de caracter en cada iteración (si es operador, número)
+                string AuxChar = "";
+                // Lista genérica de cadenas usada para ir armando la expresión validada.
+                List<string> ExpresionValidada = new List<string>();
+
+                int i = 0;
+                // Por cada caracter en la expresión dada...
+                foreach (char c in expresion)
+                {
+                    // Se ignoran los espacios
+                    if (c.Equals(' '))
+                    {
+                        i++;
+                        continue;
+                    }
+                    // Operadores que no sean operadores o números no se aceptan
+                    if (!Operadores.Contains(c) && !Numeros.Contains(c))
+                    {
+                        return "";
+                    }
+                    // La expresión no puede comenzar con un operador
+                    if (i == 0 && Operadores.Contains(c) && c != '√')
+                    {
+                        return "";
+                    }
+                    // A menos que sea una raíz cuadrada
+                    else if (i == 0 && c == '√')
+                    {
+                        AuxChar = "op";
+                    }
+                    // La expresión no puede terminar con un operador
+                    else if (i == expresion.Length - 1 && Operadores.Contains(c))
+                    {
+                        return "";
+                    }
+                    // Dos operadores no pueden estar uno al lado del otro, excepto por la raíz cuadrada (el 2 es implícito)
+                    if (AuxChar.Equals("op") && Operadores.Contains(c))
+                    {
+                        if (c == '√')
+                        {
+                            ExpresionValidada.Add("2");
+                        }
+                        else
+                        {
+                            return "";
+                        }
+                    }
+
+                    // Como la iteración se lleva a cabo caracter por caracter, si se encuentra un número y el caracter
+                    // anterior también fue un número, ambos se unen para formar un número de x dígitos
+                    if (AuxChar == "num" && Numeros.Contains(c))
+                    {
+                        ExpresionValidada.Insert(ExpresionValidada.Count - 1, ExpresionValidada.ElementAt(ExpresionValidada.Count - 1) + c.ToString());
+                        ExpresionValidada.RemoveAt(ExpresionValidada.Count - 1);
+                        i++;
+                        AuxChar = "num";
+                        continue;
+                    }
+
+                    // Se lleva cuenta de si el caracter de la iteración anterior es número u operador
+                    if (Numeros.Contains(c))
+                    {
+                        AuxChar = "num";
+                    }
+                    else if (Operadores.Contains(c))
+                    {
+                        AuxChar = "op";
+                    }
+
+                    // Se inserta el término evaluado en el arreglo que se retornará como cadena al final
+                    ExpresionValidada.Add(c.ToString());
+                    i++;
+                }
+                // Se retorna la cadena con la expresión validada con un espacio para dividir cada término,
+                // puesto que el algoritmo Shunting Yard así lo requiere.
+                return string.Join(" ", ExpresionValidada);
+            }
+        }
+
+        /// <summary>
+        ///     Convierte la expresión validada en notación polaca revertida a un árbol. (No se usa, solo se
+        ///     implementó para un potencial uso futuro con otros analizadores.)
+        /// </summary>
+        /// <param name="ExpresionPosfija">La expresión validada en notación polaca revertida a evaluar en forma de una lista genérica de cadenas.</param>
+        /// <returns>Un árbol binario de expresiones.</returns>
+        private Nodo ConvertirRPNAArbol(List<string> ExpresionPosfija)
+        {
+            // Se sigue exactamente el mismo algoritmo descrito en el método Graficar().
+            // Sólo cambian los objetos utilizados para las operaciones.
+            Stack<Nodo> PilaArbol = new Stack<Nodo>();
+            foreach (string c in ExpresionPosfija)
+            {
+                if (Numeros.Contains(c[0]))
+                {
+                    Nodo Nodo = new Nodo(c);
+                    PilaArbol.Push(Nodo);
+                }
+                else if (Operadores.Contains(c[0]))
+                {
+                    Nodo T1 = PilaArbol.Pop();
+                    Nodo T2 = PilaArbol.Pop();
+                    Nodo Nodo = new Nodo(c);
+                    Nodo.Izquierda = T1;
+                    Nodo.Derecha = T2;
+                    PilaArbol.Push(Nodo);
+                }
+            }
+            return PilaArbol.Pop();
+        }
+
+        // Postorden
+        private void RecorrerArbol(Nodo Nodo)
+        {
+            if (Nodo != null)
+            {
+                RecorrerArbol(Nodo.Izquierda);
+                RecorrerArbol(Nodo.Derecha);
+                try
+                {
+                    if (Operadores.ToList().Contains(char.Parse(Nodo.Valor)))
+                    {
+                        try
+                        {
+                            if (Operadores.ToList().Contains(char.Parse(Nodo.Izquierda.Valor)) || Operadores.ToList().Contains(char.Parse(Nodo.Derecha.Valor)))
+                            {
+                                
+                            }
+
+                        } catch
+                        {
+
+                        }
+                        string Term = Nodo.Izquierda.Valor + Nodo.Valor + Nodo.Derecha.Valor;
+                        dgvCodigoTresD.Rows.Add();
+                        dgvCodigoTresD.Rows[Tx].Cells["T"].Value = Tx.ToString();
+                        dgvCodigoTresD.Rows[Tx].Cells["Expresion"].Value = Term;
+                        Tx++;
+                        
+                    }
+                } catch
+                {
+                    
+                }
+            }
+        }
+
+        private void triplosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (txtCodigoFuente.Text.Equals(""))
+            {
+                System.Windows.Forms.MessageBox.Show("El input no puede estar vacío.");
+            }
+            else if (txtLenguaje.Text.Equals(""))
+            {
+                System.Windows.Forms.MessageBox.Show("No se cargó ningún archivo.");
+            }
+            else if (txtCodigoFuente.SelectedText.Equals(""))
+            {
+                System.Windows.Forms.MessageBox.Show("Por favor seleccione una línea.");
+            }
+            else
+            {
+                // Solo se debe seleccionar una sola linea
+                String Linea = txtCodigoFuente.SelectedText;
+                if (Linea.Contains("\n"))
+                {
+                    System.Windows.Forms.MessageBox.Show("Por favor seleccione sólo una línea.");
+                }
+                else
+                {
+                    string Expresion = ValidarInput(Linea); // La expresión validada
+                    if (Expresion.Equals("")) // Se muestra un popup avisando que la validación no fue exitosa.
+                    {
+                        System.Windows.Forms.MessageBox.Show("Input inválido. Intente de nuevo.");
+                    }
+                    else
+                    {
+                        ShuntingYard shuntingYard = new ShuntingYard();
+                        shuntingYard.InicializarOperadores();
+                        string ExpresionRPN = shuntingYard.ConvertirInfijaAPosfija(Expresion); // Expresion en notación polaca revertida
+                        // System.Windows.Forms.MessageBox.Show(ExpresionRPN);
+                        // Se convierte la cadena de la expresión en notación polaca revertida en un arreglo
+                        List<string> ExpresionRPNArreglo = new List<string>(ExpresionRPN.Split(' ').ToList());
+                        // Se elimina el objeto vacío sobrante al final del arreglo
+                        ExpresionRPNArreglo.RemoveAt(ExpresionRPNArreglo.Count - 1);
+
+                        Nodo NodoRaiz = ConvertirRPNAArbol(ExpresionRPNArreglo);
+
+                        tbcInformacion.SelectTab(tbpCod3Dir);
+                        dgvSimbolos.Rows.Clear();
+                        dgvSimbolos.Refresh();
+                        dgvCodigoTresD.Rows.Add();
+                        RecorrerArbol(NodoRaiz);
+                        dgvCodigoTresD.Rows.RemoveAt(0);
+                    }
+                }
+            }
         }
     }
 }
