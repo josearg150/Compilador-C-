@@ -311,7 +311,7 @@ namespace Compilador
         }
 
         // Postorden
-        private string RecorrerArbol(Nodo Nodo)
+        private void RecorrerArbol(Nodo Nodo)
         {
             if (Nodo != null)
             {
@@ -347,14 +347,12 @@ namespace Compilador
                         dgvCodigoTresD.Rows[Tx].Cells["Expresion"].Value = Termino;
                         PilaTerminos.Push("T" + Tx.ToString());
                         Tx++;
-                        return "T" + Tx.ToString();
                     }
                 } catch
                 {
                     
                 }
             }
-            return null;
         }
 
         private Nodo InvertirArbol(Nodo Nodo)
