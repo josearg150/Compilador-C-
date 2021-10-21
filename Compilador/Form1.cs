@@ -40,6 +40,7 @@ namespace Compilador
         AnalizadorSemantico AnalizadorSemantico;
         IdentificadorDeErrores ListaErrores;
         IDictionary<string, StringBuilder> Terminos = new Dictionary<string, StringBuilder>();
+        Stack<string> PilaTerminos = new Stack<string>();
         int Tx = 1;
         #endregion
 
@@ -310,7 +311,7 @@ namespace Compilador
         }
 
         // Postorden
-        private void RecorrerArbol(Nodo Nodo)
+        private string RecorrerArbol(Nodo Nodo)
         {
             if (Nodo != null)
             {
@@ -320,29 +321,52 @@ namespace Compilador
                 {
                     if (Operadores.ToList().Contains(char.Parse(Nodo.Valor)))
                     {
+                        string Termino = Nodo.Izquierda.Valor + Nodo.Valor + Nodo.Derecha.Valor;
                         try
                         {
-                            if (Operadores.ToList().Contains(char.Parse(Nodo.Izquierda.Valor)) || Operadores.ToList().Contains(char.Parse(Nodo.Derecha.Valor)))
+                            if (Operadores.ToList().Contains(char.Parse(Nodo.Izquierda.Valor)) && !Operadores.ToList().Contains(char.Parse(Nodo.Derecha.Valor)))
                             {
+                                Termino = PilaTerminos.Pop() + Nodo.Valor + Nodo.Derecha.Valor;
                                 
+                            } else if (!Operadores.ToList().Contains(char.Parse(Nodo.Izquierda.Valor)) && Operadores.ToList().Contains(char.Parse(Nodo.Derecha.Valor)))
+                            {
+                                Termino = Nodo.Izquierda.Valor + Nodo.Valor + PilaTerminos.Pop();
+                                
+                            } else if (Operadores.ToList().Contains(char.Parse(Nodo.Izquierda.Valor)) && Operadores.ToList().Contains(char.Parse(Nodo.Derecha.Valor)))
+                            {
+                                string Termino1 = PilaTerminos.Pop();
+                                string Termino2 = PilaTerminos.Pop();
+                                Termino = Termino2 + Nodo.Valor + Termino1;
                             }
-
                         } catch
                         {
 
                         }
-                        string Term = Nodo.Izquierda.Valor + Nodo.Valor + Nodo.Derecha.Valor;
                         dgvCodigoTresD.Rows.Add();
                         dgvCodigoTresD.Rows[Tx].Cells["T"].Value = Tx.ToString();
-                        dgvCodigoTresD.Rows[Tx].Cells["Expresion"].Value = Term;
+                        dgvCodigoTresD.Rows[Tx].Cells["Expresion"].Value = Termino;
+                        PilaTerminos.Push("T" + Tx.ToString());
                         Tx++;
-                        
+                        return "T" + Tx.ToString();
                     }
                 } catch
                 {
                     
                 }
             }
+            return null;
+        }
+
+        private Nodo InvertirArbol(Nodo Nodo)
+        {
+            if (Nodo == null) return null;
+
+            var left = Nodo.Izquierda;
+            var right = Nodo.Derecha;
+            Nodo.Derecha = this.InvertirArbol(left);
+            Nodo.Izquierda = this.InvertirArbol(right);
+
+            return Nodo;
         }
 
         private void triplosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -388,10 +412,11 @@ namespace Compilador
                         Nodo NodoRaiz = ConvertirRPNAArbol(ExpresionRPNArreglo);
 
                         tbcInformacion.SelectTab(tbpCod3Dir);
-                        dgvSimbolos.Rows.Clear();
-                        dgvSimbolos.Refresh();
+                        dgvCodigoTresD.Rows.Clear();
+                        dgvCodigoTresD.Refresh();
                         dgvCodigoTresD.Rows.Add();
-                        RecorrerArbol(NodoRaiz);
+                        Nodo NodoInvertido = InvertirArbol(NodoRaiz);
+                        RecorrerArbol(NodoInvertido);
                         dgvCodigoTresD.Rows.RemoveAt(0);
                     }
                 }
