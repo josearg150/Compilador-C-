@@ -82,6 +82,7 @@ namespace Compilador
             this.dgvCodigoTresD = new System.Windows.Forms.DataGridView();
             this.T = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Expresion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cuadrplosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grbContenedorCodigoFuente.SuspendLayout();
             this.grbLenguaje.SuspendLayout();
             this.mspMenu.SuspendLayout();
@@ -191,7 +192,8 @@ namespace Compilador
             this.tsmSintactico,
             this.tsmSemantico,
             this.tsmListaErrores,
-            this.tsmCodigoTresD});
+            this.tsmCodigoTresD,
+            this.cuadrplosToolStripMenuItem});
             this.ejecutarToolStripMenuItem.Name = "ejecutarToolStripMenuItem";
             this.ejecutarToolStripMenuItem.Size = new System.Drawing.Size(116, 25);
             this.ejecutarToolStripMenuItem.Text = "Herramientas";
@@ -583,6 +585,13 @@ namespace Compilador
             this.Expresion.Name = "Expresion";
             this.Expresion.Width = 300;
             // 
+            // cuadrplosToolStripMenuItem
+            // 
+            this.cuadrplosToolStripMenuItem.Name = "cuadrplosToolStripMenuItem";
+            this.cuadrplosToolStripMenuItem.Size = new System.Drawing.Size(323, 26);
+            this.cuadrplosToolStripMenuItem.Text = "Cuadruplos";
+            this.cuadrplosToolStripMenuItem.Click += new System.EventHandler(this.cuadrplosToolStripMenuItem_Click);
+            // 
             // Compilador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
@@ -677,6 +686,7 @@ namespace Compilador
         private System.Windows.Forms.DataGridView dgvCodigoTresD;
         private System.Windows.Forms.DataGridViewTextBoxColumn T;
         private System.Windows.Forms.DataGridViewTextBoxColumn Expresion;
+        private System.Windows.Forms.ToolStripMenuItem cuadrplosToolStripMenuItem;
     }
 }
 

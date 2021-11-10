@@ -52,7 +52,7 @@ namespace Compilador
         {
             InitializeComponent();
             ListaErrores = new IdentificadorDeErrores(dgvErrores);
-            AnalizadorLexico = new AnalizadorLexico(txtLenguaje, dgvSimbolos,ListaErrores);
+            AnalizadorLexico = new AnalizadorLexico(txtLenguaje, dgvSimbolos, ListaErrores);
         }
         #endregion
 
@@ -80,12 +80,14 @@ namespace Compilador
             if (txtCodigoFuente.Text.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show("El input no puede estar vacío.");
-            } else if (txtLenguaje.Text.Equals(""))
+            }
+            else if (txtLenguaje.Text.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show("No se cargó ningún archivo.");
-            } else
+            }
+            else
             {
-                tbcInformacion.SelectTab(tbpLexico);     
+                tbcInformacion.SelectTab(tbpLexico);
                 dgvSimbolos.Rows.Clear();
                 dgvSimbolos.Refresh();
                 // Se toma el código fuente escrito y se le pasa al constructor del
@@ -103,13 +105,16 @@ namespace Compilador
             if (txtCodigoFuente.Text.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show("El input no puede estar vacío.");
-            } else if (txtLenguaje.Text.Equals(""))
+            }
+            else if (txtLenguaje.Text.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show("No se cargó ningún archivo.");
-            } else if (txtCodigoFuente.SelectedText.Equals(""))
+            }
+            else if (txtCodigoFuente.SelectedText.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show("Por favor seleccione una línea.");
-            } else
+            }
+            else
             {
                 // Solo se debe seleccionar una sola linea
                 String Linea = txtCodigoFuente.SelectedText;
@@ -130,7 +135,8 @@ namespace Compilador
                         AnalizadorSintactico.analizar(Linea);
                         // Muestra la gráfica
                         tbcInformacion.TabPages[1].Controls.Add(AnalizadorSintactico.crearFormulario());
-                    } else
+                    }
+                    else
                     {
                         tbcInformacion.SelectTab(tbpSintactico);
                         AnalizadorSintactico = new AnalizadorSintactico(AnalizadorLexico.getTokens());
@@ -160,7 +166,8 @@ namespace Compilador
                 txtLenguaje.Text = ContenidoArchivo;
                 // Se cargan las palabras reservadas del lenguaje al analizador léxico
                 AnalizadorLexico.guardarReservadas(ContenidoArchivo);
-            } else
+            }
+            else
             {
                 System.Windows.Forms.MessageBox.Show("Error al abrir el archivo.");
             }
@@ -327,18 +334,21 @@ namespace Compilador
                             if (Operadores.ToList().Contains(char.Parse(Nodo.Izquierda.Valor)) && !Operadores.ToList().Contains(char.Parse(Nodo.Derecha.Valor)))
                             {
                                 Termino = PilaTerminos.Pop() + Nodo.Valor + Nodo.Derecha.Valor;
-                                
-                            } else if (!Operadores.ToList().Contains(char.Parse(Nodo.Izquierda.Valor)) && Operadores.ToList().Contains(char.Parse(Nodo.Derecha.Valor)))
+
+                            }
+                            else if (!Operadores.ToList().Contains(char.Parse(Nodo.Izquierda.Valor)) && Operadores.ToList().Contains(char.Parse(Nodo.Derecha.Valor)))
                             {
                                 Termino = Nodo.Izquierda.Valor + Nodo.Valor + PilaTerminos.Pop();
-                                
-                            } else if (Operadores.ToList().Contains(char.Parse(Nodo.Izquierda.Valor)) && Operadores.ToList().Contains(char.Parse(Nodo.Derecha.Valor)))
+
+                            }
+                            else if (Operadores.ToList().Contains(char.Parse(Nodo.Izquierda.Valor)) && Operadores.ToList().Contains(char.Parse(Nodo.Derecha.Valor)))
                             {
                                 string Termino1 = PilaTerminos.Pop();
                                 string Termino2 = PilaTerminos.Pop();
                                 Termino = Termino2 + Nodo.Valor + Termino1;
                             }
-                        } catch
+                        }
+                        catch
                         {
 
                         }
@@ -348,9 +358,10 @@ namespace Compilador
                         PilaTerminos.Push("T" + Tx.ToString());
                         Tx++;
                     }
-                } catch
+                }
+                catch
                 {
-                    
+
                 }
             }
         }
@@ -420,5 +431,23 @@ namespace Compilador
                 }
             }
         }
+
+        private void cuadrplosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (txtCodigoFuente.Text.Equals(""))
+            {
+                System.Windows.Forms.MessageBox.Show("El input no puede estar vacío.");
+            }
+            else if (txtLenguaje.Text.Equals(""))
+            {
+                System.Windows.Forms.MessageBox.Show("No se cargó ningún archivo.");
+            }
+            else
+            {
+                //Aqui va lo que va hacer el codigo 
+                tbcInformacion.SelectTab(tbpCuadruplos);
+            
+            }
+        }   
     }
 }
