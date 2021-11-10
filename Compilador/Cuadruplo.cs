@@ -9,10 +9,16 @@ namespace Compilador
     class Cuadruplo
     {
         private string codigo;
-
-        public Cuadruplo(string linea)
+        static private List<Token> ListaTokens;
+        public Cuadruplo(string linea, List<Token> Lista)
         {
             codigo = linea;
+            ListaTokens = Lista;
+        }
+
+        private void realizarCuadruplo()
+        {
+
         }
     }
 }
