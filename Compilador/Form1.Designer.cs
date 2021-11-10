@@ -44,15 +44,11 @@ namespace Compilador
             this.tsmSemantico = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmListaErrores = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmCodigoTresD = new System.Windows.Forms.ToolStripMenuItem();
+            this.cuadrplosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbpCuadruplos = new System.Windows.Forms.TabPage();
             this.dgvCuadruplos = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpTriplos = new System.Windows.Forms.TabPage();
             this.dgvTriplos = new System.Windows.Forms.DataGridView();
             this.Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,7 +78,11 @@ namespace Compilador
             this.dgvCodigoTresD = new System.Windows.Forms.DataGridView();
             this.T = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Expresion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cuadrplosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.op = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.argum1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.argum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.result = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grbContenedorCodigoFuente.SuspendLayout();
             this.grbLenguaje.SuspendLayout();
             this.mspMenu.SuspendLayout();
@@ -240,6 +240,13 @@ namespace Compilador
             this.tsmCodigoTresD.Text = "Código de Tres Direcciones";
             this.tsmCodigoTresD.Click += new System.EventHandler(this.triplosToolStripMenuItem_Click);
             // 
+            // cuadrplosToolStripMenuItem
+            // 
+            this.cuadrplosToolStripMenuItem.Name = "cuadrplosToolStripMenuItem";
+            this.cuadrplosToolStripMenuItem.Size = new System.Drawing.Size(323, 26);
+            this.cuadrplosToolStripMenuItem.Text = "Cuadruplos";
+            this.cuadrplosToolStripMenuItem.Click += new System.EventHandler(this.cuadrplosToolStripMenuItem_Click);
+            // 
             // ayudaToolStripMenuItem
             // 
             this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -273,50 +280,17 @@ namespace Compilador
             this.dgvCuadruplos.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvCuadruplos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCuadruplos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5});
+            this.num,
+            this.op,
+            this.argum1,
+            this.argum2,
+            this.result});
             this.dgvCuadruplos.Location = new System.Drawing.Point(6, 8);
             this.dgvCuadruplos.Name = "dgvCuadruplos";
             this.dgvCuadruplos.ReadOnly = true;
             this.dgvCuadruplos.RowTemplate.ReadOnly = true;
             this.dgvCuadruplos.Size = new System.Drawing.Size(680, 545);
             this.dgvCuadruplos.TabIndex = 1;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "#";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 60;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Operación";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Argumento 1";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 150;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Argumento 2";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 150;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Resultado";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
             // tbpTriplos
             // 
@@ -585,12 +559,38 @@ namespace Compilador
             this.Expresion.Name = "Expresion";
             this.Expresion.Width = 300;
             // 
-            // cuadrplosToolStripMenuItem
+            // num
             // 
-            this.cuadrplosToolStripMenuItem.Name = "cuadrplosToolStripMenuItem";
-            this.cuadrplosToolStripMenuItem.Size = new System.Drawing.Size(323, 26);
-            this.cuadrplosToolStripMenuItem.Text = "Cuadruplos";
-            this.cuadrplosToolStripMenuItem.Click += new System.EventHandler(this.cuadrplosToolStripMenuItem_Click);
+            this.num.HeaderText = "#";
+            this.num.Name = "num";
+            this.num.ReadOnly = true;
+            this.num.Width = 60;
+            // 
+            // op
+            // 
+            this.op.HeaderText = "Operación";
+            this.op.Name = "op";
+            this.op.ReadOnly = true;
+            // 
+            // argum1
+            // 
+            this.argum1.HeaderText = "Argumento 1";
+            this.argum1.Name = "argum1";
+            this.argum1.ReadOnly = true;
+            this.argum1.Width = 150;
+            // 
+            // argum2
+            // 
+            this.argum2.HeaderText = "Argumento 2";
+            this.argum2.Name = "argum2";
+            this.argum2.ReadOnly = true;
+            this.argum2.Width = 150;
+            // 
+            // result
+            // 
+            this.result.HeaderText = "Resultado";
+            this.result.Name = "result";
+            this.result.ReadOnly = true;
             // 
             // Compilador
             // 
@@ -651,11 +651,6 @@ namespace Compilador
         private System.Windows.Forms.ToolStripMenuItem tsmListaErrores;
         private System.Windows.Forms.TabPage tbpCuadruplos;
         private System.Windows.Forms.DataGridView dgvCuadruplos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.TabPage tbpTriplos;
         private System.Windows.Forms.DataGridView dgvTriplos;
         private System.Windows.Forms.DataGridViewTextBoxColumn Numero;
@@ -687,6 +682,11 @@ namespace Compilador
         private System.Windows.Forms.DataGridViewTextBoxColumn T;
         private System.Windows.Forms.DataGridViewTextBoxColumn Expresion;
         private System.Windows.Forms.ToolStripMenuItem cuadrplosToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn op;
+        private System.Windows.Forms.DataGridViewTextBoxColumn argum1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn argum2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn result;
     }
 }
 
