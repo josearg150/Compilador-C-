@@ -446,7 +446,8 @@ namespace Compilador
             {
                 //Aqui va lo que va hacer el codigo 
                 tbcInformacion.SelectTab(tbpCuadruplos);
-            
+                String bloque_fucion = txtCodigoFuente.SelectedText;
+
             }
         }   
     }
