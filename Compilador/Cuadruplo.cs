@@ -12,6 +12,7 @@ namespace Compilador
     {
         static private List<Token> ListaTokens;
         ArrayList nombres_funciones;
+        ArrayList lista_operaciones;
         System.Windows.Forms.DataGridView tabla;
         int i;
         int num_proceso;
@@ -20,6 +21,7 @@ namespace Compilador
             ListaTokens = Lista;
             tabla = tabla_;
             nombres_funciones = new ArrayList();
+            lista_operaciones = new ArrayList();
         }
         private void borrarTodo()
         {
@@ -99,9 +101,13 @@ namespace Compilador
                    && ListaTokens.ElementAt(i + 1).getIdToken().Equals("parentIzquierdo"))
                    {
                      
-                     nombres_funciones.Add(ListaTokens.ElementAt(i).getLexema());
-                     
-                    }
+                    nombres_funciones.Add(ListaTokens.ElementAt(i).getLexema());
+                    int linea = ListaTokens.ElementAt(i).getLinea();
+                    //string linea_codigo_operaciones = "aqui falta obtener la linea de codigo de las operaciones";
+                    //lista_operaciones.Add(linea_codigo_operaciones);
+                    System.Windows.Forms.MessageBox.Show("La linea de la operacion es "+(linea+1));
+
+                }
                                 
                 }
               
