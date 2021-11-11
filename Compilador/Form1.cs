@@ -446,8 +446,7 @@ namespace Compilador
             {
                 //Aqui va lo que va hacer el codigo 
                 tbcInformacion.SelectTab(tbpCuadruplos);
-                String bloque_fucion = txtCodigoFuente.SelectedText;
-                Cuadruplo cuadr = new Cuadruplo(bloque_fucion, AnalizadorLexico.getListaTokens(),dgvCuadruplos);
+                Cuadruplo cuadr = new Cuadruplo(AnalizadorLexico.getListaTokens(),dgvCuadruplos);
                 cuadr.realizarCuadruplo();
             }
         }   
