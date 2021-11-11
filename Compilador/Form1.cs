@@ -448,6 +448,8 @@ namespace Compilador
                 tbcInformacion.SelectTab(tbpCuadruplos);
                 Cuadruplo cuadr = new Cuadruplo(AnalizadorLexico.getListaTokens(),dgvCuadruplos);
                 cuadr.realizarCuadruplo();
+                
+
             }
         }   
     }

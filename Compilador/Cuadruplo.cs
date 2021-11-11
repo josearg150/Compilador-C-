@@ -11,17 +11,20 @@ namespace Compilador
     class Cuadruplo
     {
         static private List<Token> ListaTokens;
+        static private List<Token> Tokens_operaciones;
         ArrayList nombres_funciones;
         ArrayList lista_operaciones;
         System.Windows.Forms.DataGridView tabla;
         int i;
         int num_proceso;
+        int contador_expresion = 0;
         public Cuadruplo(List<Token> Lista, System.Windows.Forms.DataGridView tabla_)
         {
             ListaTokens = Lista;
             tabla = tabla_;
             nombres_funciones = new ArrayList();
             lista_operaciones = new ArrayList();
+            Tokens_operaciones = new List<Token>();
         }
         private void borrarTodo()
         {
@@ -78,6 +81,7 @@ namespace Compilador
             i = tabla.Rows.Add();//creamos una fila 
             tabla.Rows[i].Cells["num"].Value = i.ToString();
             tabla.Rows[i].Cells["op"].Value = "nom_"+nombre_funcion;
+           // int contador_expresion = 0;
             descripcion_funcion();
             i++;
             i = tabla.Rows.Add();//creamos una fila 
@@ -86,27 +90,89 @@ namespace Compilador
         }
         private void descripcion_funcion()
         {
-            i = tabla.Rows.Add();//creamos una fila 
+            i = tabla.Rows.Add();//creamos una fila
             tabla.Rows[i].Cells["num"].Value = i.ToString();
-            tabla.Rows[i].Cells["op"].Value = "pendiente";
-            tabla.Rows[i].Cells["argum1"].Value = "pendiente";
-            tabla.Rows[i].Cells["argum2"].Value = "pendiente";
-            tabla.Rows[i].Cells["result"].Value = "pendiente";
+            obtenerExpresionOperacion();
+            int contadorDeT = 1;
+            bool ponerEnArgum1 = false;
+            Tokens_operaciones.Reverse();
+                for (int j = 0; j < Tokens_operaciones.Count; j++) {
+                
+                string idToken = Tokens_operaciones.ElementAt(j).getIdToken();
+                if (idToken.Equals("Suma") || idToken.Equals("Resta") || idToken.Equals("Division") || idToken.Equals("Multiplicacion"))
+                {
+                    tabla.Rows[i].Cells["op"].Value = Tokens_operaciones.ElementAt(j).getLexema();
+                    contador_expresion++;
+                    //lista_operaciones.Add(ListaTokens.ElementAt(i).getLexema());
+                }
+                else if (idToken.Equals("Asignacion")) { 
+                    tabla.Rows[i].Cells["op"].Value = Tokens_operaciones.ElementAt(j).getLexema();
+                    contador_expresion++;
+                    tabla.Rows[i].Cells["argum1"].Value = "T"+(contadorDeT-1);
+                }
+                else if (idToken.Equals("Identificador"))
+                {
+                    tabla.Rows[i].Cells["result"].Value = Tokens_operaciones.ElementAt(j).getLexema();
+                    contador_expresion++;
+                }
+                else if (idToken.Equals("Digito"))
+                {
+                    if (ponerEnArgum1)
+                    {
+                        tabla.Rows[i].Cells["argum1"].Value = Tokens_operaciones.ElementAt(j).getLexema();
+                        contador_expresion++;
+                        tabla.Rows[i].Cells["result"].Value = "T" + contadorDeT;
+                        contadorDeT++;
+                        i++;
+                        i = tabla.Rows.Add();//creamos una fila
+                    }
+                    else
+                    {
+                        tabla.Rows[i].Cells["argum2"].Value = Tokens_operaciones.ElementAt(j).getLexema();
+                        contador_expresion++;
+                        ponerEnArgum1 = true;
+                    }
+
+                }
+                
+                
+            }
+        }
+        private void obtenerExpresionOperacion()
+        {
+            for(int i = 0; i < ListaTokens.Count; i++){
+                string idToken = ListaTokens.ElementAt(i).getIdToken();
+                
+                 if (idToken.Equals("Identificador") )
+                {
+                    Tokens_operaciones.Add(ListaTokens.ElementAt(i));
+                    lista_operaciones.Add(ListaTokens.ElementAt(i).getLexema());
+                }
+                else if (idToken.Equals("Asignacion"))
+                {
+                    Tokens_operaciones.Add(ListaTokens.ElementAt(i));
+                }
+                else if (idToken.Equals("Suma") || idToken.Equals("Resta") || idToken.Equals("Division") || idToken.Equals("Multiplicacion"))
+                {
+                    Tokens_operaciones.Add(ListaTokens.ElementAt(i));
+                }
+                else if (idToken.Equals("Digito"))
+                {
+                    Tokens_operaciones.Add(ListaTokens.ElementAt(i));
+                }
+            }
         }
         private void guardarNombreFunciones()
         {  
-           for (int i = 0; i < ListaTokens.Count - 1; i++)
+           for (int j = 0; j < ListaTokens.Count - 1; j++)
               {
-                if (ListaTokens.ElementAt(i).getIdToken().Equals("Identificador")
-                   && ListaTokens.ElementAt(i + 1).getIdToken().Equals("parentIzquierdo"))
+                if (ListaTokens.ElementAt(j).getIdToken().Equals("Identificador")
+                   && ListaTokens.ElementAt(j + 1).getIdToken().Equals("parentIzquierdo"))
                    {
                      
-                    nombres_funciones.Add(ListaTokens.ElementAt(i).getLexema());
-                    int linea = ListaTokens.ElementAt(i).getLinea();
-                    //string linea_codigo_operaciones = "aqui falta obtener la linea de codigo de las operaciones";
-                    //lista_operaciones.Add(linea_codigo_operaciones);
-                    System.Windows.Forms.MessageBox.Show("La linea de la operacion es "+(linea+1));
-
+                    nombres_funciones.Add(ListaTokens.ElementAt(j).getLexema());
+                    ListaTokens.RemoveAt(j);
+      
                 }
                                 
                 }
