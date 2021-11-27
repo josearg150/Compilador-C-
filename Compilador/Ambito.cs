@@ -6,6 +6,25 @@ using System.Threading.Tasks;
 
 namespace Compilador
 {
+    /// <summary>
+    ///     Clase Ámbito, la cual almacena el scope de cada entidad del código introducido por el usuario.
+    /// </summary>
+    /// 
+    /// <Para>
+    ///     Asignar a cada entidad del código introducido su scope correspondiente.
+    /// </Para>
+    /// 
+    /// <Supuestos>
+    /// </Supuestos>
+    /// 
+    /// <Autor>
+    ///     Jose angel rocha garcia 
+    ///     Jose luis carreon reyes
+    /// </Autor>
+    /// 
+    /// <FechaCreacion >
+    ///     27/11/2021
+    /// </FechaCreacion>
     class Ambito
     {
         private string IdAmbito;

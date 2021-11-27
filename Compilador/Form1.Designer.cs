@@ -49,6 +49,11 @@ namespace Compilador
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbpCuadruplos = new System.Windows.Forms.TabPage();
             this.dgvCuadruplos = new System.Windows.Forms.DataGridView();
+            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.op = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.argum1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.argum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.result = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpTriplos = new System.Windows.Forms.TabPage();
             this.dgvTriplos = new System.Windows.Forms.DataGridView();
             this.Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,11 +83,8 @@ namespace Compilador
             this.dgvCodigoTresD = new System.Windows.Forms.DataGridView();
             this.T = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Expresion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.op = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.argum1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.argum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.result = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tbpEnsamblador = new System.Windows.Forms.TabPage();
+            this.ensambladorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.grbContenedorCodigoFuente.SuspendLayout();
             this.grbLenguaje.SuspendLayout();
             this.mspMenu.SuspendLayout();
@@ -193,7 +195,8 @@ namespace Compilador
             this.tsmSemantico,
             this.tsmListaErrores,
             this.tsmCodigoTresD,
-            this.cuadrplosToolStripMenuItem});
+            this.cuadrplosToolStripMenuItem,
+            this.ensambladorToolStripMenuItem});
             this.ejecutarToolStripMenuItem.Name = "ejecutarToolStripMenuItem";
             this.ejecutarToolStripMenuItem.Size = new System.Drawing.Size(116, 25);
             this.ejecutarToolStripMenuItem.Text = "Herramientas";
@@ -291,6 +294,39 @@ namespace Compilador
             this.dgvCuadruplos.RowTemplate.ReadOnly = true;
             this.dgvCuadruplos.Size = new System.Drawing.Size(680, 545);
             this.dgvCuadruplos.TabIndex = 1;
+            // 
+            // num
+            // 
+            this.num.HeaderText = "#";
+            this.num.Name = "num";
+            this.num.ReadOnly = true;
+            this.num.Width = 60;
+            // 
+            // op
+            // 
+            this.op.HeaderText = "Operación";
+            this.op.Name = "op";
+            this.op.ReadOnly = true;
+            // 
+            // argum1
+            // 
+            this.argum1.HeaderText = "Argumento 1";
+            this.argum1.Name = "argum1";
+            this.argum1.ReadOnly = true;
+            this.argum1.Width = 150;
+            // 
+            // argum2
+            // 
+            this.argum2.HeaderText = "Argumento 2";
+            this.argum2.Name = "argum2";
+            this.argum2.ReadOnly = true;
+            this.argum2.Width = 150;
+            // 
+            // result
+            // 
+            this.result.HeaderText = "Resultado";
+            this.result.Name = "result";
+            this.result.ReadOnly = true;
             // 
             // tbpTriplos
             // 
@@ -514,6 +550,7 @@ namespace Compilador
             this.tbcInformacion.Controls.Add(this.tbpCod3Dir);
             this.tbcInformacion.Controls.Add(this.tbpTriplos);
             this.tbcInformacion.Controls.Add(this.tbpCuadruplos);
+            this.tbcInformacion.Controls.Add(this.tbpEnsamblador);
             this.tbcInformacion.Font = new System.Drawing.Font("Leelawadee UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbcInformacion.Location = new System.Drawing.Point(460, 50);
             this.tbcInformacion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -559,38 +596,24 @@ namespace Compilador
             this.Expresion.Name = "Expresion";
             this.Expresion.Width = 300;
             // 
-            // num
+            // tbpEnsamblador
             // 
-            this.num.HeaderText = "#";
-            this.num.Name = "num";
-            this.num.ReadOnly = true;
-            this.num.Width = 60;
+            this.tbpEnsamblador.Location = new System.Drawing.Point(4, 30);
+            this.tbpEnsamblador.Name = "tbpEnsamblador";
+            this.tbpEnsamblador.Padding = new System.Windows.Forms.Padding(3);
+            this.tbpEnsamblador.Size = new System.Drawing.Size(692, 560);
+            this.tbpEnsamblador.TabIndex = 8;
+            this.tbpEnsamblador.Text = "Ensamblador";
+            this.tbpEnsamblador.UseVisualStyleBackColor = true;
             // 
-            // op
+            // ensambladorToolStripMenuItem
             // 
-            this.op.HeaderText = "Operación";
-            this.op.Name = "op";
-            this.op.ReadOnly = true;
-            // 
-            // argum1
-            // 
-            this.argum1.HeaderText = "Argumento 1";
-            this.argum1.Name = "argum1";
-            this.argum1.ReadOnly = true;
-            this.argum1.Width = 150;
-            // 
-            // argum2
-            // 
-            this.argum2.HeaderText = "Argumento 2";
-            this.argum2.Name = "argum2";
-            this.argum2.ReadOnly = true;
-            this.argum2.Width = 150;
-            // 
-            // result
-            // 
-            this.result.HeaderText = "Resultado";
-            this.result.Name = "result";
-            this.result.ReadOnly = true;
+            this.ensambladorToolStripMenuItem.Name = "ensambladorToolStripMenuItem";
+            this.ensambladorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.E)));
+            this.ensambladorToolStripMenuItem.Size = new System.Drawing.Size(323, 26);
+            this.ensambladorToolStripMenuItem.Text = "Ensamblador";
+            this.ensambladorToolStripMenuItem.Click += new System.EventHandler(this.ensambladorToolStripMenuItem_Click);
             // 
             // Compilador
             // 
@@ -687,6 +710,8 @@ namespace Compilador
         private System.Windows.Forms.DataGridViewTextBoxColumn argum1;
         private System.Windows.Forms.DataGridViewTextBoxColumn argum2;
         private System.Windows.Forms.DataGridViewTextBoxColumn result;
+        private System.Windows.Forms.ToolStripMenuItem ensambladorToolStripMenuItem;
+        private System.Windows.Forms.TabPage tbpEnsamblador;
     }
 }
 

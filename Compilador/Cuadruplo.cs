@@ -8,6 +8,25 @@ using System.Threading.Tasks;
 
 namespace Compilador
 {
+    /// <summary>
+    ///     Clase Cuadruplo para generar los cuádruplos a partir del código de tres direcciones.
+    /// </summary>
+    /// 
+    /// <Para>
+    ///     Almacenar, organizar y mostrar los cuádruplos en su tabla correspondiente.
+    /// </Para>
+    /// 
+    /// <Supuestos>
+    /// </Supuestos>
+    /// 
+    /// <Autor>
+    ///     Jose angel rocha garcia 
+    ///     Jose luis carreon reyes
+    /// </Autor>
+    /// 
+    /// <FechaCreacion >
+    ///     27/11/2021
+    /// </FechaCreacion>
     class Cuadruplo
     {
         static private List<Token> ListaTokens;

@@ -172,7 +172,6 @@ namespace Compilador
                 System.Windows.Forms.MessageBox.Show("Error al abrir el archivo.");
             }
         }
-        #endregion
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -192,6 +191,7 @@ namespace Compilador
             ListaErrores.setCodigo(txtCodigoFuente);
             ListaErrores.mostrar();
         }
+        #endregion
 
         /// <summary>
         ///     Valida el input dado por el usuario.
@@ -318,6 +318,11 @@ namespace Compilador
         }
 
         // Postorden
+        /// <summary>
+        ///     Recorre el árbol dado en postorden.
+        /// </summary>
+        /// <param name="Nodo">El nodo raíz del árbol a recorrer.</param>
+        /// <returns>N/A</returns>
         private void RecorrerArbol(Nodo Nodo)
         {
             if (Nodo != null)
@@ -366,6 +371,11 @@ namespace Compilador
             }
         }
 
+        /// <summary>
+        ///     Invierte los nodos del árbol binario dado.
+        /// </summary>
+        /// <param name="Nodo">El nodo raíz del árbol a invertir.</param>
+        /// <returns>El nodo raíz del árbol ya invertido.</returns>
         private Nodo InvertirArbol(Nodo Nodo)
         {
             if (Nodo == null) return null;
@@ -378,6 +388,10 @@ namespace Compilador
             return Nodo;
         }
 
+        /// <summary>
+        ///     Genera los triplos correspondientes del código de tres direcciones previamente generado.
+        /// </summary>
+        /// <returns>N/A</returns>
         private void triplosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (txtCodigoFuente.Text.Equals(""))
@@ -451,6 +465,15 @@ namespace Compilador
                 
 
             }
-        }   
+        }
+
+        /// <summary>
+        ///     Genera el código ensamblador correspondiente a los cuádruplos previamente generados.
+        /// </summary>
+        /// <returns>N/A</returns>
+        private void ensambladorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
