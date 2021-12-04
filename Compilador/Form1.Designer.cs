@@ -45,6 +45,7 @@ namespace Compilador
             this.tsmListaErrores = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmCodigoTresD = new System.Windows.Forms.ToolStripMenuItem();
             this.cuadrplosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ensambladorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbpCuadruplos = new System.Windows.Forms.TabPage();
@@ -84,7 +85,7 @@ namespace Compilador
             this.T = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Expresion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpEnsamblador = new System.Windows.Forms.TabPage();
-            this.ensambladorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rtbEnsamblador = new System.Windows.Forms.RichTextBox();
             this.grbContenedorCodigoFuente.SuspendLayout();
             this.grbLenguaje.SuspendLayout();
             this.mspMenu.SuspendLayout();
@@ -101,6 +102,7 @@ namespace Compilador
             this.tbcInformacion.SuspendLayout();
             this.tbpCod3Dir.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodigoTresD)).BeginInit();
+            this.tbpEnsamblador.SuspendLayout();
             this.SuspendLayout();
             // 
             // grbContenedorCodigoFuente
@@ -249,6 +251,15 @@ namespace Compilador
             this.cuadrplosToolStripMenuItem.Size = new System.Drawing.Size(323, 26);
             this.cuadrplosToolStripMenuItem.Text = "Cuadruplos";
             this.cuadrplosToolStripMenuItem.Click += new System.EventHandler(this.cuadrplosToolStripMenuItem_Click);
+            // 
+            // ensambladorToolStripMenuItem
+            // 
+            this.ensambladorToolStripMenuItem.Name = "ensambladorToolStripMenuItem";
+            this.ensambladorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.E)));
+            this.ensambladorToolStripMenuItem.Size = new System.Drawing.Size(323, 26);
+            this.ensambladorToolStripMenuItem.Text = "Ensamblador";
+            this.ensambladorToolStripMenuItem.Click += new System.EventHandler(this.ensambladorToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
@@ -598,6 +609,7 @@ namespace Compilador
             // 
             // tbpEnsamblador
             // 
+            this.tbpEnsamblador.Controls.Add(this.rtbEnsamblador);
             this.tbpEnsamblador.Location = new System.Drawing.Point(4, 30);
             this.tbpEnsamblador.Name = "tbpEnsamblador";
             this.tbpEnsamblador.Padding = new System.Windows.Forms.Padding(3);
@@ -606,14 +618,14 @@ namespace Compilador
             this.tbpEnsamblador.Text = "Ensamblador";
             this.tbpEnsamblador.UseVisualStyleBackColor = true;
             // 
-            // ensambladorToolStripMenuItem
+            // rtbEnsamblador
             // 
-            this.ensambladorToolStripMenuItem.Name = "ensambladorToolStripMenuItem";
-            this.ensambladorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.E)));
-            this.ensambladorToolStripMenuItem.Size = new System.Drawing.Size(323, 26);
-            this.ensambladorToolStripMenuItem.Text = "Ensamblador";
-            this.ensambladorToolStripMenuItem.Click += new System.EventHandler(this.ensambladorToolStripMenuItem_Click);
+            this.rtbEnsamblador.Location = new System.Drawing.Point(6, 6);
+            this.rtbEnsamblador.Name = "rtbEnsamblador";
+            this.rtbEnsamblador.ReadOnly = true;
+            this.rtbEnsamblador.Size = new System.Drawing.Size(680, 545);
+            this.rtbEnsamblador.TabIndex = 0;
+            this.rtbEnsamblador.Text = "";
             // 
             // Compilador
             // 
@@ -650,6 +662,7 @@ namespace Compilador
             this.tbcInformacion.ResumeLayout(false);
             this.tbpCod3Dir.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCodigoTresD)).EndInit();
+            this.tbpEnsamblador.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -712,6 +725,7 @@ namespace Compilador
         private System.Windows.Forms.DataGridViewTextBoxColumn result;
         private System.Windows.Forms.ToolStripMenuItem ensambladorToolStripMenuItem;
         private System.Windows.Forms.TabPage tbpEnsamblador;
+        private System.Windows.Forms.RichTextBox rtbEnsamblador;
     }
 }
 

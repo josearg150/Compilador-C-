@@ -460,10 +460,10 @@ namespace Compilador
             {
                 //Aqui va lo que va hacer el codigo 
                 tbcInformacion.SelectTab(tbpCuadruplos);
-                Cuadruplo cuadr = new Cuadruplo(AnalizadorLexico.getListaTokens(),dgvCuadruplos);
+                dgvCuadruplos.Rows.Clear();
+                dgvCuadruplos.Refresh();
+                Cuadruplo cuadr = new Cuadruplo(AnalizadorLexico.getListaTokens(), dgvCuadruplos);
                 cuadr.realizarCuadruplo();
-                
-
             }
         }
 
@@ -473,7 +473,63 @@ namespace Compilador
         /// <returns>N/A</returns>
         private void ensambladorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            tbcInformacion.SelectTab(tbpEnsamblador);
+            rtbEnsamblador.Text = "";
+            String NombreFuncion = "";
+            String NombreVariable = "";
+            String MnemOperacion = "";
+            String Ensamblaje = "";
+            String OperandoUno = "";
+            String OperandoDos = "";
 
+            String OperacionAritmetica = "";
+            List<Token> ListaDeTokens = AnalizadorLexico.getListaTokens();
+            for (int i = 0; i < ListaDeTokens.Count; i++)
+            {
+                Token token_actual = ListaDeTokens.ElementAt(i);
+                if (token_actual.getLexema().Equals("void"))
+                {
+                    if (ListaDeTokens.ElementAt(i + 2).getIdToken().Equals("parentIzquierdo"))
+                    {
+                        NombreFuncion = ListaDeTokens.ElementAt(i + 1).getLexema();
+                        OperacionAritmetica = ListaDeTokens.ElementAt(i + 9).getLexema();
+                        OperandoUno = ListaDeTokens.ElementAt(i + 8).getLexema();
+                        OperandoDos = ListaDeTokens.ElementAt(i + 10).getLexema();
+                        if (OperacionAritmetica.Equals("+"))
+                        {
+                            NombreVariable = "suma";
+                            MnemOperacion = "ADD";
+                        } else if (OperacionAritmetica.Equals("-"))
+                        {
+                            NombreVariable = "resta";
+                            MnemOperacion = "SUB";
+                        } else if (OperacionAritmetica.Equals("*"))
+                        {
+                            NombreVariable = "multiplicacion";
+                            MnemOperacion = "MUL";
+                        } else if (OperacionAritmetica.Equals("/"))
+                        {
+                            NombreVariable = "division";
+                            MnemOperacion = "DIV";
+                        }
+                    }
+                }
+            }
+            Ensamblaje = "lbl" + NombreFuncion + "Llamada:\n" +
+                         "CALL lbl" + NombreFuncion + "\n" +
+                         "JMP lbl" + NombreFuncion + "Salida\n" +
+                         "\n" +
+                         "lbl" + NombreFuncion + ":\n" +
+                         NombreVariable + " db 0" + "\n" +
+                         "PUSH AX\n" +
+                         "MOV AX, " + OperandoUno + "\n" +
+                         MnemOperacion + " AX, " + OperandoDos + "\n" +
+                         "MOV " + "[" + NombreVariable + "]" + ", AX\n" +
+                         "POP AX\n" +
+                         "RET\n" +
+                         "\n" +
+                         "lbl" + NombreFuncion + "Salida:\n";
+            rtbEnsamblador.Text = Ensamblaje;
         }
     }
 }

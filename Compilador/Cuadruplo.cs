@@ -52,7 +52,6 @@ namespace Compilador
         }
         public void realizarCuadruplo()
         {
-            borrarTodo();
             //Proceso para primer renglon Proc
             guardarNombreFunciones();
             i = 0; //contador para renglones
