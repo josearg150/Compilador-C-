@@ -512,6 +512,7 @@ namespace Compilador
                             NombreVariable = "division";
                             MnemOperacion = "DIV";
                         }
+                        break;
                     }
                 }
             }
