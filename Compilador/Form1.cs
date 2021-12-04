@@ -522,9 +522,15 @@ namespace Compilador
                          "lbl" + NombreFuncion + ":\n" +
                          NombreVariable + " db 0" + "\n" +
                          "PUSH AX\n" +
-                         "MOV AX, " + OperandoUno + "\n" +
-                         MnemOperacion + " AX, " + OperandoDos + "\n" +
+                         "PUSH BX\n" +
+                         "PUSH CX\n" +
+                         "MOV BX, " + OperandoUno + "\n" +
+                         "MOV CX, " + OperandoDos + "\n" +
+                         "MOV AX, BX\n" +
+                         MnemOperacion + " AX, CX\n" +
                          "MOV " + "[" + NombreVariable + "]" + ", AX\n" +
+                         "POP CX\n" +
+                         "POP BX\n" +
                          "POP AX\n" +
                          "RET\n" +
                          "\n" +
