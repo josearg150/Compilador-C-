@@ -1,0 +1,11 @@
+package paquete;
+
+class Clase {
+	public void funcion() {
+		int suma = 1 + 2;
+	}
+
+	public void main() {
+		funcion();
+	}
+}
