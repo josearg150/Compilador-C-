@@ -62,39 +62,91 @@ namespace Compilador
         //Metodos
         //***************************************
         #region Metodos
-        //metodos get de los atributos
+        /// <summary>
+        ///     get Indice
+        /// </summary>
+        /// <param></param>
+        /// <returns>El campo privado Indice</returns>
         public int getIndice()
         {
             return Indice;
         }
+
+        /// <summary>
+        ///     get Lexema
+        /// </summary>
+        /// <param></param>
+        /// <returns>El campo privado Lexema</returns>
         public String getLexema()
         {
             return Lexema;
         }
+
+        /// <summary>
+        ///     get Indice
+        /// </summary>
+        /// <param></param>
+        /// <returns>El campo privado Indice</returns>
         public String getIdToken()
         {
             return TipoToken;
         }
+
+        /// <summary>
+        ///     get TipoDato
+        /// </summary>
+        /// <param></param>
+        /// <returns>El campo privado TipoDato</returns>
         public String getTipoDato()
         {
             return tipoDato;
         }
+
+        /// <summary>
+        ///     get TipoDato
+        /// </summary>
+        /// <param>El valor del campo privado TipoDato</param>
+        /// <returns></returns>
         public void setTipoDato(String _tipoDato)
         {
             tipoDato = _tipoDato;
         }
+
+        /// <summary>
+        ///     get Ambito
+        /// </summary>
+        /// <param></param>
+        /// <returns>El campo privado Ambito</returns>
         public String getAmbito()
         {
             return Ambito;
         }
+
+        /// <summary>
+        ///     set Ambito
+        /// </summary>
+        /// <param>El valor del campo privado Ambito</param>
+        /// <returns></returns>
         public void setAmbito(String _ambito)
         {
             Ambito = _ambito;
         }
+
+        /// <summary>
+        ///     get Linea
+        /// </summary>
+        /// <param></param>
+        /// <returns>El campo privado Linea</returns>
         public int getLinea()
         {
             return Linea;
         }
+
+        /// <summary>
+        ///     get Columna
+        /// </summary>
+        /// <param></param>
+        /// <returns>El campo privado Columna</returns>
         public int getColumna()
         {
             return Columna;

@@ -17,6 +17,7 @@ namespace Compilador
     /// </Para>
     /// 
     /// <Supuestos>
+    ///     La clase se instanciará desde el form de la aplicación.
     /// </Supuestos>
     /// 
     /// <Autor>
@@ -67,14 +68,24 @@ namespace Compilador
         //Metodos
         //***************************************
         #region Metodos
-        //metodo para agregar tokens a la lista 
+        //metodo para agregar tokens a la lista
+        /// <summary>
+        ///     Agrega el token dado a la lista de tokens principal
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         public void agregarToken(String lexema, String idToken, int linea, int columna, int indice)
         {
             Token nuevo = new Token(lexema, idToken, linea, columna, indice);
             ListaTokens.Add(nuevo);
         }
-        
+
         //Metodo para saber si es reservada o no
+        /// <summary>
+        ///     Determina si el texto pertenece a una palabra reservada
+        /// </summary>
+        /// <param></param>
+        /// <returns>True si lo es, False si no</returns>
         public Boolean IdentificarReservada(String palabra)
         {
             Boolean encontrado = false;
@@ -91,6 +102,11 @@ namespace Compilador
         }
 
         //metodo para analizar el codigo fuente
+        /// <summary>
+        ///     Analisis lexico principal
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         public void analizar(string _codigoFuente)
         {
             ListaTokens.Clear();
@@ -394,6 +410,11 @@ namespace Compilador
         }
 
         //Metodo para mostrar en la tabla
+        /// <summary>
+        ///     Muestra los tokens del arreglo principal en la tabla del form
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         public void mostrar()
         {
             //Agregar tipos de datos si es identificador
@@ -426,18 +447,33 @@ namespace Compilador
                 
         }
 
-        //metodo para obtener los tokens identificados 
+        //metodo para obtener los tokens identificados
+        /// <summary>
+        ///     get Tokens
+        /// </summary>
+        /// <param></param>
+        /// <returns>El campo privado Tokens</returns>
         public ArrayList getTokens()
         {
             return Tokens;
         }
 
-        //metodo para obtener la lista de tokens 
+        //metodo para obtener la lista de tokens
+        /// <summary>
+        ///     get ListaTokens
+        /// </summary>
+        /// <param></param>
+        /// <returns>El campo privado ListaTokens</returns>
         public List<Token> getListaTokens()
         {
             return ListaTokens;
         }
 
+        /// <summary>
+        ///     Analisis semantico principal
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         public void agregarTiposDeDato()
         {
             int elemento_anterior;
@@ -454,6 +490,11 @@ namespace Compilador
             }
         }
 
+        /// <summary>
+        ///     Determina el nivel del scope del token
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         public void extraerAmbitos()
         {
             List<Ambito> Ambitos = new List<Ambito>();
@@ -560,13 +601,16 @@ namespace Compilador
             }
         }
 
-        //Metodo para guardar las palabras reservadas del txt 
+        /// <summary>
+        ///     Metodo para guardar las palabras reservadas del txt 
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         public void guardarReservadas(string contenido)
         {
             string[] Lineas = contenido.Split(new[] { "\r\n", "\r", "\n" },StringSplitOptions.None);
             Tokens = new ArrayList(Lineas);
         }
-
         #endregion
     }
 }

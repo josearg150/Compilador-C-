@@ -30,6 +30,7 @@
         public Nodo Izquierda { set; get; }
         public Nodo Derecha { set; get; }
         #endregion
+
         //***************************************
         //Constructores   
         //***************************************

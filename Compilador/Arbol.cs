@@ -6,7 +6,9 @@
     /// </summary>
     /// 
     /// <Para>
-    ///  Esta clase unicamente sirve para crear el arbol y sus nodos 
+    ///     Esta clase unicamente sirve para crear el arbol y sus nodos.
+    ///     Esta estructura de datos se utiliza internamente para manejar el
+    ///     árbol sintáctico entre otras funcionalidades.
     /// </Para>
     /// 
     /// <Supuestos>

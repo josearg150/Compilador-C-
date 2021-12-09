@@ -39,6 +39,7 @@ namespace Compilador
         private int linea;
         private int columna;
         #endregion
+
         //***************************************
         //Constructores   
         //***************************************
@@ -53,35 +54,71 @@ namespace Compilador
             this.columna = columna;
         }
         #endregion
+
         //***************************************
         //Metodos
         //***************************************
         #region Metodos
+        /// <summary>
+        ///     get Codigo
+        /// </summary>
+        /// <param></param>
+        /// <returns>Campo privado: codigo</returns>
         public String getCodigo()
         {
             return this.codigo;
         }
+
+        /// <summary>
+        ///     get Codigo
+        /// </summary>
+        /// <param></param>
+        /// <returns>Campo privado: codigo</returns>
         public String getTipo()
         {
             return this.tipo;
         }
+
+        /// <summary>
+        ///     get Lexema
+        /// </summary>
+        /// <param></param>
+        /// <returns>Campo privado: Lexema</returns>
         public String getLexema()
         {
             return this.lexema;
         }
+
+        /// <summary>
+        ///     get IdToken
+        /// </summary>
+        /// <param></param>
+        /// <returns>Campo privado: IdToken</returns>
         public String getIdToken()
         {
             return this.idToken;
         }
+
+        /// <summary>
+        ///     get Linea
+        /// </summary>
+        /// <param></param>
+        /// <returns>Campo privado: Linea</returns>
         public int getLinea()
         {
             return this.linea;
         }
+
+        /// <summary>
+        ///     get Columna
+        /// </summary>
+        /// <param></param>
+        /// <returns>Campo privado: Columna</returns>
         public int getColumna()
         {
             return this.columna;
         }
-        
+
         #endregion
     }
 }

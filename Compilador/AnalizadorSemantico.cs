@@ -16,6 +16,7 @@ namespace Compilador
     /// </Para>
     /// 
     /// <Supuestos>
+    ///     La clase se instanciará desde el form de la aplicación.
     /// </Supuestos>
     /// 
     /// <Autor>
@@ -38,6 +39,7 @@ namespace Compilador
         Stack<String> PilaOperadores = new Stack<String>();
         IdentificadorDeErrores ListaErrores;
         #endregion
+
         //***************************************
         //Constructores   
         //***************************************
@@ -49,10 +51,16 @@ namespace Compilador
             ListaErrores = Lista;
         }
         #endregion
+
         //***************************************
         //Metodos
         //***************************************
         #region Metodos
+        /// <summary>
+        ///     Analisis semantico principal
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         public void analizar()
         { 
             //metemos los parentesis, corchetes o llaves en una pila 
@@ -126,6 +134,11 @@ namespace Compilador
             }
         }
 
+        /// <summary>
+        ///     Categorizar los tokens según su operador
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         private void guardarOperadores_OperandosEnPila() {
             for (int i = 0; i < ListaTokens.Count; i++)
             {
@@ -146,6 +159,12 @@ namespace Compilador
             Stack<String> pilaOperandosInvertida = invertirPila(PilaOperandos);
             realizarOperaciones(pilaOperadoresInvertida, pilaOperandosInvertida);
         }
+
+        /// <summary>
+        ///     Operaciones en la pila semantica
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         private void realizarOperaciones(Stack<String> pilaOperadores, Stack<String> pilaOperandos)
         {
             Stack<String> pilaOperaciones = new Stack<String>();
@@ -235,6 +254,11 @@ namespace Compilador
             }
         }
 
+        /// <summary>
+        ///     Invierte la pila semantica
+        /// </summary>
+        /// <param></param>
+        /// <returns>La pila invertida</returns>
         private Stack<String> invertirPila(Stack<String> pilaR)
         {
             Stack<String> PilaFinal = new Stack<string>();

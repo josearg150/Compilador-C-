@@ -17,6 +17,7 @@ namespace Compilador
     /// </Para>
     /// 
     /// <Supuestos>
+    ///                 
     /// </Supuestos>
     /// 
     /// <Autor>
@@ -29,6 +30,10 @@ namespace Compilador
     /// </FechaCreacion>
     class Cuadruplo
     {
+        //***************************************
+        //Variables locales                     
+        //***************************************
+        #region Variables locales
         static private List<Token> ListaTokens;
         static private List<Token> Tokens_operaciones;
         ArrayList nombres_funciones;
@@ -37,6 +42,12 @@ namespace Compilador
         int i;
         int num_proceso;
         int contador_expresion = 0;
+        #endregion
+
+        //***************************************
+        //Constructores   
+        //***************************************
+        #region Constructores
         public Cuadruplo(List<Token> Lista, System.Windows.Forms.DataGridView tabla_)
         {
             ListaTokens = Lista;
@@ -45,11 +56,28 @@ namespace Compilador
             lista_operaciones = new ArrayList();
             Tokens_operaciones = new List<Token>();
         }
+        #endregion Constructores
+
+        //***************************************
+        //Metodos
+        //***************************************
+        #region Metodos
+        /// <summary>
+        ///     Limpia la tabla principal de los cuadruplos.
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         private void borrarTodo()
         {
             tabla.Rows.Clear();
             nombres_funciones.Clear();
         }
+
+        /// <summary>
+        ///     Calcula el cuadruplo correspondiente para mostrarlo en la i fila.
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         public void realizarCuadruplo()
         {
             //Proceso para primer renglon Proc
@@ -77,6 +105,11 @@ namespace Compilador
             }
         }
 
+        /// <summary>
+        ///     Asignar nombres a las funciones.
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         private void poner_nombres_funciones(string nombre_funcion)
         {
             i = tabla.Rows.Add();//creamos una fila 
@@ -94,6 +127,12 @@ namespace Compilador
             tabla.Rows[i].Cells["num"].Value = i.ToString();
             tabla.Rows[i].Cells["op"].Value = "fin_llamada_proc" + num_proceso;
         }
+
+        /// <summary>
+        ///     Crear la parte inferior de la tabla de cuadruplos.
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         private void poner_parteBaja(string nombre_funcion)
         {
             i = tabla.Rows.Add();//creamos una fila 
@@ -106,6 +145,12 @@ namespace Compilador
             tabla.Rows[i].Cells["num"].Value = i.ToString();
             tabla.Rows[i].Cells["result"].Value = "fin_llamada_proc" + num_proceso;
         }
+
+        /// <summary>
+        ///     Asignar descripciones a las funciones.
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         private void descripcion_funcion()
         {
             i = tabla.Rows.Add();//creamos una fila
@@ -156,6 +201,12 @@ namespace Compilador
                 
             }
         }
+
+        /// <summary>
+        ///     Devuelve el token según si identificador.
+        /// </summary>
+        /// <param></param>
+        /// <returns>token</returns>
         private void obtenerExpresionOperacion()
         {
             for(int i = 0; i < ListaTokens.Count; i++){
@@ -180,6 +231,12 @@ namespace Compilador
                 }
             }
         }
+
+        /// <summary>
+        ///     Función no pura; modifica el campp privado ListaTokens según los identificadors de los tokens que se contengan en ese arreglo.
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         private void guardarNombreFunciones()
         {  
            for (int j = 0; j < ListaTokens.Count - 1; j++)
@@ -190,11 +247,10 @@ namespace Compilador
                      
                     nombres_funciones.Add(ListaTokens.ElementAt(j).getLexema());
                     ListaTokens.RemoveAt(j);
-      
-                }
+                   }
                                 
-                }
-              
+              }
         }
+        #endregion Metodos
     }
 }

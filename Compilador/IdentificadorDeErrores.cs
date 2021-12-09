@@ -36,6 +36,7 @@ namespace Compilador
         System.Windows.Forms.RichTextBox codigo;
 
         #endregion
+
         //***************************************
         //Constructores   
         //***************************************
@@ -49,19 +50,37 @@ namespace Compilador
         }
 
         #endregion
+
         //***************************************
         //Metodos
         //***************************************
         #region Metodos
+        /// <summary>
+        ///     get ListaDeErrores
+        /// </summary>
+        /// <param></param>
+        /// <returns>Campo privado: ListaDeErrores</returns>
         public List<Error> getListaDeErrores()
         {
             return ListaErrores;
         }
+
+        /// <summary>
+        ///     Añade los errores al arreglo principal por token.
+        /// </summary>
+        /// <param>Datos del token: String codigo,String tipo,String lexema, String idToken, int linea, int columna</param>
+        /// <returns></returns>
         public void agregarErrores(String codigo,String tipo,String lexema, String idToken, int linea, int columna)
         {
             Error errtok = new Error(codigo,tipo,lexema, idToken, linea, columna);
             ListaErrores.Add(errtok);
         }
+
+        /// <summary>
+        ///     Muestra los errores en la tabla del form.
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         public void mostrar()
         {
             for (int i = 0; i < ListaErrores.Count; i++)
@@ -77,12 +96,24 @@ namespace Compilador
 
             }
         }
+
+        /// <summary>
+        ///     set Codigo
+        /// </summary>
+        /// <param>Texto del TextBox del form</param>
+        /// <returns></returns>
         public void setCodigo(System.Windows.Forms.RichTextBox _codigo)
         {
             codigo.Text = _codigo.Text;
             AnalizarLineas();
         }
         //Revisar si las lineas terminan con ;
+
+        /// <summary>
+        ///     Análisis de errores principal.
+        /// </summary>
+        /// <param></param>
+        /// <returns>Campo privado: codigo</returns>
         private void AnalizarLineas()
         {
 
@@ -102,6 +133,12 @@ namespace Compilador
                 
             }
         }
+
+        /// <summary>
+        ///     Análisis para la validación de operaciones con tipos de dato correctos.
+        /// </summary>
+        /// <param>Lineas del codigo a comprobar</param>
+        /// <returns></returns>
         private void analizarTiposDeDato(String linea, int numLinea)
         {
             ///  0  1 2 3
@@ -119,7 +156,6 @@ namespace Compilador
 
             }
         }
-
         #endregion
     }
 }

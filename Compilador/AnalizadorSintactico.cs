@@ -19,6 +19,7 @@ namespace Compilador
     /// </Para>
     /// 
     /// <Supuestos>
+    ///     La clase se instanciará desde el form de la aplicación.
     /// </Supuestos>
     /// 
     /// <Autor>
@@ -63,6 +64,11 @@ namespace Compilador
         //Metodos
         //***************************************
         #region Metodos
+        /// <summary>
+        ///     Análisis sintáctico principal.
+        /// </summary>
+        /// <param>La expresión a evaluar.</param>
+        /// <returns></returns>
         public void analizar(String Expresion)
         {
             if (!OperadoresShuntingInicializados)         // Se inicializan los operadores permitidos con su precedencia
@@ -76,7 +82,11 @@ namespace Compilador
             ExpresionRPNArreglo.RemoveAt(ExpresionRPNArreglo.Count - 1);
         }
 
-        //metodo para identificar palabras reservadas 
+        /// <summary>
+        ///     Metodo para identificar palabras reservadas 
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         public Boolean IdentificarReservada(String palabra)
         {
             for (int i = 0; i < tokens.Count; ++i)
@@ -89,7 +99,11 @@ namespace Compilador
             return false;
         }
 
-        //metodo para quitar palabras reservadas 
+        /// <summary>
+        ///     Metodo para quitar palabras reservadas
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         public void quitarReservadas()
         {
             for (int i = 0; i < ExpresionRPNArreglo.Count; i++)
@@ -102,7 +116,11 @@ namespace Compilador
             }
         }
 
-        // metodo para quitar delimitadores
+        /// <summary>
+        ///     Metodo para quitar delimitadores
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         public void quitarDelims()
         {
             for (int i = 0; i < ExpresionRPNArreglo.Count; i++)
@@ -114,6 +132,11 @@ namespace Compilador
             }
         }
 
+        /// <summary>
+        ///     Crea el form para mostrar el árbol binario.
+        /// </summary>
+        /// <param></param>
+        /// <returns></returns>
         public System.Windows.Forms.Form crearFormulario()
         {
             //Se llama al metodo para eliminar las palabras reservadas
