@@ -473,6 +473,7 @@ namespace Compilador
         /// <returns>N/A</returns>
         private void ensambladorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            AnalizadorLexico.analizar(txtCodigoFuente.Text);
             tbcInformacion.SelectTab(tbpEnsamblador);
             rtbEnsamblador.Text = "";
             String NombreFuncion = "";
