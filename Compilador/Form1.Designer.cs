@@ -55,12 +55,6 @@ namespace Compilador
             this.argum1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.argum2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.result = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tbpTriplos = new System.Windows.Forms.TabPage();
-            this.dgvTriplos = new System.Windows.Forms.DataGridView();
-            this.Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Operacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Arg1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Arg2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbpErrores = new System.Windows.Forms.TabPage();
             this.dgvErrores = new System.Windows.Forms.DataGridView();
             this.ColCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,8 +85,6 @@ namespace Compilador
             this.mspMenu.SuspendLayout();
             this.tbpCuadruplos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuadruplos)).BeginInit();
-            this.tbpTriplos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTriplos)).BeginInit();
             this.tbpErrores.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvErrores)).BeginInit();
             this.tbpSemantico.SuspendLayout();
@@ -339,62 +331,6 @@ namespace Compilador
             this.result.Name = "result";
             this.result.ReadOnly = true;
             // 
-            // tbpTriplos
-            // 
-            this.tbpTriplos.Controls.Add(this.dgvTriplos);
-            this.tbpTriplos.Location = new System.Drawing.Point(4, 30);
-            this.tbpTriplos.Name = "tbpTriplos";
-            this.tbpTriplos.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpTriplos.Size = new System.Drawing.Size(692, 560);
-            this.tbpTriplos.TabIndex = 5;
-            this.tbpTriplos.Text = "Triplos";
-            this.tbpTriplos.UseVisualStyleBackColor = true;
-            // 
-            // dgvTriplos
-            // 
-            this.dgvTriplos.AllowUserToAddRows = false;
-            this.dgvTriplos.AllowUserToDeleteRows = false;
-            this.dgvTriplos.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.dgvTriplos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTriplos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Numero,
-            this.Operacion,
-            this.Arg1,
-            this.Arg2});
-            this.dgvTriplos.Location = new System.Drawing.Point(6, 6);
-            this.dgvTriplos.Name = "dgvTriplos";
-            this.dgvTriplos.ReadOnly = true;
-            this.dgvTriplos.RowTemplate.ReadOnly = true;
-            this.dgvTriplos.Size = new System.Drawing.Size(680, 545);
-            this.dgvTriplos.TabIndex = 0;
-            // 
-            // Numero
-            // 
-            this.Numero.HeaderText = "#";
-            this.Numero.Name = "Numero";
-            this.Numero.ReadOnly = true;
-            this.Numero.Width = 60;
-            // 
-            // Operacion
-            // 
-            this.Operacion.HeaderText = "Operación";
-            this.Operacion.Name = "Operacion";
-            this.Operacion.ReadOnly = true;
-            // 
-            // Arg1
-            // 
-            this.Arg1.HeaderText = "Argumento 1";
-            this.Arg1.Name = "Arg1";
-            this.Arg1.ReadOnly = true;
-            this.Arg1.Width = 150;
-            // 
-            // Arg2
-            // 
-            this.Arg2.HeaderText = "Argumento 2";
-            this.Arg2.Name = "Arg2";
-            this.Arg2.ReadOnly = true;
-            this.Arg2.Width = 150;
-            // 
             // tbpErrores
             // 
             this.tbpErrores.Controls.Add(this.dgvErrores);
@@ -559,7 +495,6 @@ namespace Compilador
             this.tbcInformacion.Controls.Add(this.tbpSemantico);
             this.tbcInformacion.Controls.Add(this.tbpErrores);
             this.tbcInformacion.Controls.Add(this.tbpCod3Dir);
-            this.tbcInformacion.Controls.Add(this.tbpTriplos);
             this.tbcInformacion.Controls.Add(this.tbpCuadruplos);
             this.tbcInformacion.Controls.Add(this.tbpEnsamblador);
             this.tbcInformacion.Font = new System.Drawing.Font("Leelawadee UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -651,8 +586,6 @@ namespace Compilador
             this.mspMenu.PerformLayout();
             this.tbpCuadruplos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuadruplos)).EndInit();
-            this.tbpTriplos.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTriplos)).EndInit();
             this.tbpErrores.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvErrores)).EndInit();
             this.tbpSemantico.ResumeLayout(false);
@@ -687,12 +620,6 @@ namespace Compilador
         private System.Windows.Forms.ToolStripMenuItem tsmListaErrores;
         private System.Windows.Forms.TabPage tbpCuadruplos;
         private System.Windows.Forms.DataGridView dgvCuadruplos;
-        private System.Windows.Forms.TabPage tbpTriplos;
-        private System.Windows.Forms.DataGridView dgvTriplos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Numero;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Operacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Arg1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Arg2;
         private System.Windows.Forms.TabPage tbpErrores;
         private System.Windows.Forms.DataGridView dgvErrores;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCodigo;
