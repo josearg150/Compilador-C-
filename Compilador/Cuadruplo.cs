@@ -80,6 +80,7 @@ namespace Compilador
         /// <returns></returns>
         public void realizarCuadruplo()
         {
+            borrarTodo();
             //Proceso para primer renglon Proc
             guardarNombreFunciones();
             i = 0; //contador para renglones
@@ -239,6 +240,7 @@ namespace Compilador
         /// <returns></returns>
         private void guardarNombreFunciones()
         {  
+           //Encontrar nombres de funcion
            for (int j = 0; j < ListaTokens.Count - 1; j++)
               {
                 if (ListaTokens.ElementAt(j).getIdToken().Equals("Identificador")
@@ -250,6 +252,22 @@ namespace Compilador
                    }
                                 
               }
+           //Eliminar main y nombres funciones repetidas
+            for (int j = 0; j < nombres_funciones.Count; j++)
+            {
+                if (nombres_funciones[j].ToString().Equals("main"))
+                {
+                    nombres_funciones.RemoveAt(j);
+                }
+            }
+            for (int j = 1; j < nombres_funciones.Count; j++)
+            {
+                string duplicado = nombres_funciones[0].ToString();
+                if (duplicado.Equals(nombres_funciones[j].ToString()))
+                {
+                    nombres_funciones.RemoveAt(j);
+                }
+            }
         }
         #endregion Metodos
     }

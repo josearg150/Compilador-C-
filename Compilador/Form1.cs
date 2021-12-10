@@ -449,6 +449,7 @@ namespace Compilador
 
         private void cuadrplosToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            AnalizadorLexico.analizar(txtCodigoFuente.Text);
             if (txtCodigoFuente.Text.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show("El input no puede estar vacío.");

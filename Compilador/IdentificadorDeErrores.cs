@@ -83,6 +83,7 @@ namespace Compilador
         /// <returns></returns>
         public void mostrar()
         {
+            tabla_errores.Rows.Clear();
             for (int i = 0; i < ListaErrores.Count; i++)
             {
                 //Asignamos el token de la lista a un token auxiliar 
@@ -116,19 +117,20 @@ namespace Compilador
         /// <returns>Campo privado: codigo</returns>
         private void AnalizarLineas()
         {
-
+            ListaErrores.Clear();
             for(int i = 0; i < codigo.Lines.Length; i++)
             {
                 analizarTiposDeDato(codigo.Lines[i], i);
                 //Aperturas de llaves, parentesis, corchetes ,no son errores
-                if (codigo.Lines[i].EndsWith("{") || codigo.Lines[i].EndsWith("(") || codigo.Lines[i].EndsWith("["))
+                if (codigo.Lines[i].EndsWith("{") || codigo.Lines[i].EndsWith("(") || codigo.Lines[i].EndsWith("[")
+                    || codigo.Lines[i].EndsWith("}") || codigo.Lines[i].EndsWith(")"))
                 {
                     continue;
                 }
                 //La linea no termina en ;
                 else if (!(codigo.Lines[i].EndsWith(";")))
-                {
-                    agregarErrores("04", "Semantico", codigo.Lines[i].Last().ToString(), "Se esperaba ;", i+1, 0);
+                {              
+                    //agregarErrores("04", "Semantico", caracter_final, "Se esperaba ;", i+1, 0);
                 }
                 
             }
