@@ -175,6 +175,7 @@ namespace Compilador
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            AnalizadorLexico.analizar(txtCodigoFuente.Text);
             tbcInformacion.SelectTab(tbpSemantico);
             AnalizadorSemantico = new AnalizadorSemantico(AnalizadorLexico.getListaTokens(), dvgErrores, ListaErrores);
             AnalizadorSemantico.analizar();

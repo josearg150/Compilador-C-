@@ -62,75 +62,98 @@ namespace Compilador
         /// <param></param>
         /// <returns></returns>
         public void analizar()
-        { 
+        {
+            tabla.Rows.Clear();
             //metemos los parentesis, corchetes o llaves en una pila 
-            Stack<Token> tokens = new Stack<Token>();
+            Stack<Token> llaves = new Stack<Token>();
+            Stack<Token> parentesis = new Stack<Token>();
+            Stack<Token> corchetes = new Stack<Token>();
+            //Metemos las aperturas a su pila correspondiente
             for (int i = 0; i < ListaTokens.Count; i++)
             {
                 Token token = (ListaTokens.ElementAt(i));
-                if (token.getIdToken().Equals("llaveIzquierda")
-                    || token.getIdToken().Equals("parentIzquierdo")
-                    || token.getIdToken().Equals("corcheteIzquierdo"))
-                {
-                    tokens.Push(token);
+                if (token.getIdToken().Equals("llaveIzquierda")){
+                    llaves.Push(token);
                 }
+                else if(token.getIdToken().Equals("parentIzquierdo"))
+                {
+                    parentesis.Push(token);
+                }
+                else if (token.getIdToken().Equals("corcheteIzquierdo"))
+                {
+                    corchetes.Push(token);
+                 }
             }
-          
+            //Analizamos los cierres y sacamos elementos de sus respectivas pilas
             for (int i = 0; i < ListaTokens.Count; i++)
-            {   if(tokens.Count == 0)
+            {              
+                if(ListaTokens.ElementAt(i).getIdToken().Equals("llaveDerecha"))
                 {
-                    break;
+                    if(llaves.Count == 0)
+                    {
+                        continue;
+                    }
+                    llaves.Pop();
                 }
-                Token token = tokens.Peek();
-                if (token.getIdToken().Equals("llaveIzquierda") && ListaTokens.ElementAt(i).getIdToken().Equals("llaveDerecha"))
+                else if (ListaTokens.ElementAt(i).getIdToken().Equals("parentDerecho"))
                 {
-                    tokens.Pop();
+                    if (parentesis.Count == 0)
+                    {
+                        continue;
+                    }
+                    parentesis.Pop();
                 }
-                else if (token.getIdToken().Equals("parentIzquierdo") && ListaTokens.ElementAt(i).getIdToken().Equals("parentDerecho"))
+                else if (ListaTokens.ElementAt(i).getIdToken().Equals("corcheteDerecho"))
                 {
-                    
-                    tokens.Pop();
-                }
-                else if(token.getIdToken().Equals("corcheteIzquierdo") && ListaTokens.ElementAt(i).getIdToken().Equals("corcheteDerecho"))
-                {
-                    tokens.Pop();
+                    if (corchetes.Count == 0)
+                    {
+                        continue;
+                    }
+                    corchetes.Pop();
                 }
             }
+            //Revisar operandos y operadores
             guardarOperadores_OperandosEnPila();
-            if (tokens.Count == 0)
+            //Pilas vacias no hay errores de cierre o apertura
+            if (llaves.Count == 0 && parentesis.Count == 0 && corchetes.Count == 0)
             {
                 System.Windows.Forms.MessageBox.Show("No se detectaron errores de apertura y cierre");
             }
             else
             {
+                //Existen errores, se identifican las correspondendicas faltantes y se agregan a la tabla
+                int renglon = 0;
                 System.Windows.Forms.MessageBox.Show("Se detectaron errores");
-                for(int i = 0; i <= tokens.Count; i++)
+                for(int i = 0; i < llaves.Count; i++)
                 {
-                    Token token = tokens.Pop();
-                    
-                    string error = " ";
-                    string lexema = token.getLexema();
-                    if (lexema.Equals("("))
-                    {
-                        error = "Falta cierre de parentesis izquierdo";
-                        ListaErrores.agregarErrores("03", "Sintactico", token.getLexema(), error, token.getLinea(), token.getColumna());
-                    }
-                    else if (lexema.Equals("{"))
-                    {
-                        error = "Falta cierre de llave izquierda";
-                        ListaErrores.agregarErrores("03", "Sintactico", token.getLexema(), error, token.getLinea(), token.getColumna());
-                    }
-                    else if (lexema.Equals("["))
-                    {
-                        error = "Falta cierre de corchete izquierdo";
-                        ListaErrores.agregarErrores("03", "Siintactico", token.getLexema(), error, token.getLinea(), token.getColumna());
-                    }
-                    i = tabla.Rows.Add();
-                    tabla.Rows[i].Cells["colError"].Value = error;
-                    tabla.Rows[i].Cells["colLinea"].Value = token.getLinea();
-                    //Guardamos los operadores y operandos en la pila 
-                    
+                    Token token = llaves.Pop();
+                    string error = "Falta cierre de llave izquierda";
+                    ListaErrores.agregarErrores("03", "Sintactico", token.getLexema(), error, token.getLinea(), token.getColumna());
+                    renglon = tabla.Rows.Add();
+                    tabla.Rows[renglon].Cells["colError"].Value = error;
+                    tabla.Rows[renglon].Cells["colLinea"].Value = token.getLinea();
+                    renglon++;
                 }
+                for (int i = 0; i < parentesis.Count; i++)
+                {
+                    Token token = parentesis.Pop();
+                    string error = "Falta cierre de parentesis izquierdo";
+                    ListaErrores.agregarErrores("03", "Sintactico", token.getLexema(), error, token.getLinea(), token.getColumna());
+                    renglon = tabla.Rows.Add();
+                    tabla.Rows[renglon].Cells["colError"].Value = error;
+                    tabla.Rows[renglon].Cells["colLinea"].Value = token.getLinea();
+                    renglon++;
+                }
+                for (int i = 0; i < corchetes.Count; i++)
+                {
+                    Token token = corchetes.Pop();
+                    string error = "Falta cierre de corchete izquierdo";
+                    ListaErrores.agregarErrores("03", "Sintactico", token.getLexema(), error, token.getLinea(), token.getColumna());
+                    renglon = tabla.Rows.Add();
+                    tabla.Rows[renglon].Cells["colError"].Value = error;
+                    tabla.Rows[renglon].Cells["colLinea"].Value = token.getLinea();
+                    renglon++;
+                }                              
             }
         }
 
@@ -207,7 +230,7 @@ namespace Compilador
                 }
                 else if (operadorAnterior.Contains(elem))
                 {
-                    System.Windows.Forms.MessageBox.Show("Error en correspondencia");
+                    System.Windows.Forms.MessageBox.Show("Error en correspondencia de operadores, revise el codigo fuente");
                     ListaErrores.agregarErrores("05", "Sintactico", elem+operadorAnterior, "Error en correspondencia de operadores", 0, 0);
                     continuar = false;
                     finalizoCorrecto = false;
