@@ -1,11 +1,25 @@
-package paquete;
+package paqueteProyecto;
 
-class Clase {
+class claseProyecto {
 	public void funcion() {
 		int suma = 1 + 2;
 	}
 
 	public void main() {
+		funcion();
+	}
+}
+
+-----------------------------------------------------
+
+paquete paqueteProyecto;
+
+clase claseProyecto {
+	publico vacia funcion() {
+		entero suma = 1 + 2;
+	}
+
+	publico vacia main() {
 		funcion();
 	}
 }

@@ -4,8 +4,8 @@ booleano
 romper
 byte
 caso
-atrapar 
-caracter 
+atrapar
+caracter
 clase
 constante
 continuar
@@ -18,7 +18,7 @@ hereda
 final
 finalmente
 flotante
-para 
+para
 irhacia
 si
 implementar
@@ -26,11 +26,11 @@ importar
 instanciade
 entero
 interfaz
-long 
+long
 nativo
-nuevo 
-paquete 
-privado 
+nuevo
+paquete
+privado
 protegido
 publico
 regresar

@@ -488,7 +488,7 @@ namespace Compilador
             for (int i = 0; i < ListaDeTokens.Count; i++)
             {
                 Token token_actual = ListaDeTokens.ElementAt(i);
-                if (token_actual.getLexema().Equals("void"))
+                if (token_actual.getLexema().Equals("void") || token_actual.getLexema().Equals("vacia"))
                 {
                     if (ListaDeTokens.ElementAt(i + 2).getIdToken().Equals("parentIzquierdo"))
                     {

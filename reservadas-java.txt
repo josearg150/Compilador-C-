@@ -4,8 +4,8 @@ boolean
 break
 byte
 case
-catch 
-char 
+catch
+char
 class
 const
 continue
@@ -18,7 +18,7 @@ extends
 final
 finally
 float
-for 
+for
 goto
 if
 implements
@@ -26,11 +26,11 @@ import
 instanceof
 int
 interface
-long 
+long
 native
-new 
-package 
-private 
+new
+package
+private
 protected
 public
 return
@@ -41,7 +41,7 @@ super
 switch
 synchronized
 this
-throw 
+throw
 throws
 transient
 try
