@@ -7,6 +7,8 @@ class claseProyecto {
 
 	public void main() {
 		funcion();
+		float pi = 3.14;
+		entero ej = 1+2*3/4^5+2*1;
 	}
 }
 
@@ -21,5 +23,7 @@ clase claseProyecto {
 
 	publico vacia main() {
 		funcion();
+		flotante pi = 3.14;
+		entero ej = 1+2*3/4^5+2*1;
 	}
 }
